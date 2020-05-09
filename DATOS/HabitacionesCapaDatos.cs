@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ENTIDAD;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -55,6 +56,48 @@ namespace DATOS
             catch (Exception) { }
             finally { conexion.Close(); }
             return listarTipoHabitacion;
+        }//Fin
+
+
+        private List<ENTIDAD.Habitacion> listarDisponibilidadHabitacion = new List<ENTIDAD.Habitacion>();
+        public IEnumerable<ENTIDAD.Habitacion> listadoDisponibilidadHabitaciones(Reservacion reservacion)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                comando.CommandText = "exec PA_DisponibilidadHabitaciones @idTipoHabitacion,@fechaLlegada,@fechaSalida";
+
+                comando.Parameters.AddWithValue("@idTipoHabitacion", reservacion.idTipoHabitacion);
+                comando.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaLlegada);
+                comando.Parameters.AddWithValue("@fechaSalida", reservacion.fechaSalida);
+
+                SqlDataAdapter da = new SqlDataAdapter(comando);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                ENTIDAD.Habitacion habitacionDisp = null;
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        habitacionDisp = new ENTIDAD.Habitacion();
+                        habitacionDisp.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
+                        habitacionDisp.tipoHabitacion = (ds.Tables[0].Rows[i][1].ToString());
+                        habitacionDisp.precio = int.Parse(ds.Tables[0].Rows[i][2].ToString());
+
+                        listarDisponibilidadHabitacion.Add(habitacionDisp);
+                    }
+                }
+                int result = comando.ExecuteNonQuery();
+
+                return listarDisponibilidadHabitacion;
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return listarDisponibilidadHabitacion;
         }//Fin
     }
 }

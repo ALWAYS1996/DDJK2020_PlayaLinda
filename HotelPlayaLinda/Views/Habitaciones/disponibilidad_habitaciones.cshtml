@@ -1,0 +1,42 @@
+﻿
+@{
+    var disponibles = (IEnumerable<ENTIDAD.Habitacion>)ViewData["listaDisponibles"];
+    ViewBag.Title = "disponibilidad_habitaciones";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="sel1">Tipo Habitación:</label>
+            <select class="form-control" id="sel1" onchange="llenaDatos();">
+                @foreach (var dato in Model)
+                {
+                    <option value="@dato.codigoTipoHabitacion">@dato.nombre</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("MostrarDisponibles", "Habitaciones", FormMethod.Post))
+        {
+            <input type="text" id="idTipoHabitacion" name="idTipoHabitacion" hidden>
+            <p>Fecha inicio: <input type="date" id="inicio" name="fechaLlegada"></p>
+            <p>Fecha final: <input type="date" id="final" name="fechaSalida"></p>
+            <button type="submit" name="action">Enviar</button>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function llenaDatos() {
+        var name = document.getElementById("sel1").value;
+        document.getElementById("idTipoHabitacion").value = name;
+
+
+
+    }
+  
+</script>
+
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

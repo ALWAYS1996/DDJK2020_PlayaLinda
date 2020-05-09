@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DATOS;
+using ENTIDAD;
 using System.Text;
 
 namespace NEGOCIO
@@ -13,5 +14,11 @@ namespace NEGOCIO
         {
             return habitacionCapaDatos.listadoTipoHabitaciones();
         }
+        public IEnumerable<ENTIDAD.Habitacion> listarDisponibilidadHabitacion(Reservacion reservacion)
+        {
+            return habitacionCapaDatos.listadoDisponibilidadHabitaciones(reservacion);
+        }
     }
+
+        
 }

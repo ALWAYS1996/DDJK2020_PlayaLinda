@@ -9,7 +9,7 @@ namespace ENTIDAD
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Código")]
         [Key]
-        public string codigoHabitacion { get; set; }
+        public int codigoHabitacion { get; set; }
 
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "tipo Habitacion")]
@@ -25,18 +25,18 @@ namespace ENTIDAD
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Capacidad")]
 
-        public int capacidad { get; set; }
+        public int precio { get; set; }
 
         public Habitacion()
         {
         }
 
-        public Habitacion(string codigoHabitacion, string tipoHabitacion, int vacante, int capacidad)
+        public Habitacion(int codigoHabitacion, string tipoHabitacion, int vacante, int precio)
         {
             this.codigoHabitacion = codigoHabitacion;
             this.tipoHabitacion = tipoHabitacion;
             this.vacante = vacante;
-            this.capacidad = capacidad;
+            this.precio = precio;
         }
     }
 }

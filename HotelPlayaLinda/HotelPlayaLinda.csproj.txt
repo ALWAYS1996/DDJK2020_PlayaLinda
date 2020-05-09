@@ -425,6 +425,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Habitaciones\" />
     <Folder Include="Views\Imagen\" />
   </ItemGroup>
   <ItemGroup>
@@ -434,9 +435,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
-    <Content Include="Views\Habitaciones\adm_habitaciones.cshtml" />
-    <Content Include="Views\Habitaciones\disponibilidad_habitaciones.cshtml" />
-    <Content Include="Views\Habitaciones\MostrarDisponibles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

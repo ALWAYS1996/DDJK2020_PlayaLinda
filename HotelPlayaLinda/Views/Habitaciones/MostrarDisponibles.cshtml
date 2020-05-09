@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "MostrarDisponibles";
+}
+
+
+@{
+    var disponibles =ViewData["listaDisponibles"];
+    ViewBag.Title = "disponibilidad_habitaciones";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="table" class="table">
+                <thead>
+                    <tr>
+                        <th>Codigo Habitacion</th>
+                        <th>Tipo Habitacion</th>
+                        <th>Precio</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var dato in Model)
+                    {
+                        <tr>
+                            <td>@dato.codigoHabitacion</td>
+                            <td>@dato.tipoHabitacion</td>
+                            <td>@dato.precio</td>
+
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

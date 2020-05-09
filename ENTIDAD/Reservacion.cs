@@ -16,7 +16,9 @@ namespace ENTIDAD
 
         public int codigoHabitacion { get; set; }
 
-        public string idHabitacionTemp { get; set; }
+        public string idHabitacionTemp{ get; set; }
+
+        public int idTipoHabitacion { get; set; }
 
 
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
@@ -59,6 +61,13 @@ namespace ENTIDAD
             this.codigoHabitacion = codigoHabitacion;
             this.fechaL = fechaLlegada;
             this.fechaS = fechaSalida;
+        }
+
+        public Reservacion(int idTipoHabitacion, DateTime fechaLlegada, DateTime fechaSalida)
+        {
+            this.idTipoHabitacion = idTipoHabitacion;
+            this.fechaLlegada = fechaLlegada;
+            this.fechaSalida = fechaSalida;
         }
         public Reservacion(int idReserva)
         {

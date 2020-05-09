@@ -31,7 +31,7 @@ namespace HotelPlayaLinda.Controllers
         public ActionResult Login(Login model, string returnUrl)
         {
             DDJKEntities db = new DDJKEntities();
-            var dataItem = db.Login.Where(x => x.Username == model.Username && x.Password == model.Password).First();
+                var dataItem = db.Login.Where(x => x.Username == model.Username && x.Password == model.Password).First();
             if (dataItem != null)
             {
                 FormsAuthentication.SetAuthCookie(dataItem.Username, false);
