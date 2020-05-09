@@ -69,9 +69,9 @@ namespace HotelPlayaLinda.Controllers
             else
             {
                 Reservacion reservacion = new Reservacion();
-                ViewData["idHabitacion"] = reservacion.codigoHabitacion;
-                ViewData["fechaInicio"] = reservacion.fechaLlegada;
-                ViewData["fechaFin"] = reservacion.fechaSalida;
+                ViewData["idHabitacion"] = codigoHabitacion;
+                ViewData["fechaInicio"] =fechaLlegada;
+                ViewData["fechaFin"] = fechaSalida;
                 ViewBag.mensaje = "Habitación disponible para ser reservada";
                 return View();
             }
