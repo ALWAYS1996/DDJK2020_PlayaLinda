@@ -3,7 +3,7 @@
 @model IEnumerable<ENTIDAD.Facilidades>
 <style>
     .gallery {
-        filter: brightness(130%);
+        filter: brightness(110%);
         animation: escalar;
         cursor: pointer;
         animation: escalar 1.4s infinite alternate;
@@ -58,70 +58,44 @@
         <div class="col-4"></div>
     </div>
     <br><br>
-    <div class="row" >
+    
+
+    <div class="row ">
 
         @foreach (var dato in Model)
 
         {
-            <div class="col-sm-4" >
-                <div class="form-group gallery" style="border: 1px dashed #ccc" >
-                    <img src="@dato.urlImg" data-target="#myModal" data-toggle="modal" class=" card-img-top" width="200" height="200" alt="...">
-                    <br><br><br />
-                </div>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+            <div class="card gallery" style="width: 28rem;border:2px solid #ebe3e3">
 
+                @*<hr style="border-top: 1px solid black;">*@
+                <img src="@dato.urlImg" class="card-img-top " width="300" height="300" alt="...">
+                <div class="card-body">
 
-                            <div class="modal-body">
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-
-                                <img src="//media.tenor.com/images/556e9ff845b7dd0c62dcdbbb00babb4b/tenor.gif" alt="" id="image" class="img-fluid">
-
-
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-            <div class="col-sm-8">
-                <div style="border: 1px initial #ccc" class="form-group" >
-                    <div class="form-group">
-                        <div class="col-lg-4"> </div>
-                        <div class="col-lg-4">
-                            <hr style="color: #47748b; ">
-                            <img src="~/Content/img/nature.png" /> <strong> @dato.nombre </strong>
-                            <hr style="color: #47748b; ">
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="form-group">
-                        Reglas: @dato.reglas
-                    </div>
-                    <div class="form-group">
-                        Detalles: @dato.detalles
-                    </div>
+                    <p class="card-text">
+                        <font style="text-transform: uppercase;">
+                            <center>
+                                <hr style="border-top: 1px solid black;" width="50%">
+                                <strong>Habitación: @dato.nombre  </strong>
+                                <hr style="border-top: 1px solid black;" width="50%">
+                            </center>
+                        </font>
+                    </p>
+                    <p class="card-text text-justify  btn btn-outline-dark">Reglas: @dato.reglas</p>
+                    <h5 class="btn btn-outline-info animated infinite bounceIn slow">Detalles @dato.detalles</h5>
                     <br>
+                    <h5 class="btn btn-dark animated infinite bounceInRight slow">Más Información</h5>
                 </div>
+                <hr style="border-top: 5px solid #FF0000">
             </div>
-            @*<div class="col-sm-4"></div>*@
+
+
+            <hr style="        border-top: 1px solid #ebe3e3;">
 
         }
 
+
+
+
     </div>
 
-
-
 </div>
-
