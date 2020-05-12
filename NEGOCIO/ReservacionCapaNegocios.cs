@@ -18,6 +18,9 @@ namespace NEGOCIO
         public IEnumerable<ENTIDAD.Reservacion> sugerirReservacion()
         { return reservacionCapaDatos.sugerirReservacion(); }
 
+        public IEnumerable<ENTIDAD.Reservacion> filtrandoReservacionById(ENTIDAD.Reservacion reservacion)
+        { return reservacionCapaDatos.filtrandoReservacionById(reservacion); }
+
         public IEnumerable<ENTIDAD.Reservacion> listarReservaciones()
         { return reservacionCapaDatos.listarReservaciones(); }
         public IEnumerable<ENTIDAD.Reservacion> consultarReservaciones(ENTIDAD.Reservacion reserva)
@@ -26,6 +29,10 @@ namespace NEGOCIO
         public int eliminarReservacion(Reservacion reservacion)
         {
             return reservacionCapaDatos.eliminarReservacion(reservacion);
+        }
+        public int modificarReservacion(Reservacion reservacion)
+        {
+            return reservacionCapaDatos.modificarReservacion(reservacion);
         }
     }
 }

@@ -40,8 +40,7 @@ namespace HotelPlayaLinda.Controllers
                 {
                     return Redirect(returnUrl);
                 }
-                else
-                {
+                else{
                     return Redirect("Index");
                 }
             }

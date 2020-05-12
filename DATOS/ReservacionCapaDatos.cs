@@ -62,8 +62,7 @@ namespace DATOS
                            //{
 
                 cantidad = (rdr.GetInt32(rdr.GetOrdinal("rangoFechas")));
-                string hola = "Hello word";
-
+                
                 //}
             }
             catch (Exception)
@@ -117,6 +116,49 @@ namespace DATOS
             finally { conexion.Close(); }
             return sugerenciaReservacion;
         }//Fin
+
+        private List<ENTIDAD.Reservacion> filtarReservacionById = new List<ENTIDAD.Reservacion>();
+        public IEnumerable<ENTIDAD.Reservacion> filtrandoReservacionById(ENTIDAD.Reservacion reserva)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                comando.CommandText = "exec PA_FiltrarReservacionById @idReservacion";
+                comando.Parameters.AddWithValue("@idReservacion", reserva.codigoReservacion);
+                SqlDataAdapter da = new SqlDataAdapter(comando);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                ENTIDAD.Reservacion reservacion = null;
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        reservacion = new ENTIDAD.Reservacion();
+                      
+                        reservacion.codigoReservacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
+                        reservacion.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][1].ToString());
+                        reservacion.codigoCliente = int.Parse(ds.Tables[0].Rows[i][2].ToString());
+                        reservacion.fechaL = (ds.Tables[0].Rows[i][3].ToString());
+                        reservacion.fechaS = (ds.Tables[0].Rows[i][4].ToString());
+
+                        filtarReservacionById.Add(reservacion);
+                    }
+                }
+                int result = comando.ExecuteNonQuery();
+
+                return filtarReservacionById;
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return filtarReservacionById;
+        }//Fin
+
+
+        //
         private List<ENTIDAD.Reservacion> listaReservacions = new List<ENTIDAD.Reservacion>();
         public IEnumerable<ENTIDAD.Reservacion> listarReservaciones()
         {
@@ -142,7 +184,7 @@ namespace DATOS
 
                         reservacion.codigoReservacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
                         reservacion.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][1].ToString());
-                        reservacion.codigoCliente = (ds.Tables[0].Rows[i][2].ToString());
+                        reservacion.codigoCliente =int.Parse (ds.Tables[0].Rows[i][2].ToString());
                         reservacion.fechaL = (ds.Tables[0].Rows[i][3].ToString());
                         reservacion.fechaS = (ds.Tables[0].Rows[i][4].ToString());
 
@@ -185,7 +227,7 @@ private List<ENTIDAD.Reservacion> consultaReservaciones = new List<ENTIDAD.Reser
 
                         reservacion.codigoReservacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
                         reservacion.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][1].ToString());
-                        reservacion.codigoCliente = (ds.Tables[0].Rows[i][2].ToString());
+                        reservacion.codigoCliente = int.Parse(ds.Tables[0].Rows[i][2].ToString());
                         reservacion.fechaL =         (ds.Tables[0].Rows[i][3].ToString());
                         reservacion.fechaS =        (ds.Tables[0].Rows[i][4].ToString());
 
@@ -201,7 +243,35 @@ private List<ENTIDAD.Reservacion> consultaReservaciones = new List<ENTIDAD.Reser
             return consultaReservaciones;
         }//Fin
 
+        
+             public int modificarReservacion(ENTIDAD.Reservacion reservacion)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_ModificarReservacion @idReservacion,@idHabitacion,@idCliente,@fechaEntrada,@fechaSalida";
+                comando.Parameters.AddWithValue("@idReservacion", reservacion.codigoReservacion);
+                comando.Parameters.AddWithValue("@idHabitacion", reservacion.codigoHabitacion);
+                comando.Parameters.AddWithValue("@idCliente", reservacion.codigoCliente);
+                comando.Parameters.AddWithValue("@fechaEntrada", reservacion.fechaLlegada);
+                comando.Parameters.AddWithValue("@fechaSalida", reservacion.fechaSalida);
 
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
         public int eliminarReservacion(ENTIDAD.Reservacion reservacion)
         {
             SqlCommand comando = new SqlCommand();

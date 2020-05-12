@@ -1,0 +1,74 @@
+﻿@{    var tipoHabitacion = (IEnumerable<ENTIDAD.TipoHabitacion>)ViewData["tipoHabitacion"];
+}
+@model IEnumerable<ENTIDAD.Reservacion>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ActualizarReservaciones</title>
+</head>
+<body>
+    <div class="container">
+        @foreach (var dato in Model)
+        {
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                @if (@ViewBag.mensaje != null)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        @ViewBag.mensaje
+                    </div>
+                }
+
+
+
+                <form method="post" action="/Reserva/ActualizarReservacion">
+                    <hr style="color: #47748b">
+                    <center>  <h5>Modificar Reservación</h5> </center>
+                    <hr style="color: #47748b">
+                    <div class="form-group">
+                        <label> Código de Reservación</label>
+
+                        <input class="form-control" name="codigoReservacion" readonly value="@dato.codigoReservacion" type="number">
+                    </div>
+                    <div class="form-group">
+                        <label> Número de Habitación</label>
+                        <input class="form-control" name="codigoHabitacion" id="codigoHabitacion" value="@dato.codigoHabitacion" type="text" >
+                      
+                    </div>
+                    <div class="form-group">
+                        <label> Id Cliente</label>
+                        <input readonly class="form-control" name="codigoCliente" value="@dato.codigoCliente" type="number">
+                    </div>
+                    <div class="form-group">
+                        <label> Fecha de llegada</label>
+                        <input class="form-control" name="fechaLlegada" value="@dato.fechaL" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label> Fecha de Salida</label>
+                        <input class="form-control" name="fechaSalida" value="@dato.fechaS" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <center>
+                            <a href="/Reserva/ListaReservaciones" class="btn btn-primary">Regresar</a>
+                            <button class="btn btn-warning" type="submit">Actualizar</button>
+                        </center>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </form>
+            </div>
+
+            <div class="col-4"></div>
+        </div>
+            }
+        </div>
+
+</body>
+</html>

@@ -24,7 +24,7 @@ namespace ENTIDAD
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Id Cliente")]
 
-        public string codigoCliente { get; set; }
+        public int codigoCliente { get; set; }
 
 
         [Display(Name = "Fecha Llegada")]
@@ -47,7 +47,7 @@ namespace ENTIDAD
         {
         }
 
-        public Reservacion(int codigoReservacion, int codigoHabitacion, string codigoCliente, DateTime fechaLlegada, DateTime fechaSalida)
+        public Reservacion(int codigoReservacion, int codigoHabitacion, int codigoCliente, DateTime fechaLlegada, DateTime fechaSalida)
         {
             this.codigoReservacion = codigoReservacion;
             this.codigoHabitacion = codigoHabitacion;

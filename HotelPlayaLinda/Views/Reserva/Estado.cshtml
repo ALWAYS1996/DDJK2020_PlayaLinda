@@ -50,8 +50,8 @@
             @{ENTIDAD.Reservacion lastItem = Model.Last<ENTIDAD.Reservacion>(); }
             @foreach (var item in Model) {
                     @:{
-
-                            @: start:'@Convert.ToDateTime(@item.fechaL).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffzzz")',
+                  
+                @: start:'@Convert.ToDateTime(@item.fechaL).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffzzz")',
                             @: end: '@Convert.ToDateTime(@item.fechaS).ToString("yyyy'-'MM'-'dd'T'13:30:00")',
                             @: description: 'Esta habitacion esta ocupada:',
                             @: title: ('Reservada #Hab: @item.idHabitacionTemp'),
@@ -59,7 +59,7 @@
                             @:textColor:'#ECF0F1'
                     @:}
 
-                    if (item.fechaS != lastItem.fechaS) {
+                    if (item.fechaS == lastItem.fechaS) {
                         @:,
                     }
                     else
@@ -67,7 +67,7 @@
                         @:
                     }
                 }
-                      
+
         ]
 
                 });
@@ -81,6 +81,7 @@
 
 </script>
 <style>
+
 
 
     body {

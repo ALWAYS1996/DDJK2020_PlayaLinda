@@ -1,8 +1,7 @@
-﻿@*@{
-        Layout = "~/Views/Shared/Layout_Adm.cshtml";
-    }*@
+﻿
 @model IEnumerable<ENTIDAD.Reservacion>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">*@
 
 <div class="container">
     <div class="row">
@@ -18,31 +17,35 @@
                         <th>Fecha salida</th>
                         <th>Opciones</th>
                         <th>Detalle</th>
+                        <th>Modificar</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     @foreach (var dato in Model)
                     {
-                        <tr>
-                            <td>@dato.codigoHabitacion</td>
-                            <td>@dato.codigoReservacion</td>
-                            <td>@dato.codigoCliente</td>
-                            <td>@dato.fechaL</td>
-                            <td>@dato.fechaS</td>
-                            <td>
-                                <button class=" btn btn-danger" type="submit"
-                                        onclick="return  eliminar(  @Html.DisplayFor(modelItem => dato.codigoReservacion))">
-                                    Eliminar
-                                    <span class="glyphicon glyphicon-remove" style="color:white"></span>
+                    <tr>
+                        <td>@dato.codigoHabitacion</td>
+                        <td>@dato.codigoReservacion</td>
+                        <td>@dato.codigoCliente</td>
+                        <td>@dato.fechaL</td>
+                        <td>@dato.fechaS</td>
+                        <td>
+                            <button class=" btn btn-danger" type="submit"
+                                    onclick="return  eliminar(  @Html.DisplayFor(modelItem => dato.codigoReservacion))">
+                                Eliminar
+                                <span class="glyphicon glyphicon-remove" style="color:white"></span>
 
-                                </button>
+                            </button>
 
-                            </td>
-                            <td>
-                                @Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion })
-                            </td>
-                        </tr>
+                        </td>
+                        <td>
+                            @Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion }, new { @class = "btn btn-info"})
+                        </td>
+                        <td>
+                            @Html.ActionLink("Actualizar", "filtrandoReservacionById", new { codigoReservacion = dato.codigoReservacion}, new{ @class = "btn btn-warning" })
+                        </td>
+                    </tr>
 
                     }
 
@@ -167,4 +170,4 @@
 
 
     </script>
-    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    @*<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>*@

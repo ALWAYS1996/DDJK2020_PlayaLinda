@@ -29,6 +29,21 @@ namespace HotelPlayaLinda.Controllers
             return View(HabitacionesCapaNegocio.listadoTipoHabitaciones());
         }
 
+        public ActionResult filtrandoReservacionById(int codigoReservacion)
+        {
+            return View("ActualizarReservacion", reservacionCapaNegocios.filtrandoReservacionById(new Reservacion(codigoReservacion)));
+        }
+        public ActionResult ActualizarReservacion(int codigoReservacion, int codigoHabitacion, int codigoCliente, DateTime fechaSalida, DateTime fechaLlegada)
+        {
+            if (reservacionCapaNegocios.modificarReservacion(new Reservacion(codigoReservacion, codigoHabitacion, codigoCliente, fechaLlegada, fechaSalida))>0) {
+                ViewBag.mensaje = "Se ha actualizado correctamente";
+            } else {
+                ViewBag.mensaje = "Lo sentimos, no se ha podido actualizar";
+            }
+
+            return View("ActualizarReservacion", reservacionCapaNegocios.filtrandoReservacionById(new Reservacion(codigoReservacion)));
+        }
+
         public ActionResult Estado(Reservacion reservacion)
         {
 
