@@ -15,16 +15,18 @@ namespace ENTIDAD
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Ruta")]
         public string imgPath { get; set; }
+        public int tipo { get; set; }
 
         public Imagen(int idImagen, string imgPath)
         {
             this.idImagen = idImagen;
             this.imgPath = imgPath;
         }
-        public Imagen(int idImagen)
+        
+        public Imagen(int tipo)
         {
-            this.idImagen = idImagen;
-     
+            this.tipo = tipo;
+
         }
         public Imagen()
         {

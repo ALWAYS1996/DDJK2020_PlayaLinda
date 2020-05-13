@@ -24,7 +24,7 @@ namespace HotelPlayaLinda.Controllers
         {
 
             ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
-            return View(img.listadoImagenes());
+            return View(img.listadoImagenes(new ENTIDAD.Imagen(1)));
         }
 
 
@@ -33,7 +33,7 @@ namespace HotelPlayaLinda.Controllers
 
             ViewData["listadoPromociones"] = promocionCapaNegocio.listadoPromociones();
             ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(4));
-            return View();
+            return View(img.listadoImagenes(new ENTIDAD.Imagen(2)));
         }
     }
 }

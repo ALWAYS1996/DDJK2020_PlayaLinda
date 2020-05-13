@@ -1,7 +1,9 @@
 ﻿body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
-
+    /*background-image: url(img/playa1.jpg);
+    background-repeat: no-repeat;
+    width:auto;
+    height:auto;*/
 }
 a {
     text-decoration: dashed;

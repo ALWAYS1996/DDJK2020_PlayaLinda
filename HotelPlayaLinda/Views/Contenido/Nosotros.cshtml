@@ -60,10 +60,10 @@
                     @foreach (var dato in contenido)
                     {
                         <hr style="color: #47748b">
-                        <center style="background-color:bisque"><strong> @Html.DisplayFor(modelItem => dato.titulo)</strong> </center>
+                        <center ><strong> @Html.DisplayFor(modelItem => dato.titulo)</strong> </center>
                         <hr style="color: #47748b">
                         <br>
-                        <center >          <div style="text-align: justify;">@Html.DisplayFor(modelItem => dato.contenido) </div></center>
+                        <center class="animated infinite bounceIn slow" >          <div style="text-align: justify;">@Html.DisplayFor(modelItem => dato.contenido) </div></center>
 
                     }
 

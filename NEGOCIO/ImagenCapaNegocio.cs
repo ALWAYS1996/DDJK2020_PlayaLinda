@@ -15,9 +15,9 @@ namespace NEGOCIO
             return capaDatos.modificarImagenes(imagen);
         }
 
-        public IEnumerable<ENTIDAD.Imagen> listadoImagenes()
+        public IEnumerable<ENTIDAD.Imagen> listadoImagenes(ENTIDAD.Imagen imagen)
         {
-            return capaDatos.listadoImagenes();
+            return capaDatos.listadoImagenes(imagen);
         }
     }
 }

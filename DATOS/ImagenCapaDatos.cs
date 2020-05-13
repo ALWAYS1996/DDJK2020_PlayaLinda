@@ -44,15 +44,15 @@ namespace DATOS
         }//fin
 
         private List<ENTIDAD.Imagen> listarImagenes = new List<ENTIDAD.Imagen>();
-        public IEnumerable<ENTIDAD.Imagen> listadoImagenes()
+        public IEnumerable<ENTIDAD.Imagen> listadoImagenes(ENTIDAD.Imagen imagen)
         {
             SqlCommand comando = new SqlCommand();
             try
             {
                 comando.Connection = conexion;
                 conexion.Open();
-                comando.CommandText = "exec PA_ListarImagenes";
-               
+                comando.CommandText = "exec PA_ListarImagenes @tipo";
+                comando.Parameters.AddWithValue("@tipo", imagen.tipo);
                 SqlDataAdapter da = new SqlDataAdapter(comando);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
