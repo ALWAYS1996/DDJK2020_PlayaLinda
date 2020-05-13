@@ -10,6 +10,10 @@ namespace NEGOCIO
     {
         DATOS.HabitacionesCapaDatos habitacionCapaDatos = new DATOS.HabitacionesCapaDatos();
 
+        public IEnumerable<ENTIDAD.TipoHabitacion> filtrandoTipoHabitaciones(TipoHabitacion habitacion)
+        {
+            return habitacionCapaDatos.filtrandoTipoHabitaciones(habitacion);
+        }
         public IEnumerable<ENTIDAD.TipoHabitacion> listadoTipoHabitaciones()
         {
             return habitacionCapaDatos.listadoTipoHabitaciones();
@@ -27,6 +31,15 @@ namespace NEGOCIO
         {
             return habitacionCapaDatos.modificarEstadoHabitacion(habitacion);
         }
+        public int modificarTipoHabitacion(TipoHabitacion habitacion)
+        {
+            return habitacionCapaDatos.modificarTipoHabitacion(habitacion);
+        }
+        public int modificarImagenTipoHabitacion(TipoHabitacion habitacion)
+        {
+            return habitacionCapaDatos.modificarImagenTipoHabitacion(habitacion);
+        }
+        
     }
 
         

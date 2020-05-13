@@ -1,18 +1,136 @@
 ﻿
-@{
-    ViewBag.Title = "adm_descipcionhabitaciones";
-}
 
-<h2>adm_descipcionhabitaciones</h2>
+@model IEnumerable<ENTIDAD.TipoHabitacion>
 
-<form>
 
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+@*<form action="javascripts:;">
+        <input type="file" id="fileUpload" name="fileUpload">
+        <input type="button" name="btn" id="btn" value="Enviar">
+        <div class="col-md-3" id="alertControl"></div>
+    </form>*@
+
+
+<div class="container">
+    <hr style="color: #47748b; ">
+    <center> <h5>Modificar Habitaciones</h5></center>
+    <hr style="color: #47748b; ">
+    <br><br>
+    @foreach (var tipoHabitacion in Model)
+    {
+<div class="row">
+
+
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+        <div class="form-group">
+            <center>
+
+                @if (@ViewBag.mensaje != null)
+                {
+                <div class="alert alert-warning" role="alert">
+                    @ViewBag.mensaje
+                </div>
+                        }
+
+               
+                </center>
+        </div>
+        <vr>
+            <form method="post" action="/Habitaciones/modificarTipoHabitacion">
+
+                <center>
+                    <div class="form-group col-3">
+                        <input type="hidden" readonly name="codigoTipoHabitacion" id="codigoTipoHabitacion" class="form-control" value="@tipoHabitacion.codigoTipoHabitacion">
+                    </div>
+                </center>
+                <center>
+                    <div class="form-group col-3">
+                        <label for="exampleFormControlTextarea1">Precio</label>
+                        <input type="number" name="precio" id="precio" class="form-control" value="@tipoHabitacion.precio">
+                    </div>
+                </center>
+                <center>
+                    <div class="form-group col-3">
+                        <label for="exampleFormControlTextarea1">Tipo</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" value="@tipoHabitacion.nombre">
+                    </div>
+                </center>
+
+                <center>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Descripción habitación</label>
+
+                        <textarea class="form-control" name="descripcion" id="descripcion" rows="10"> @tipoHabitacion.descripcion</textarea>
+                    </div>
+                </center>
+                <center>
+                    <div class="form-group">
+                        <button class="btn btn-warning" type="submit"> Modificar Texto</button>
+                    </div>
+                </center>
+            </form>
+
     </div>
-    <button>Aceptar</button>
-    <li class="nav-link">
-        @Html.ActionLink("Cancelar  ", "adm_habitaciones", "Habitaciones")
-    </li>
+</div>
+    
+<form action="javascripts:;">
+    <div class="row">
+    
+        <div class="col-6">
+            <div class="form-group">
+               <center> <h5 for="exampleFormControlTextarea1">Imagen Actual</h5></center>
+                <img src="@tipoHabitacion.urlImg" class="container-fluid" alt="Los Angeles" width="50" height="200">
+
+            </div>
+        </div>
+        <div class="col-6">
+
+
+            <div class="form-group">
+                <center> <h5 for="exampleFormControlTextarea1">Imagen Actualizar</h5></center>
+                <input class="form-control" type="file" id="fileUpload" name="fileUpload">
+            </div>
+
+            <input class="btn btn-warning" type="button" name="btn" value="Modificar Imagen" id="btn">
+        </div>
+    </div>
 </form>
+    <center>
+              @Html.ActionLink("Regresar", "filtrarHabitaciones", new { idTipoHabitacion = @tipoHabitacion.codigoTipoHabitacion }, new { @class = "btn btn-info" })
+
+    </center>
+        }
+    <br><br> <br><br>
+</div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+                        $(document).ready(function (){
+
+                            $("#btn").click(function () {
+
+                                var selectFile = ($("#fileUpload"))[0].files[0];
+
+                            var dataString = new FormData();
+
+                                dataString.append("fileUpload", selectFile);
+                             
+                                var cod = ($("#codigoTipoHabitacion").val());
+                                dataString.append("cod", cod);
+                            $.ajax({
+                             url: '@Url.Action("modificarImagenTipoHabitacion", "Habitaciones")',
+                                type: 'POST',
+                                data: dataString,
+                               // data: { dataString, "codigoTipoHabitacion": cod },
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                success: function () {
+                                    console.log("correcto");
+                                },
+                                error: function (data) {
+                                }
+                            });
+                        });
+
+                        });
+</script>

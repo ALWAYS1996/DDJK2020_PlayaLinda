@@ -32,12 +32,28 @@ namespace ENTIDAD
         public TipoHabitacion()
         {
         }
+        public TipoHabitacion(int codigoTipoHabitacion)
+        {
 
+            this.codigoTipoHabitacion = codigoTipoHabitacion;
+        }
+        public TipoHabitacion(int codigoTipoHabitacion,string img)
+        {
+
+            this.codigoTipoHabitacion = codigoTipoHabitacion;
+            this.urlImg = img;
+        }
         public TipoHabitacion(int codigoTipoHabitacion, string nombre, int precio)
         {
             this.codigoTipoHabitacion = codigoTipoHabitacion;
             this.nombre = nombre;
             this.precio = precio;
+        }
+
+        public TipoHabitacion(int codigoTipoHabitacion, string nombre, int precio, string descripcion) : this(codigoTipoHabitacion, nombre, precio)
+        {
+           
+            this.descripcion = descripcion;
         }
     }
 }

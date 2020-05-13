@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ENTIDAD;
+using NEGOCIO;
 
 namespace HotelPlayaLinda.Controllers
 {
@@ -55,9 +57,9 @@ namespace HotelPlayaLinda.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult adm_descipcionhabitaciones()
+        public ActionResult adm_descipcionhabitaciones(int idTipoHab)
         {
-            return View();
+            return View(HabitacionesCapaNegocio.filtrandoTipoHabitaciones(new TipoHabitacion(idTipoHab)));
         }
 
 
@@ -66,7 +68,48 @@ namespace HotelPlayaLinda.Controllers
             return View(HabitacionesCapaNegocio.listadoTipoHabitaciones());
 
         }
+        public ActionResult modificarTipoHabitacion(int codigoTipoHabitacion, string nombre, int precio, string descripcion) {
 
+        if(HabitacionesCapaNegocio.modificarTipoHabitacion(new TipoHabitacion(codigoTipoHabitacion, nombre, precio, descripcion))>0){
+                ViewBag.mensaje = "Se ha modificado correctamente";
+            }else{
+                ViewBag.mensaje = "Imporsible modificar";
+            }
+            return View("adm_descipcionhabitaciones", HabitacionesCapaNegocio.filtrandoTipoHabitaciones(new TipoHabitacion(codigoTipoHabitacion)));
+        
+
+    }
+    public ActionResult modificarImagenTipoHabitacion(HttpPostedFileBase fileUpload, int cod)
+        {
+            try
+            {
+                string path = Server.MapPath("~/Content/img/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                 fileUpload.SaveAs(path + Path.GetFileName(fileUpload.FileName));
+                ENTIDAD.TipoHabitacion galeria = new ENTIDAD.TipoHabitacion();
+                galeria.urlImg = "\\Content\\img\\" + fileUpload.FileName;
+                galeria.codigoTipoHabitacion = cod;
+              //  img.modificarImagenes(galeria);
+                if (HabitacionesCapaNegocio.modificarImagenTipoHabitacion(galeria) > 0)
+                {
+                    ViewBag.mensaje = "Se ha modificado Exitosamente";
+                }
+                else
+                {
+                    ViewBag.mensaje = "No ha sido posible modificar la imagen";
+                }
+             
+            }
+            catch (Exception e)
+            {
+                return Json(new { Value = false, Mensaje = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
+            }
+            ViewBag.mensaje = "Se ha modificado Exitosamente";
+            return Json(new { Value = false, mensaje = "Subido con exito" }, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult MostrarDisponibles(Reservacion reservacion)
         {
             return View(HabitacionesCapaNegocio.listarDisponibilidadHabitacion(reservacion));

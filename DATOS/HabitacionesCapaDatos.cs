@@ -18,6 +18,46 @@ namespace DATOS
         {
             this.conexion = Conexion.getConexion();
         }
+        private List<ENTIDAD.TipoHabitacion> filtrarTipoHabitacion = new List<ENTIDAD.TipoHabitacion>();
+        public IEnumerable<ENTIDAD.TipoHabitacion> filtrandoTipoHabitaciones(TipoHabitacion tipoH)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                comando.CommandText = "exec PA_FiltrarTipoHabitacion @idTipoHabitacion";
+                comando.Parameters.AddWithValue("@idTipoHabitacion", tipoH.codigoTipoHabitacion);
+
+                SqlDataAdapter da = new SqlDataAdapter(comando);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                ENTIDAD.TipoHabitacion tipoHabitacion = null;
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        tipoHabitacion = new ENTIDAD.TipoHabitacion();
+                        tipoHabitacion.codigoTipoHabitacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
+                        tipoHabitacion.nombre = (ds.Tables[0].Rows[i][1].ToString());
+                        tipoHabitacion.precio = int.Parse(ds.Tables[0].Rows[i][2].ToString());
+                        tipoHabitacion.urlImg = (ds.Tables[0].Rows[i][3].ToString());
+                        tipoHabitacion.descripcion = (ds.Tables[0].Rows[i][4].ToString());
+
+                        filtrarTipoHabitacion.Add(tipoHabitacion);
+                    }
+                }
+                int result = comando.ExecuteNonQuery();
+
+                return filtrarTipoHabitacion;
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return filtrarTipoHabitacion;
+        }//Fin
+
 
         private List<ENTIDAD.TipoHabitacion> listarTipoHabitacion = new List<ENTIDAD.TipoHabitacion>();
         public IEnumerable<ENTIDAD.TipoHabitacion> listadoTipoHabitaciones()
@@ -109,9 +149,7 @@ namespace DATOS
                 comando.Connection = conexion;
                 conexion.Open();
                 comando.CommandText = "exec PA_ListarHabitacionTipoHabitacion @idTipoHabitacion";
-
                 comando.Parameters.AddWithValue("@idTipoHabitacion", habitacion.idTipoHabitacion);
-
                 SqlDataAdapter da = new SqlDataAdapter(comando);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -152,6 +190,58 @@ namespace DATOS
                 comando.CommandText = "exec PA_ModificarHabitacion @idHabitacion,@estado";
                 comando.Parameters.AddWithValue("@idHabitacion", habitacion.codigoHabitacion);
                 comando.Parameters.AddWithValue("@estado", habitacion.vacante);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
+        
+             public int modificarImagenTipoHabitacion(ENTIDAD.TipoHabitacion habitacion)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_ModificarImagenTipoHabitacion @idTipoHabitacion,@imgRuta";
+                comando.Parameters.AddWithValue("@idTipoHabitacion", habitacion.codigoTipoHabitacion);
+                comando.Parameters.AddWithValue("@imgRuta", habitacion.urlImg);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
+        public int modificarTipoHabitacion(ENTIDAD.TipoHabitacion habitacion)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_ModificarTipoHabitacion @idTipoHabitacion,@nombreTipoHabitacion,@descripcion,@precioBase";
+                comando.Parameters.AddWithValue("@idTipoHabitacion", habitacion.codigoTipoHabitacion);
+                comando.Parameters.AddWithValue("@nombreTipoHabitacion", habitacion.nombre);
+                comando.Parameters.AddWithValue("@precioBase", habitacion.precio);
+                comando.Parameters.AddWithValue("@descripcion", habitacion.descripcion);
+                
                 int result = comando.ExecuteNonQuery();
                 if (result == -1)
                 {
