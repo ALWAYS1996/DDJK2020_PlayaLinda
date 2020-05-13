@@ -18,6 +18,15 @@ namespace NEGOCIO
         {
             return habitacionCapaDatos.listadoDisponibilidadHabitaciones(reservacion);
         }
+
+        public IEnumerable<ENTIDAD.Habitacion> listandoHabitacionTipoHabitacion(Habitacion habitacion)
+        {
+            return habitacionCapaDatos.listandoHabitacionTipoHabitacion(habitacion);
+        }
+        public int modificarEstado(Habitacion habitacion)
+        {
+            return habitacionCapaDatos.modificarEstadoHabitacion(habitacion);
+        }
     }
 
         

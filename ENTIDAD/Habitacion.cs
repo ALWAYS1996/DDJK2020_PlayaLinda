@@ -14,7 +14,7 @@ namespace ENTIDAD
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "tipo Habitacion")]
 
-        public string tipoHabitacion { get; set; }
+        public int idTipoHabitacion { get; set; }
 
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Estado Habitacion")]
@@ -25,18 +25,26 @@ namespace ENTIDAD
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Capacidad")]
 
-        public int precio { get; set; }
+        public int capacidad { get; set; }
 
         public Habitacion()
         {
         }
-
-        public Habitacion(int codigoHabitacion, string tipoHabitacion, int vacante, int precio)
+        public Habitacion(int idTipoHabitacion)
+        {
+            this.idTipoHabitacion = idTipoHabitacion;
+        }
+        public Habitacion(int codigoHabitacion, int idTipoHabitacion, int vacante, int capacidad)
         {
             this.codigoHabitacion = codigoHabitacion;
-            this.tipoHabitacion = tipoHabitacion;
+            this.idTipoHabitacion = idTipoHabitacion;
             this.vacante = vacante;
-            this.precio = precio;
+            this.capacidad = capacidad;
+        }
+        public Habitacion(int codigoHabitacion, int vacante)
+        {
+            this.codigoHabitacion = codigoHabitacion;
+            this.vacante = vacante;
         }
     }
 }

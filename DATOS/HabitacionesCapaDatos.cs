@@ -85,8 +85,8 @@ namespace DATOS
                     {
                         habitacionDisp = new ENTIDAD.Habitacion();
                         habitacionDisp.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
-                        habitacionDisp.tipoHabitacion = (ds.Tables[0].Rows[i][1].ToString());
-                        habitacionDisp.precio = int.Parse(ds.Tables[0].Rows[i][2].ToString());
+                        habitacionDisp.idTipoHabitacion = int.Parse(ds.Tables[0].Rows[i][1].ToString());
+                        habitacionDisp.capacidad = int.Parse(ds.Tables[0].Rows[i][2].ToString());
 
                         listarDisponibilidadHabitacion.Add(habitacionDisp);
                     }
@@ -99,5 +99,72 @@ namespace DATOS
             finally { conexion.Close(); }
             return listarDisponibilidadHabitacion;
         }//Fin
+
+        private List<ENTIDAD.Habitacion> listarHabitacionTipoHabitacion = new List<ENTIDAD.Habitacion>();
+        public IEnumerable<ENTIDAD.Habitacion> listandoHabitacionTipoHabitacion(Habitacion habitacion)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                comando.CommandText = "exec PA_ListarHabitacionTipoHabitacion @idTipoHabitacion";
+
+                comando.Parameters.AddWithValue("@idTipoHabitacion", habitacion.idTipoHabitacion);
+
+                SqlDataAdapter da = new SqlDataAdapter(comando);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                ENTIDAD.Habitacion habitacionDisp = null;
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        habitacionDisp = new ENTIDAD.Habitacion();
+                        habitacionDisp.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
+                        habitacionDisp.vacante = int.Parse(ds.Tables[0].Rows[i][1].ToString());
+                        //    habitacionDisp.capacidad = int.Parse(ds.Tables[0].Rows[i][2].ToString());
+                        //    habitacionDisp.nombreTipoHabitacion = ds.Tables[0].Rows[i][3].ToString();
+                        //    habitacionDisp.idTipoHabitacion = int.Parse(ds.Tables[0].Rows[i][4].ToString());
+
+                        listarHabitacionTipoHabitacion.Add(habitacionDisp);
+                    }
+                }
+                int result = comando.ExecuteNonQuery();
+
+                return listarHabitacionTipoHabitacion;
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return listarHabitacionTipoHabitacion;
+        }//Fin
+
+
+        public int modificarEstadoHabitacion(ENTIDAD.Habitacion habitacion)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_ModificarHabitacion @idHabitacion,@estado";
+                comando.Parameters.AddWithValue("@idHabitacion", habitacion.codigoHabitacion);
+                comando.Parameters.AddWithValue("@estado", habitacion.vacante);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
     }
 }

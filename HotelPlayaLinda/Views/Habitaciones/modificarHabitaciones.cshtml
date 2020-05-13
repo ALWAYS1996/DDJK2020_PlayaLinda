@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Mapa";
+    var tipoHabitaciones = (IEnumerable<ENTIDAD.TipoHabitacion>)ViewData["tipoHabitacion"];
+
+}
+
+
+@model IEnumerable<ENTIDAD.Habitacion>
+
+
+<div class="container">
+
+
+    <br>
+    <br>
+    <form action="/Habitaciones/filtrarHabitaciones" method="post">
+        <div class="row">
+
+            <div class="col-2"></div>
+            <div class="col-6">
+                <center><h4>Adminstracion de habitaciones</h4></center>
+                <strong>
+                    <font style="text-transform: uppercase;">
+                        <hr style="color: #47748b; ">
+                        <div class="form-group">
+
+                            <select style="40px" class="form-control" id="idTipoHabitacion" name="idTipoHabitacion" onchange="llenaDatos();">
+                                @foreach (var tiposHabitacion in tipoHabitaciones)
+                                {
+                                    <option value="@tiposHabitacion.codigoTipoHabitacion">@tiposHabitacion.nombre</option>
+                                }
+                            </select>
+
+                        </div>
+
+                        <hr style="color: #47748b; ">
+                    </font>
+                </strong>
+            </div>
+            <div class="col-4">
+                <br>
+                <br>
+                <button class="btn btn-outline-dark type="submit"> Filtrar </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-6">
+                <center>
+
+                    <a class="btn btn-outline-dark" value="@ViewData["idTipoHabitacion"]" href="/Habitaciones/DetalleHabitaciones"> DetalleHabitaciones </a>
+                    <br>
+                    <br>
+                    <br>
+                </center>
+            </div>
+            <div class="col-4">
+            </div>
+        </div>
+
+
+    </form>
+<form action="/Habitaciones/modificarHabitaciones" method="post">
+    <div class="row">
+        <div class="col-md-2">
+            <input type="hidden" value="@ViewData["IdHabit"]" id="idTipoHa" name="idTipoHa">
+        </div>
+        <div class="col-md-6">
+
+            <table id="table" class="table">
+                <thead>
+                    <tr>
+
+                        <th>Número de Habitacion</th>
+                        <th>Estado</th>
+                        <th>Cambiar estado</th>
+                        <th>Modificar</th>
+
+                    </tr>
+                </thead>
+                @foreach (var dato in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @dato.codigoHabitacion
+                                @*<input type="hidden" value="@dato.codigoHabitacion" name="codigoHabitacion">*@
+
+                            </td>
+                            <td>@dato.vacante</td>
+                            <td>
+                                <select class="form-control" id="estado" name="estado[]">
+                                    <option selected value="0">Estado</option>
+                                    <option value="3">Activa</option>
+                                    <option value="1">Inactiva</option>
+                                    <option value="2">Reparacion</option>
+                                </select>
+                            </td>
+                            <td><button name="codigoHabitacion" value="@dato.codigoHabitacion" class="btn btn-outline-warning" type="submit"> Modificar </button></td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
+        <div class="col-md-4">
+        </div>
+    </div>
+</form>
+    </div>
+
+<script type="text/javascript">
+    function llenaDatos() {
+        var name = document.getElementById("idTipoHabitacion").value;
+        document.getElementById("idTipoHa").value = name;
+        //    var temp = document.getElementById("idTipoHa").value = name;
+        //  filtrarIdHabitacion(temp);
+
+    }
+
+
+
+        //var filtrarIdHabitacion = function (idTipoHabitacion) {
+        //    alert("hol");
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: "/Habitaciones/filtrarHabitaciones",
+        //        data: "idTipoHabitacion=" + idTipoHabitacion,
+        //        contentType: false,
+        //        cache: false,
+        //        processData: false,
+        //        beforeSend: function () {
+        //                   console.log("");
+        //        },
+        //        success: function (response) {
+        //            console.log(response);
+
+        //        }
+        //    });
+        //};
+
+
+</script>

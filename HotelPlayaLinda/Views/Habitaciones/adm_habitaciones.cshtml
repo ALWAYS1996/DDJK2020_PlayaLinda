@@ -1,7 +1,44 @@
-﻿
-@{
-    ViewBag.Title = "adm_habitaciones";
+﻿@{
+    ViewBag.Title = "Mapa";
+    var tipoHabitaciones = (IEnumerable<ENTIDAD.TipoHabitacion>)ViewData["tipoHabitacion"];
+
 }
 
-<h2>adm_habitaciones</h2>
+
+@model IEnumerable<ENTIDAD.Habitacion>
+
+
+<div class="container">
+    <center><h2>Adminstracion de habitaciones</h2></center>
+    <br>
+    <br>
+    <form action="/Habitaciones/filtrarHabitaciones" method="post">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <strong>
+                    <font style="text-transform: uppercase;">
+                        <hr style="color: #47748b; ">
+                        <center class="animated infinite bounceOut" slow>
+                            <div class="form-group">
+                                <label for="tipoHabitacion">Escoja habitacion</label>
+
+                                <select class="form-control" id="idTipoHabitacion" name="idTipoHabitacion">
+                                    @foreach (var tiposHabitacion in tipoHabitaciones)
+                                    {
+                                        <option value="@tiposHabitacion.codigoTipoHabitacion">@tiposHabitacion.nombre</option>
+                                    }
+                                </select>
+                            </div>
+                        </center>
+                        <hr style="color: #47748b; ">
+                    </font>
+                </strong>
+                <button type="submit"> Filtrar </button>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </form>
+</div>
+
 
