@@ -26,11 +26,13 @@ namespace DATOS
             {
                 conexion.Open();
                 comando.Connection = conexion;
-                comando.CommandText = "exec PA_RegistrarPromocion @fechaInicio,@fechaFinal,@informacion,@rebaja";
+                comando.CommandText = "exec PA_RegistrarPromocion @fechaInicio,@fechaFinal,@informacion,@rebaja,@imgUrl";
                 comando.Parameters.AddWithValue("@informacion", promocion.informacion);
                 comando.Parameters.AddWithValue("@fechaInicio", promocion.fechaInicio);
                 comando.Parameters.AddWithValue("@fechaFinal", promocion.fechaFinal);
                 comando.Parameters.AddWithValue("@rebaja", promocion.precio);
+                comando.Parameters.AddWithValue("@imgUrl", promocion.imgUrl);
+
                 int result = comando.ExecuteNonQuery();
                 if (result == -1)
                 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Web;
 
 namespace ENTIDAD
 {
@@ -16,6 +17,8 @@ namespace ENTIDAD
         [Display(Name = "Ruta")]
         public string imgPath { get; set; }
         public int tipo { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; }
 
         public Imagen(int idImagen, string imgPath)
         {

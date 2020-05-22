@@ -1,9 +1,12 @@
 ﻿using ENTIDAD;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace HotelPlayaLinda.Controllers
 {
@@ -41,13 +44,23 @@ namespace HotelPlayaLinda.Controllers
             ViewData["listadoPromociones"] = promocionCapaNegocio.listadoPromociones();
             return View();
         }
-        public ActionResult Crear_oferta(string informacion,DateTime fechaInicio,DateTime fechaFinal,int precio)
+        public ActionResult Crear_oferta(string informacion,DateTime fechaInicio,DateTime fechaFinal,int precio, Imagen img)
         {
             Promocion promocion = new Promocion();
+
+            string filename = Path.GetFileNameWithoutExtension(img.ImageFile.FileName);
+            string extension = Path.GetExtension(img.ImageFile.FileName);
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+
             promocion.precio = precio;
+            promocion.imgUrl= "/Content/img/"+filename;
             promocion.informacion = informacion;
             promocion.fechaInicio = fechaInicio;
             promocion.fechaFinal = fechaFinal;
+
+            filename = Path.Combine(Server.MapPath("~/Content/img/"), filename);
+            img.ImageFile.SaveAs(filename);
+            
 
             promocionCapaNegocio.createPromo(promocion);
             ViewData["listadoPromociones"] = promocionCapaNegocio.listadoPromociones();
@@ -72,8 +85,6 @@ namespace HotelPlayaLinda.Controllers
 
         public ActionResult actualizarPromo(int codigoPromocion,string informacion, DateTime fechaInicio, DateTime fechaFinal, int precio) {
 
-
-
             Promocion promocion = new Promocion();
             promocion.codigoPromocion = codigoPromocion;
             promocion.precio = precio;
@@ -84,6 +95,20 @@ namespace HotelPlayaLinda.Controllers
             promocionCapaNegocio.updatePromo(promocion);
             ViewData["listadoPromociones"] = promocionCapaNegocio.listadoPromociones();
             return View("Administrar_ofertas");
+        }
+
+
+
+        public string uploadImag(HttpPostedFile file) {
+            try { if (file.ContentLength > 0) {
+                    string filename = Path.GetFileName(file.FileName);
+                    string filepath = Path.Combine(Server.MapPath("/img"),filename);
+                    file.SaveAs(filepath);
+                    return filepath;
+                } } catch { return "error"; }
+            return "Error";
+    
+            
         }
     }
 }
