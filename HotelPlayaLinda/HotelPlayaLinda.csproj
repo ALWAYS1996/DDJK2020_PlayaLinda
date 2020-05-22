@@ -443,6 +443,8 @@
     <Content Include="Views\Shared\_Layout1.cshtml" />
     <Content Include="Views\Habitaciones\adm_descipcionhabitaciones.cshtml" />
     <Content Include="Views\Habitaciones\modificarHabitaciones.cshtml" />
+    <Content Include="Views\Contenido\Administrar_ofertas.cshtml" />
+    <Content Include="Views\Contenido\ObtenerPromo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

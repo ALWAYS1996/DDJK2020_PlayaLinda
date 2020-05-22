@@ -1,0 +1,37 @@
+﻿@{var promo = (ENTIDAD.Promocion)ViewData["promo"];
+}
+
+
+@using (Html.BeginForm("actualizarPromo", "Contenido", FormMethod.Post))
+{
+    <form>
+        <div class="form-group">
+            <label for="codigoPromocion">Codigo de la promoción: @promo.codigoPromocion</label>
+
+            <input type="text" class="form-control" name="codigoPromocion" placeholder="descripcion promocion" id="informacion" value="@promo.codigoPromocion" hidden>
+        </div>
+        <div class="form-group">
+            <label for="informacion">Descripcion promoción:</label>
+            <input type="text" class="form-control" name="informacion" placeholder="descripcion promocion" id="informacion" value="@promo.informacion">
+        </div>
+        <div class="form-group">
+            <label for="fechaInicio">Fecha inicio:</label>
+            <input type="text" class="form-control" name="fechaInicio" id="fechaInicio" value="@promo.fechaInicio">
+        </div>
+        <div class="form-group">
+            <label for="fechaFinal">Fecha Final:</label>
+            <input type="text" class="form-control" name="fechaFinal" id="fechaFinal" value="@promo.fechaFinal">
+        </div>
+        <div class="form-group">
+            <label for="precio">Rebajo en %:</label>
+            <input type="number" class="form-control" name="precio" id="precio" value="@promo.precio">
+        </div>
+
+
+        <button type="submit" name="action " class="btn btn-primary">Submit</button>
+
+    </form>
+
+
+}
+
