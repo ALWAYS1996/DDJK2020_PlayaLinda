@@ -22,11 +22,11 @@
             <img src="~/Content/img/hotel.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             Hotel Playa Linda
         </a>
-
-        <a class="btn btn-outline-dark" asp-area="Identity"
-           title="Manage"> <img src="~/Content/img/avatar.png"> Bienvenido al sitio: @User.Identity.Name</a>
-
-        <a class="btn btn-outline-danger" href="@Url.Action("SignOut","Administrador")"> <img src="~/Content/img/signs.png">  </a>
+        Modulo Administativo
+        <a class="navbar-brand btn btn-outline-dark" asp-area="Identity"
+           title="Manage"> <img src="~/Content/img/avatar.png"> Bienvenido: @User.Identity.Name</a>
+     
+        <a class="btn btn-outline-danger" href="@Url.Action("SignOut","Administrador")"> <img src="~/Content/img/signs.png"> Salir </a>
 
 
 
@@ -58,7 +58,7 @@
                     <a class="nav-link" href="/Habitaciones/adm_habitaciones"> Administrar habitaciones </a>
                 </li>
                 <li class="nav-link">
-                    <a class="nav-link" href="#">Estado del hotel </a>
+                    <a class="nav-link" href="/Habitaciones/adm_estadohoy">Estado del hotel Hoy </a>
 
                 </li>
                 <li class="nav-link">

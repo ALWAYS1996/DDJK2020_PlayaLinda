@@ -18,6 +18,46 @@ namespace DATOS
         {
             this.conexion = Conexion.getConexion();
         }
+
+        private List<ENTIDAD.Habitacion> listarEstadoHoyHabitacion = new List<ENTIDAD.Habitacion>();
+        public IEnumerable<ENTIDAD.Habitacion> listandoEstadoHoyHabitacion()
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                comando.CommandText = "exec PA_EstadoHoyHabitacion";
+               // comando.Parameters.AddWithValue("@idTipoHabitacion", tipoH.codigoTipoHabitacion);
+
+                SqlDataAdapter da = new SqlDataAdapter(comando);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                ENTIDAD.Habitacion tipoHabitacion = null;
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        tipoHabitacion = new ENTIDAD.Habitacion();
+                        tipoHabitacion.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
+                        tipoHabitacion.nombre = (ds.Tables[0].Rows[i][1].ToString());
+                        tipoHabitacion.vacante = int.Parse(ds.Tables[0].Rows[i][2].ToString());
+                       listarEstadoHoyHabitacion.Add(tipoHabitacion);
+                    }
+                }
+                int result = comando.ExecuteNonQuery();
+
+                return listarEstadoHoyHabitacion;
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return listarEstadoHoyHabitacion;
+        }//Fin
+
+
+        
         private List<ENTIDAD.TipoHabitacion> filtrarTipoHabitacion = new List<ENTIDAD.TipoHabitacion>();
         public IEnumerable<ENTIDAD.TipoHabitacion> filtrandoTipoHabitaciones(TipoHabitacion tipoH)
         {

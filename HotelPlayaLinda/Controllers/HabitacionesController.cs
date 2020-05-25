@@ -15,6 +15,11 @@ namespace HotelPlayaLinda.Controllers
 
 
         [Authorize(Roles = "Admin")]
+        public ActionResult adm_estadohoy()
+        {
+        return View(HabitacionesCapaNegocio.listarEstadoHoyHabitacion());
+        }
+        [Authorize(Roles = "Admin")]
         public ActionResult adm_habitaciones()
         {
             ViewData["tipoHabitacion"] = HabitacionesCapaNegocio.listadoTipoHabitaciones();

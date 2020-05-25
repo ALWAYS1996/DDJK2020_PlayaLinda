@@ -4,39 +4,50 @@
     ViewBag.Title = "disponibilidad_habitaciones";
 }
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="sel1">Tipo Habitación:</label>
-            <select class="form-control" id="sel1" onchange="llenaDatos();">
-                @foreach (var dato in Model)
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+            <hr style="color: #47748b; ">
+            <center> <h6>Consultar Disponibilidad de Habitaciones</h6></center>
+            <hr style="color: #47748b; ">
+
+            <br><br>
+            <div class="form-group">
+                <label for="sel1">Tipo Habitación:</label>
+                <select class="form-control" id="sel1" onchange="llenaDatos();">
+                    @foreach (var dato in Model)
+                    {
+                        <option value="@dato.codigoTipoHabitacion">@dato.nombre</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                @using (Html.BeginForm("MostrarDisponibles", "Habitaciones", FormMethod.Post))
                 {
-                    <option value="@dato.codigoTipoHabitacion">@dato.nombre</option>
+                    <input type="text" id="idTipoHabitacion" name="idTipoHabitacion" hidden>
+                    <p>Fecha inicio: <input type="date" id="inicio" name="fechaLlegada"></p><br>
+                    <p>Fecha final: <input type="date" id="final" name="fechaSalida"></p>
+                    <br>
+                    <center>   <button type="submit" class="btn btn-outline-primary" name="action">Enviar</button></center>
                 }
-            </select>
+            </div>
         </div>
+        <div class="col-md-4"></div>
     </div>
-    <div class="col-md-6">
-        @using (Html.BeginForm("MostrarDisponibles", "Habitaciones", FormMethod.Post))
-        {
-            <input type="text" id="idTipoHabitacion" name="idTipoHabitacion" hidden>
-            <p>Fecha inicio: <input type="date" id="inicio" name="fechaLlegada"></p>
-            <p>Fecha final: <input type="date" id="final" name="fechaSalida"></p>
-            <button type="submit" name="action">Enviar</button>
+    </div>
+
+    <script type="text/javascript">
+        function llenaDatos() {
+            var name = document.getElementById("sel1").value;
+            document.getElementById("idTipoHabitacion").value = name;
+
+
+
         }
-    </div>
-</div>
 
+    </script>
 
-<script type="text/javascript">
-    function llenaDatos() {
-        var name = document.getElementById("sel1").value;
-        document.getElementById("idTipoHabitacion").value = name;
-
-
-
-    }
-  
-</script>
-
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

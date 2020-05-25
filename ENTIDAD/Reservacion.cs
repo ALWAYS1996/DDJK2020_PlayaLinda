@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ENTIDAD
 {
-    public class Reservacion
+    public class Reservacion 
     {
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Id Reserva")]

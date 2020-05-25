@@ -1,11 +1,11 @@
 ﻿
 @model IEnumerable<ENTIDAD.Reservacion>
 
-@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">*@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
 
             <table id="table" class="table">
                 <thead>
@@ -24,28 +24,28 @@
 
                     @foreach (var dato in Model)
                     {
-                    <tr>
-                        <td>@dato.codigoHabitacion</td>
-                        <td>@dato.codigoReservacion</td>
-                        <td>@dato.codigoCliente</td>
-                        <td>@dato.fechaL</td>
-                        <td>@dato.fechaS</td>
-                        <td>
-                            <button class=" btn btn-danger" type="submit"
-                                    onclick="return  eliminar(  @Html.DisplayFor(modelItem => dato.codigoReservacion))">
-                                Eliminar
-                                <span class="glyphicon glyphicon-remove" style="color:white"></span>
+                        <tr>
+                            <td>@dato.codigoHabitacion</td>
+                            <td>@dato.codigoReservacion</td>
+                            <td>@dato.codigoCliente</td>
+                            <td>@dato.fechaL</td>
+                            <td>@dato.fechaS</td>
+                            <td>
+                                <button class=" btn btn-danger" type="submit"
+                                        onclick="return  eliminar(  @Html.DisplayFor(modelItem => dato.codigoReservacion))">
+                                    Eliminar
+                                    <span class="glyphicon glyphicon-remove" style="color:white"></span>
 
-                            </button>
+                                </button>
 
-                        </td>
-                        <td>
-                            @Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion }, new { @class = "btn btn-info"})
-                        </td>
-                        <td>
-                            @Html.ActionLink("Actualizar", "filtrandoReservacionById", new { codigoReservacion = dato.codigoReservacion}, new { @class = "btn btn-warning" } )
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion }, new { @class = "btn btn-info" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Actualizar", "filtrandoReservacionById", new { codigoReservacion = dato.codigoReservacion }, new { @class = "btn btn-warning" })
+                            </td>
+                        </tr>
 
                     }
 
@@ -53,8 +53,10 @@
             </table>
 
         </div>
+
+        <div class="col-md-1"></div>
     </div>
-</div>
+    </div>
 
 <div class="container">
     <div class="row">
@@ -95,10 +97,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#table').DataTable();
-        });
-
+    
         function eliminar(valor) {
             var clienteid = valor;
             swal({

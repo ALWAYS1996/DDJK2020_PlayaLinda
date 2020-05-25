@@ -3,7 +3,7 @@
 namespace ENTIDAD
 {
 
-    public class Habitacion
+    public class Habitacion : TipoHabitacion
     {
 
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]

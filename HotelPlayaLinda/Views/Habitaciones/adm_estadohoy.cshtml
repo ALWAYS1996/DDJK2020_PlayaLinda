@@ -1,0 +1,61 @@
+﻿
+@model IEnumerable<ENTIDAD.Habitacion>
+@{  DateTime fecha = DateTime.Now;
+             
+    }
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <hr style="color: #47748b; ">
+            <center><h4>Estado del Hotel Hoy </h4></center>
+
+            <hr style="color: #47748b; ">
+          
+            <center>
+                <label  class="col-form-label">
+                 
+                    Fecha: @fecha
+                    <br>
+                </label>
+            </center>
+            <br>
+            <br>
+
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col"># Habitación</th>
+                        <th scope="col">Tipo </th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var habi in Model)
+                    {
+                        var vacante = habi.vacante; var estado = "";
+                        if (vacante == 1) { estado = "Ocupado"; }
+                        if (vacante == 2) { estado = "Mantenimiento"; }
+                        if (vacante == 0) { estado = "Disponible"; }
+
+                        <tr>
+                            <th scope="row">@habi.codigoHabitacion</th>
+                            <td>@habi.nombre</td>
+                            <td>@estado</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <br>
+            <br>
+
+            <center>   <a class="btn btn-outline-dark" stle="color:white" >   <img src="~/Content/img/pdf.svg" width="20" height="20">Descargar PDF</a></center>
+            <br>
+            <br>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+
+</div>

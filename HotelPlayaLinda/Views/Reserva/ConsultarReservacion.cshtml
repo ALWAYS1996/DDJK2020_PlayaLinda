@@ -8,22 +8,26 @@
 
         <div class="col-md-4"> </div>
         <div class="col-md-4">
-
+            <br><br>
             @foreach (var dato in Model)
             {
-                <hr style="color: #47748b">
                 <p><center><strong>Detalles de Reservación</strong></center></p>
-                <hr style="color: #47748b">
                 <ul>
+                    <br>
+                    <br>
 
-                    <li>   <p class="text-justify">Código de Reservación: @dato.codigoReservacion</p></li>
-                    <li>   <p class="text-justify">Número de Habitación:@dato.codigoHabitacion</p></li>
+                    <li>   <p class="text-justify">Código de Reservación: @dato.codigoReservacion</p>  <hr style="color: #47748b; "></li>
+
+                    <li>   <p class="text-justify">Número de Habitación:@dato.codigoHabitacion</p>  <hr style="color: #47748b; "></li>
+
                     <li>
-                        <p class="text-justify">Pasaporte Cliente:@dato.codigoCliente</p>
+                        <p class="text-justify">Pasaporte Cliente:@dato.codigoCliente</p>  <hr style="color: #47748b; ">
                     </li>
+
                     <li>
-                        <p class="text-justify">Fecha Llegada: @dato.fechaL</p>
+                        <p class="text-justify">Fecha Llegada: @dato.fechaL</p>  <hr style="color: #47748b; ">
                     </li>
+
                     <li>
                         <p class="text-justify">Fecha Salida: @dato.fechaS</p>
                     </li>
@@ -39,7 +43,7 @@
             <br>
             <br>
             <br>
-           
+
         </div>
 
 

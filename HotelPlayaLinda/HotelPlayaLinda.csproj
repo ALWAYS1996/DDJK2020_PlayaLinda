@@ -317,6 +317,7 @@
     <Content Include="Content\img\calendario.svg" />
     <Content Include="Content\img\cena.jpg" />
     <Content Include="Content\img\comedor-del-hotel-gamboa.jpg" />
+    <Content Include="Content\img\eliminar.svg" />
     <Content Include="Content\img\cuatro.jpg" />
     <Content Include="Content\img\desayunoAmericano.jpg" />
     <Content Include="Content\img\dos.jpg" />
@@ -335,6 +336,7 @@
     <Content Include="Content\img\hotel8.jpg" />
     <Content Include="Content\img\isla.png" />
     <Content Include="Content\img\logoPagina.PNG" />
+    <Content Include="Content\img\mod1.svg" />
     <Content Include="Content\img\mapa.svg" />
     <Content Include="Content\img\occidental-tamarindo_cuarto1.jpg" />
     <Content Include="Content\img\occidental-tamarindo_cuarto2.jpg" />
@@ -356,6 +358,7 @@
     <Content Include="Content\img\playa7.jpg" />
     <Content Include="Content\img\playa8.jpg" />
     <Content Include="Content\img\proximo.png" />
+    <Content Include="Content\img\mod2.svg" />
     <Content Include="Content\img\reunion.jpg" />
     <Content Include="Content\img\tres.jpg" />
     <Content Include="Content\img\uno.jpg" />
@@ -445,6 +448,12 @@
     <Content Include="Views\Habitaciones\modificarHabitaciones.cshtml" />
     <Content Include="Views\Contenido\Administrar_ofertas.cshtml" />
     <Content Include="Views\Contenido\ObtenerPromo.cshtml" />
+    <Content Include="Views\Contenido\SobreNosotrosAdm.cshtml" />
+    <Content Include="Views\Contenido\AdministrarPaginas.cshtml" />
+    <Content Include="Views\Contenido\Administrar_Publicidad.cshtml" />
+    <Content Include="Views\Contenido\Administrar_Inicio.cshtml" />
+    <Content Include="Views\Mapa\AdministrarContenido.cshtml" />
+    <Content Include="Views\Habitaciones\adm_estadohoy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

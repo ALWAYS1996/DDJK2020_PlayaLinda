@@ -4,115 +4,119 @@
 
 
 
-<div class="container">
-    <div class="row">
-        <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Crear promocion</button>
-        <div class="col-md-12">
-            <table id="table" class="table">
-                <thead>
-                    <tr>
-                        <th>Codigo promocion</th>
-                        <th>Fecha inicio</th>
-                        <th>Fecha final</th>
-                        <th>Precio</th>
-                        <th>Informacion</th>
-                        <th>Eliminar</th>
-                        <th>Modificar</th>
+    <div class="container">
+      <center>  <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Crear promocion</button></center>
+        <br>
+        <div class="row">
 
-
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var dato in listadoPromociones)
-                    {
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <table id="table" class="table">
+                    <thead>
                         <tr>
-                            <td>@dato.codigoPromocion</td>
-                            <td>@dato.fechaInicio</td>
-                            <td>@dato.fechaFinal</td>
-                            <td>@dato.precio</td>
-                            <td>@dato.informacion</td>
+                            <th>Codigo promocion</th>
+                            <th>Fecha inicio</th>
+                            <th>Fecha final</th>
+                            <th>Precio</th>
+                            <th>Informacion</th>
+                            <th>Eliminar</th>
+                            <th>Modificar</th>
 
-                            <td>
-                                <button class=" btn btn-danger" type="submit"
-                                        onclick="return  eliminar(@Html.DisplayFor(modelItem => dato.codigoPromocion))">
-                                    Eliminar
-                                    <span class="glyphicon glyphicon-remove" style="color:white"></span>
-
-                                </button>
-
-                            </td>
-                            
-                            <td>
-                                @Html.ActionLink("Actualizar", "obtenerPromoById", new { codigoPromocion = dato.codigoPromocion }, new { @class = "btn btn-warning" })
-                            </td>
 
 
                         </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var dato in listadoPromociones)
+                        {
+                            <tr>
+                                <td>@dato.codigoPromocion</td>
+                                <td>@dato.fechaInicio</td>
+                                <td>@dato.fechaFinal</td>
+                                <td>@dato.precio</td>
+                                <td>@dato.informacion</td>
 
-                    }
-                </tbody>
-            </table>
+                                <td>
+                                    <button class=" btn btn-danger" type="submit"
+                                            onclick="return  eliminar(@Html.DisplayFor(modelItem => dato.codigoPromocion))">
+                                        Eliminar
+                                        <span class="glyphicon glyphicon-remove" style="color:white"></span>
+
+                                    </button>
+
+                                </td>
+
+                                <td>
+                                    @Html.ActionLink("Actualizar", "obtenerPromoById", new { codigoPromocion = dato.codigoPromocion }, new { @class = "btn btn-warning" })
+                                </td>
+
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-    </div>
 
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        @using (Html.BeginForm("Crear_oferta", "Contenido", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <form>
+
+                                <div class="form-group">
+                                    <label for="informacion">Descripcion promoción:</label>
+                                    <input type="text" class="form-control" name="informacion" placeholder="descripcion promocion" id="informacion">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaInicio">Fecha inicio:</label>
+                                    <input type="date" class="form-control" name="fechaInicio" id="fechaInicio">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaFinal">Fecha Final:</label>
+                                    <input type="date" class="form-control" name="fechaFinal" id="fechaFinal">
+                                </div>
+                                <div class="form-group">
+                                    <label for="img">Imagen:</label>
+                                    <input type="file" class="form-control" name="ImageFile" id="urlImg">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="precio">Precio:</label>
+                                    <input type="number" class="form-control" name="precio" id="precio">
+                                </div>
+
+
+                                <button type="submit" name="action " class="btn btn-primary">Submit</button>
+
+                            </form>
+                        }
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
                 </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    @using (Html.BeginForm("Crear_oferta", "Contenido", FormMethod.Post, new { enctype="multipart/form-data"}))
-                    {
-                    <form>
-
-                        <div class="form-group">
-                            <label for="informacion">Descripcion promoción:</label>
-                            <input type="text" class="form-control" name="informacion" placeholder="descripcion promocion" id="informacion">
-                        </div>
-                        <div class="form-group">
-                            <label for="fechaInicio">Fecha inicio:</label>
-                            <input type="date" class="form-control" name="fechaInicio" id="fechaInicio">
-                        </div>
-                        <div class="form-group">
-                            <label for="fechaFinal">Fecha Final:</label>
-                            <input type="date" class="form-control" name="fechaFinal" id="fechaFinal">
-                        </div>
-                        <div class="form-group">
-                            <label for="img">Imagen:</label>
-                            <input type="file" class="form-control" name="ImageFile" id="urlImg">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="precio">Precio:</label>
-                            <input type="number" class="form-control" name="precio" id="precio">
-                        </div>
-
-
-                        <button type="submit" name="action " class="btn btn-primary">Submit</button>
-
-                    </form>
-                    }
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-
             </div>
         </div>
+
+
+
     </div>
-
- 
-
-</div>
 
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

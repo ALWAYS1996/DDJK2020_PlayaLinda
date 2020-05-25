@@ -413,6 +413,9 @@ CREATE PROCEDURE PA_ModificarContenido( @contenido varchar(max),@titulo varchar(
 AS SET NOCOUNT ON;
 update Contenido set contenido=@contenido,titulo=@titulo WHERE idContenido=@idContenido   
 GO
+select * from Reservacion
+select * from TipoHabitacion
+select * from Habitacion
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE PROCEDURE PA_ModificarCoordenadasDestino(@latitudDestino varchar(max),@longitudDestino varchar(max))
 AS SET NOCOUNT ON;
@@ -465,11 +468,7 @@ where o.idTipoHabitacion =@tipoHabitacion and
 AND (select max(r.fechaSalida) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion  where o.idTipoHabitacion =@tipoHabitacion ) > @fechaLlegada
 AND o.estado=1
  GO
- select * from Habitacion
-select * from Reservacion
-select * from TipoHabitacion
-select * from Habitacion
-
+ 
 ------------------------------------------------------------------------------------------------------------------------
 alter procedure PA_Login( @Usuario varchar(30),  @Contra  varchar(30), @TipoUsuario int)
 as	SET NOCOUNT ON;
@@ -491,7 +490,14 @@ CREATE PROCEDURE PA_ModificarImagen(@idImagen int, @ruta varchar(30))
  select * from Imagen
  update Imagen set ruta=@ruta where idImagen=@idImagen
  go
+---------------------------------------------------------------------------------------------------------------------------
+alter procedure PA_EstadoHoyHabitacion
+as set nocount on;
+select h.idHabitacion, t.nombreTipoHabitacion, h.estado from Reservacion r join Habitacion h on r.idHabitacion=h.idHabitacion
+join TipoHabitacion t on t.idTipoHabitacion=h.idTipoHabitacion  
 
+ GO
+----------------------------------------------------------------------------------------------------------------------------
 select * from Habitacion
 select * from Reservacion
 CREATE TRIGGER TR_CambiarEstado on Reservacion

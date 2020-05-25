@@ -17,6 +17,8 @@ namespace DATOS
         {
             this.conexion = Conexion.getConexion();
         }
+
+
         public int registrarReservacion(ENTIDAD.Reservacion reservacion)
         {
             SqlCommand comando = new SqlCommand();
