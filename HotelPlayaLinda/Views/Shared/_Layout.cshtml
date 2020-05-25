@@ -27,7 +27,7 @@
             <img src="~/Content/img/hotel.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             Hotel Playa Linda
         </a>
-        <a href="/Administrador/Login/" class="btn btn-light">
+        <a href="/Administrador/Login/" class="btn btn-outline-danger"><img src="~/Content/img/avatar.png">
             
            Inicio de Session 
         </a>
@@ -37,41 +37,44 @@
 
 
     <div class="wrapper">
-        <nav class="shadow nav navbar-brand" syle=" background:cornflowerblue">
+        <nav class="shadow nav navbar-brand bg-light" >
 
             <ul class="">
                 <li class="nav-link">
-                    @Html.ActionLink("Inicio", "Inicio", "Contenido")
+                    @Html.ActionLink("Inicio", "Inicio", "Contenido", new { @class="nav-link"})
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Sobre Nosotros", "Nosotros", "Contenido")
+                    <a class="nav-link" href="/Contenido/Nosotros"> Sobre Nosotros </a>
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Facilidades", "Facilidades", "Basic")
+                    <a class="nav-link" href="/Basic/Facilidades"> Facilidades </a>
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Cómo llegar", "Llegar", "Mapa")
+                    <a class="nav-link" href="/Mapa/Llegar"> Cómo llegar </a>
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Tarifas", "Tarifas", "Basic")
+                    <a class="nav-link" href="/Basic/Tarifas"> Tarifas </a>
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Hace reservación", "Reservar", "Reserva")
+                    <a class="nav-link" href="/Reserva/Reservar"> Reservaciones </a>
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Contáctenos", "Contacto", "Contenido")
+                    <a class="nav-link" href="/Contenido/Contacto"> Contáctenos </a>
+
                 </li>
             </ul>
         </nav>
+       
         @RenderBody()
+           
     </div>
     <br>
 
-    <footer class="page-footer" id="foote" name="foote">
-        <div class="container">
+    <footer class="page-footer bg-light" id="foote" name="foote">
+        <div class="container bg-light">
             <div class="row">
                 <div class="col 12 s3">
-                    <h5 class="white-text" style="background-color:cornflowerblue">Contactenos</h5>
+                    <h5 class="white-text" >Contactenos</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Administracion Sitio Web</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Oficinas Centrales</a></li>
@@ -79,7 +82,7 @@
                     </ul>
                 </div>
                 <div class="col 12  s3">
-                    <h5 class="white-text" style="background-color:cornflowerblue">Navegación</h5>
+                    <h5 class="white-text" >Navegación</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Inicio</a></li>
                         <li><a id="ftextoA4" class="grey-text text-lighten-3" href="#!">Menu Principal</a></li>
@@ -88,7 +91,7 @@
                 </div>
 
                 <div class="col 12  s3">
-                    <h5 class="white-text" style="background-color:cornflowerblue">Redes Sociales</h5>
+                    <h5 class="white-text" >Redes Sociales</h5>
                     <ul name="texto">
                         <li>
                             <a class="grey-text text-lighten-3" href="#!">Facebook </a>

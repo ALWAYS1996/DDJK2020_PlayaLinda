@@ -19,5 +19,11 @@ namespace NEGOCIO
         {
             return capaDatos.listadoImagenes(imagen);
         }
+        public IEnumerable<ENTIDAD.Imagen> listadoImagenesById(ENTIDAD.Imagen imagen)
+        {
+            return capaDatos.listadoImagenes(imagen);
+        }
+
+      
     }
 }

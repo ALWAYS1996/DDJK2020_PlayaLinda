@@ -3,76 +3,73 @@
 @model IEnumerable<ENTIDAD.TipoHabitacion>
 
 
-@*<form action="javascripts:;">
-        <input type="file" id="fileUpload" name="fileUpload">
-        <input type="button" name="btn" id="btn" value="Enviar">
-        <div class="col-md-3" id="alertControl"></div>
-    </form>*@
 
 
 <div class="container">
-    <hr style="color: #47748b; ">
-    <center> <h5>Modificar Habitaciones</h5></center>
-    <hr style="color: #47748b; ">
+  
     <br><br>
     @foreach (var tipoHabitacion in Model)
     {
 <div class="row">
 
 
-    <div class="col-sm-1"></div>
-    <div class="col-sm-11">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <hr style="color: #47748b; ">
+        <center> <h5>Modificar Habitaciones</h5></center>
+        <hr style="color: #47748b; ">
         <div class="form-group">
             <center>
 
                 @if (@ViewBag.mensaje != null)
                 {
-                <div class="alert alert-warning" role="alert">
-                    @ViewBag.mensaje
-                </div>
-                        }
+                    <div class="alert alert-warning" role="alert">
+                        @ViewBag.mensaje
+                    </div>
+                }
 
-               
-                </center>
+
+            </center>
         </div>
-        <vr>
-            <form method="post" action="/Habitaciones/modificarTipoHabitacion">
+        <br>
+        <form method="post" action="/Habitaciones/modificarTipoHabitacion">
 
-                <center>
-                    <div class="form-group col-3">
-                        <input type="hidden" readonly name="codigoTipoHabitacion" id="codigoTipoHabitacion" class="form-control" value="@tipoHabitacion.codigoTipoHabitacion">
-                    </div>
-                </center>
-                <center>
-                    <div class="form-group col-3">
-                        <label for="exampleFormControlTextarea1">Precio</label>
-                        <input type="number" name="precio" id="precio" class="form-control" value="@tipoHabitacion.precio">
-                    </div>
-                </center>
-                <center>
-                    <div class="form-group col-3">
-                        <label for="exampleFormControlTextarea1">Tipo</label>
-                        <input type="text" name="nombre" id="nombre" class="form-control" value="@tipoHabitacion.nombre">
-                    </div>
-                </center>
+            <center>
+                <div class="form-group ">
+                    <input type="hidden" readonly name="codigoTipoHabitacion" id="codigoTipoHabitacion" class="form-control" value="@tipoHabitacion.codigoTipoHabitacion">
+                </div>
+            </center>
+            <center>
+                <div class="form-group ">
+                    <label for="exampleFormControlTextarea1">Precio de Habitación</label>
+                    <input type="number" name="precio" id="precio" class="form-control" value="@tipoHabitacion.precio">
+                </div>
+            </center>
+            <center>
+                <div class="form-group ">
+                    <label for="exampleFormControlTextarea1">Tipo de Habitación</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" value="@tipoHabitacion.nombre">
+                </div>
+            </center>
 
-                <center>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Descripción habitación</label>
+            <center>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descripción habitación</label>
 
-                        <textarea class="form-control" name="descripcion" id="descripcion" rows="10"> @tipoHabitacion.descripcion</textarea>
-                    </div>
-                </center>
-                <center>
-                    <div class="form-group">
-                        <button class="btn btn-warning" type="submit"> Modificar Texto</button>
-                    </div>
-                </center>
-            </form>
+                    <textarea class="form-control" name="descripcion" id="descripcion" rows="10"> @tipoHabitacion.descripcion</textarea>
+                </div>
+            </center>
+            <center>
+                <div class="form-group">
+                    <button class="btn btn-warning" type="submit"> Modificar Texto</button>
+                </div>
+            </center>
+        </form>
 
     </div>
+    <div class="col-sm-4"></div>
 </div>
-    
+    <br><br>
 <form action="javascripts:;">
     <div class="row">
     
@@ -95,8 +92,9 @@
         </div>
     </div>
 </form>
+        <br><br>
     <center>
-              @Html.ActionLink("Regresar", "filtrarHabitaciones", new { idTipoHabitacion = @tipoHabitacion.codigoTipoHabitacion }, new { @class = "btn btn-info" })
+              @Html.ActionLink("Regresar", "filtrarHabitaciones", new { idTipoHabitacion = @tipoHabitacion.codigoTipoHabitacion }, new { @class = "btn btn-outline-info" })
 
     </center>
         }
@@ -125,6 +123,7 @@
                                 processData: false,
                                 async: false,
                                 success: function () {
+                                    alert("Subida con exito");
                                     console.log("correcto");
                                 },
                                 error: function (data) {

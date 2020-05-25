@@ -1,5 +1,5 @@
 ﻿body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Comic Sans', sans-serif;
     /*background-image: url(img/playa1.jpg);
     background-repeat: no-repeat;
     width:auto;
@@ -9,28 +9,27 @@ a {
     text-decoration: dashed;
 }
 
-
-
-    a:visited {
-        color: #000000;
-    }
+  
 
     a:hover {
-        color: #fafafa;
+        background-color: #ede9e9;
     }
+    
+
 
     a:active {
-        color: #fafafa;
+     background: #808080;
+     
     }
 
 
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Comic Sans', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+   
 }
 
 a, a:hover, a:focus {

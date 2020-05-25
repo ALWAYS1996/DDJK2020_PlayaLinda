@@ -6,10 +6,13 @@
 <body class="scroll">
     <div class="container ">
         <div class="row">
-            <div class="col-2"></div>
+            <div class="col-3"></div>
             <div class="col-6">
                 @foreach (var dato in contenido)
                 {
+
+
+
                     <hr style="color: #47748b">
                     <center>  <strong> @Html.DisplayFor(modelItem => dato.titulo)</strong></center>
 
@@ -17,11 +20,11 @@
                     <hr style="color: #47748b">
                     <br>
                     <br>
-                    <center>  <div style="text-align: justify;"> @Html.DisplayFor(modelItem => dato.contenido) </div></center>
+                <div style="text-align: justify;"> @Html.DisplayFor(modelItem => dato.contenido) </div>
 
                 }
             </div>
-            <div class="col-4"></div>
+            <div class="col-3"></div>
         </div>
         </div>
 </body>

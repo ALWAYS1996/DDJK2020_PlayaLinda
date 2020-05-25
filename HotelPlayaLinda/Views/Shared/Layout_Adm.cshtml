@@ -17,47 +17,58 @@
 
 <body>
     <nav class="navbar navbar-light bg-light">
+
         <a class="navbar-brand" href="#">
             <img src="~/Content/img/hotel.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             Hotel Playa Linda
         </a>
 
-            <a class="nav-link text-dark" asp-area="Identity" 
-               title="Manage">Bienvenido: @User.Identity.Name!</a>
-       
-        <a href="@Url.Action("SignOut","Administrador")">Cerrar Sesion</a>
+        <a class="btn btn-outline-dark" asp-area="Identity"
+           title="Manage"> <img src="~/Content/img/avatar.png"> Bienvenido al sitio: @User.Identity.Name</a>
+
+        <a class="btn btn-outline-danger" href="@Url.Action("SignOut","Administrador")"> <img src="~/Content/img/signs.png">  </a>
+
+
+
     </nav>
 
     <br>
 
 
+
     <div class="wrapper">
-        <nav class="shadow nav navbar-brand" syle=" background:cornflowerblue">
+        <nav class="shadow nav navbar-brand bg-light">
+
 
             <ul class="">
                 <li class="nav-link">
-                    @Html.ActionLink("Home", "Inicio", "Contenido")
+                    @Html.ActionLink("Inicio", "Administrar_Inicio", "Contenido")
+                    <br>
+                </li>
+
+                <li class="nav-link">
+                    <a class="nav-link" href="/Contenido/AdministrarPaginas"> Modificar Paginas </a>
+
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Modificar páginas", "Nosotros", "Contenido")
+                    <a class="nav-link" href="/Reserva/ListaReservaciones"> Listado  Reservas </a>
+
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Listado de reservaciones", "ListaReservaciones", "Reserva")
+                    <a class="nav-link" href="/Habitaciones/adm_habitaciones"> Administrar habitaciones </a>
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Administrar habitaciones", "adm_habitaciones", "Habitaciones")
+                    <a class="nav-link" href="#">Estado del hotel </a>
+
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Ver estado del hotel", "Tarifas", "Basic")
+                    <a class="nav-link" href="/Habitaciones/disponibilidad_habitaciones"> Disponibilidad Habitaciones </a>
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Consultar disponibilidad de habitaciones", "disponibilidad_habitaciones", "Habitaciones")
+                    <a class="nav-link" href="/Contenido/Administrar_Publicidad"> Publicidad </a>
                 </li>
                 <li class="nav-link">
-                    @Html.ActionLink("Publicidad", "Contacto", "Contenido")
-                </li>
-                <li class="nav-link">
-                    @Html.ActionLink("Administrar ofertas","Administrar_ofertas","Contenido")
+                    <a class="nav-link" href="/Contenido/Administrar_ofertas"> Administrar ofertas </a>
                 </li>
             </ul>
         </nav>
@@ -65,11 +76,11 @@
     </div>
     <br>
 
-    <footer class="page-footer" id="foote" name="foote">
-        <div class="container">
+    <footer class="page-footer bg-light" id="foote" name="foote">
+        <div class="container bg-light">
             <div class="row">
                 <div class="col 12 s3">
-                    <h5 class="white-text" style="background-color:cornflowerblue">Contactenos</h5>
+                    <h5 class="white-text">Contactenos</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Administracion Sitio Web</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Oficinas Centrales</a></li>
@@ -77,7 +88,7 @@
                     </ul>
                 </div>
                 <div class="col 12  s3">
-                    <h5 class="white-text" style="background-color:cornflowerblue">Navegación</h5>
+                    <h5 class="white-text">Navegación</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Inicio</a></li>
                         <li><a id="ftextoA4" class="grey-text text-lighten-3" href="#!">Menu Principal</a></li>
@@ -86,7 +97,7 @@
                 </div>
 
                 <div class="col 12  s3">
-                    <h5 class="white-text" style="background-color:cornflowerblue">Redes Sociales</h5>
+                    <h5 class="white-text">Redes Sociales</h5>
                     <ul name="texto">
                         <li>
                             <a class="grey-text text-lighten-3" href="#!">Facebook </a>

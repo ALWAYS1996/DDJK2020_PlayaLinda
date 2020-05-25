@@ -51,7 +51,7 @@
                             </center>
                       
                             <!-- Left and right controls -->
-                            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <a id="j" class="carousel-control-prev" href="#demo" data-slide="prev">
                                 <span class="carousel-control-prev-icon"></span>
                             </a>
                             <a class="carousel-control-next" href="#demo" data-slide="next">
@@ -68,7 +68,7 @@
                     @foreach (var dato in contenido)
                     {
                         <hr style="border-top: 1px solid #ebe3e3;" width="100%">
-                        <center>  <h3> @Html.DisplayFor(modelItem => dato.titulo)</h3></center>
+                        <center>  <h2 class=""> @Html.DisplayFor(modelItem => dato.titulo)</h2></center>
                         <hr style="border-top: 1px solid #ebe3e3;" width="100%">
                         <center>  <p class="text-justify"> @Html.DisplayFor(modelItem => dato.contenido) </p></center>
                     }
@@ -100,7 +100,7 @@
 
 
                         <p class="card-text text-justify">@dato1.informacion</p>
-                        <h5 class="btn btn-outline-info animated infinite bounceIn slow">Precio: ₡ @dato1.precio</h5>
+                        <h5 class="btn btn-outline-info">Precio: ₡ @dato1.precio</h5>
                         <br>
                         <h5 class="btn btn-outline-info animated infinite bounceIn slow">RESERVAR AHORA!</h5>
 

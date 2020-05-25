@@ -26,8 +26,9 @@ namespace DATOS
             {
                 conexion.Open();
                 comando.Connection = conexion;
-                comando.CommandText = "exec PA_ModificarImagenenes @rutaImagen";
-                comando.Parameters.AddWithValue("@rutaImagen", imagen.imgPath);
+                comando.CommandText = "exec PA_ModificarImagen @idImagen,@ruta";
+                comando.Parameters.AddWithValue("@idImagen", imagen.idImagen);
+                comando.Parameters.AddWithValue("@ruta", imagen.imgPath);
                 int result = comando.ExecuteNonQuery();
                 if (result == -1)
                 {
@@ -65,6 +66,7 @@ namespace DATOS
                     {
                         galeria = new ENTIDAD.Imagen();
                         galeria.imgPath = (ds.Tables[0].Rows[i][0].ToString());
+                        galeria.idImagen = int.Parse(ds.Tables[0].Rows[i][1].ToString());
                         listarImagenes.Add(galeria);
                     }
                 }

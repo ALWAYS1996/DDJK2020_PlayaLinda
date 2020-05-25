@@ -30,7 +30,7 @@ ALTER TABLE Itinerario ADD  imagenCena varchar(max);
 ALTER TABLE Itinerario ADD CONSTRAINT PK_Itinerario PRIMARY KEY (idItinerario);
 ALTER TABLE Itinerario DROP COLUMN dummy;
 
-
+select * from TipoHabitacion
 
 
 DROP TABLE IF EXISTS Cliente;
@@ -275,14 +275,26 @@ INSERT INTO TipoHabitacion(nombreTipoHabitacion,precioBase )
 VALUES(@nombreTipoHabitacion,@precioBase )
 GO
 -------------------------------------------------------------------------------------------------------------------------
-CREATE PROCEDURE PA_ModificarTipoHabitacion(
+ALTER PROCEDURE PA_ModificarTipoHabitacion(
 @idTipoHabitacion int,
 @nombreTipoHabitacion varchar(25),
+@descripcion varchar(max),
 @precioBase  int)
 AS SET NOCOUNT ON;
 UPDATE TipoHabitacion set
 nombreTipoHabitacion=@nombreTipoHabitacion,
-precioBase=@precioBase  
+precioBase=@precioBase,
+descripcion=@descripcion
+WHERE idTipoHabitacion= @idTipoHabitacion 
+GO
+
+-----------------------------------------------------
+CREATE PROCEDURE PA_ModificarImagenTipoHabitacion(
+@idTipoHabitacion int,
+@imgRuta varchar(max))
+AS SET NOCOUNT ON;
+UPDATE TipoHabitacion set
+imagenUrl=@imgRuta
 WHERE idTipoHabitacion= @idTipoHabitacion 
 GO
 -------------------------------------------------------------------------------------------------------------------------
@@ -295,6 +307,12 @@ GO
 CREATE PROCEDURE PA_ListarTipoHabitacion
 AS SET NOCOUNT ON;
 Select idTipoHabitacion ,nombreTipoHabitacion,precioBase From TipoHabitacion 
+GO
+---------------------------------------------------------------------------------------------------------------------------
+CREATE PROCEDURE PA_FiltrarTipoHabitacion(@idTipoHabitacion int)
+AS SET NOCOUNT ON;
+Select idTipoHabitacion ,nombreTipoHabitacion,precioBase,imagenUrl,descripcion From TipoHabitacion 
+WHERE idTipoHabitacion= @idTipoHabitacion 
 GO
 -------------------------------------------------------------------------------------------------------------------------
 CREATE PROCEDURE PA_RegistrarEmpleado(
@@ -424,8 +442,9 @@ GO
 
 Alter PROCEDURE PA_ListarImagenes(@tipo int)
 AS SET NOCOUNT ON;
-SELECT ruta from Imagen where  tipo=@tipo
+SELECT ruta, idImagen from Imagen where  tipo=@tipo
 GO
+
  exec PA_ListarImagenes 1
 -------------------------------------------------------------------------------------------------------------------------
 ALTER PROCEDURE PA_SugerenciaReservacion
@@ -467,6 +486,12 @@ as	SET NOCOUNT ON;
 INSERT INTO [dbo].[Empleado] ([tipoEmpleado],[idUsuario],[contrasenna]) VALUES (1,  'admin' , ENCRYPTBYPASSPHRASE('password','admin' ))
 GO
 ------------------------------------------------------------------------------------------------------------------------
+CREATE PROCEDURE PA_ModificarImagen(@idImagen int, @ruta varchar(30))
+ as set nocount on;
+ select * from Imagen
+ update Imagen set ruta=@ruta where idImagen=@idImagen
+ go
+
 select * from Habitacion
 select * from Reservacion
 CREATE TRIGGER TR_CambiarEstado on Reservacion

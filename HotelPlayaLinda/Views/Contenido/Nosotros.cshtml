@@ -1,42 +1,4 @@
-﻿<!---------------------------RegistrarGaleriaImagen------------------------------------>
-@*<form action="javascripts:;">
-            <input type="file" id="fileUpload" name="fileUpload">
-            <input type="button" name="btn" id="btn" value="Enviar">
-            <div class="col-md-3" id="alertControl"></div>
-        </form>
-
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script type="text/javascript">
-                        $(document).ready(function (){
-
-                        $("#btn").click(function (){
-                            var selectFile = ($("#fileUpload"))[0].files[0];
-                            var dataString = new FormData();
-
-                            dataString.append("fileUpload", selectFile);
-
-                            $.ajax({
-
-                                url: '@Url.Action("RegistrarGaleriaImagenes", "Basic")',
-                                type: 'POST',
-                                data: dataString,
-                                contentType: false,
-                                processData: false,
-                                async: false,
-                                success: function () {
-                                    $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
-                                    if (typeof (data.Value) != "undefined") {
-                                        alert(data.Message);
-                                    } else { alert('Imagen Subida con exito'); }
-                                },
-                                error: function (data) {
-                                }
-                            });
-                        });
-
-                    });
-
-    </script>*@
+﻿
 
 
 <!--------------------------- ------------------------------------>
@@ -63,7 +25,7 @@
                         <center ><strong> @Html.DisplayFor(modelItem => dato.titulo)</strong> </center>
                         <hr style="color: #47748b">
                         <br>
-                        <center class="animated infinite bounceIn slow" >          <div style="text-align: justify;">@Html.DisplayFor(modelItem => dato.contenido) </div></center>
+                        <center class="" >          <div style="text-align: justify;">@Html.DisplayFor(modelItem => dato.contenido) </div></center>
 
                     }
 

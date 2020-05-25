@@ -23,7 +23,17 @@ namespace HotelPlayaLinda.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult Administrar_Publicidad() {
+            return View();
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult Administrar_Inicio()
+        {
+            return View();
+        }
 
+        
         public ActionResult Nosotros()
         {
 
@@ -31,6 +41,49 @@ namespace HotelPlayaLinda.Controllers
             return View(img.listadoImagenes(new ENTIDAD.Imagen(1)));
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdministrarPaginas() {
+            return View();
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult SobreNosotrosAdm() {
+         
+            ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
+            return View(img.listadoImagenes(new ENTIDAD.Imagen(1)));
+        }
+       
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ModificarContenido(string contenido, string titulo) {
+            capaNegocios.modificarContenido(new Contenido(1, contenido, titulo));
+            ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
+            return View("SobreNosotrosAdm", img.listadoImagenes(new ENTIDAD.Imagen(1)));
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ModificarImagen(HttpPostedFileBase fileUpload, int idImagen)
+        {
+            try
+            {
+                string path = Server.MapPath("~/Content/img/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                fileUpload.SaveAs(path + Path.GetFileName(fileUpload.FileName));
+                ENTIDAD.Imagen galeria = new ENTIDAD.Imagen();
+                galeria.idImagen = idImagen;
+                galeria.imgPath = "\\Content\\img\\" + fileUpload.FileName;
+
+                img.modificarImagenes(galeria);
+                ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
+                return View("SobreNosotrosAdm", img.listadoImagenes(new ENTIDAD.Imagen(1)));
+            }
+            catch (Exception e)
+            {
+                return Json(new { Value = false, Message = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         public ActionResult Inicio()
         {
@@ -40,10 +93,14 @@ namespace HotelPlayaLinda.Controllers
             return View(img.listadoImagenes(new ENTIDAD.Imagen(2)));
         }
 
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Administrar_ofertas() {
             ViewData["listadoPromociones"] = promocionCapaNegocio.listadoPromociones();
             return View();
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Crear_oferta(string informacion,DateTime fechaInicio,DateTime fechaFinal,int precio, Imagen img)
         {
             Promocion promocion = new Promocion();
@@ -67,6 +124,8 @@ namespace HotelPlayaLinda.Controllers
             return View("Administrar_ofertas");
         }
 
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Eliminar_oferta(int codigoPromocion)
         {
             
@@ -76,6 +135,8 @@ namespace HotelPlayaLinda.Controllers
             return View("Administrar_ofertas");
         }
 
+
+        [Authorize(Roles = "Admin")]
         public ActionResult obtenerPromoById(int codigoPromocion)
         {
             //promocionCapaNegocio.deletePromo(codigoPromocion);
@@ -83,6 +144,7 @@ namespace HotelPlayaLinda.Controllers
             return View("ObtenerPromo");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult actualizarPromo(int codigoPromocion,string informacion, DateTime fechaInicio, DateTime fechaFinal, int precio) {
 
             Promocion promocion = new Promocion();

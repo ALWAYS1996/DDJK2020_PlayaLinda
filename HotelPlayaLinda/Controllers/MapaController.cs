@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ENTIDAD;
+
 using System.Web.Mvc;
 
 namespace HotelPlayaLinda.Controllers
@@ -20,10 +18,21 @@ namespace HotelPlayaLinda.Controllers
             return View(capaNegocios.listadoCoordenadasOrigen());
 
         }
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdministrarContenido()
+        {
+            return View(contenido.listadoContenido(new ENTIDAD.Contenido(3)));
+        }
+        [Authorize(Roles = "Admin")]
 
+        public ActionResult ModificarContenido(string contenido1, string titulo) {
+            contenido.modificarContenido(new Contenido(3, contenido1,titulo));
+            return View("AdministrarContenido", contenido.listadoContenido(new ENTIDAD.Contenido(3)));
+        }
         public ActionResult Llegar()
         {
             return View();
         }
     }
+
 }
