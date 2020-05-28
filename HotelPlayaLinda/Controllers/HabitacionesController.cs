@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ENTIDAD;
 using NEGOCIO;
+using Rotativa;
 
 namespace HotelPlayaLinda.Controllers
 {
@@ -17,8 +18,18 @@ namespace HotelPlayaLinda.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult adm_estadohoy()
         {
+           //new Rotativa.ViewAsPdf("adm_estadohoy");
         return View(HabitacionesCapaNegocio.listarEstadoHoyHabitacion());
         }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult view_pdf()
+        {
+            
+            return new ViewAsPdf("View_pdf", HabitacionesCapaNegocio.listarEstadoHoyHabitacion()) ; 
+        }
+
+
         [Authorize(Roles = "Admin")]
         public ActionResult adm_habitaciones()
         {

@@ -11,10 +11,10 @@
             <center><h4>Estado del Hotel Hoy </h4></center>
 
             <hr style="color: #47748b; ">
-          
+
             <center>
-                <label  class="col-form-label">
-                 
+                <label class="col-form-label">
+
                     Fecha: @fecha
                     <br>
                 </label>
@@ -49,9 +49,9 @@
             </table>
             <br>
             <br>
-
-            <center>   <a class="btn btn-outline-dark" stle="color:white" >   <img src="~/Content/img/pdf.svg" width="20" height="20">Descargar PDF</a></center>
-            <br>
+            
+            <center>   <a onclick="location.href='@Url.Action("view_pdf", "Habitaciones")'" class="btn btn-outline-info" stle="color:white" >Ver pdf  <img src="~/Content/img/pdf.svg" width="20" height="20">  </a></center>
+            <b></b>
             <br>
         </div>
         <div class="col-md-4"></div>
