@@ -16,6 +16,7 @@ namespace HotelPlayaLinda.Controllers
         NEGOCIO.ContenidoCapaNegocio capaNegocios = new NEGOCIO.ContenidoCapaNegocio();
         NEGOCIO.ImagenCapaNegocio img = new NEGOCIO.ImagenCapaNegocio();
         NEGOCIO.PromocionCapaNegocio promocionCapaNegocio = new NEGOCIO.PromocionCapaNegocio();
+        NEGOCIO.FacilidadesCapaNegocio facilidades = new NEGOCIO.FacilidadesCapaNegocio();
         public ActionResult Contacto()
         {
 
@@ -51,7 +52,43 @@ namespace HotelPlayaLinda.Controllers
             ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
             return View(img.listadoImagenes(new ENTIDAD.Imagen(1)));
         }
-       
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult FacilidadesAdm()
+        {
+           
+            return View(facilidades.listadoFacilidades2());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ModificarFacilidades(HttpPostedFileBase fileUpload,int idf,string nombre, string regla,string detalle)
+        {
+
+            try
+            {
+
+                string path = Server.MapPath("~/Content/img/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                fileUpload.SaveAs(path + Path.GetFileName(fileUpload.FileName));
+                ENTIDAD.Facilidades galeria = new Facilidades();
+                galeria.id_Facilidades = idf;
+                galeria.nombre = nombre;
+                galeria.reglas = regla;
+                galeria.detalles = detalle;
+                galeria.urlImg = "\\Content\\img\\" + fileUpload.FileName;
+                facilidades.modificarFacilidades(galeria);
+                return View("FacilidadesAdm", facilidades.listadoFacilidades2());
+            }
+            catch (Exception e)
+            {
+                return Json(new { Value = false, Message = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
 
         [Authorize(Roles = "Admin")]
         public ActionResult ModificarContenido(string contenido, string titulo) {

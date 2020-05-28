@@ -1,0 +1,143 @@
+﻿
+@model IEnumerable<ENTIDAD.Facilidades>
+
+<div class="container ">
+    <div class="row">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Reglas</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dato in Model)
+
+                {
+                    <tr>
+                        <th>@dato.id_Facilidades</th>
+                        <th>@dato.nombre</th>
+                        <td>@dato.reglas</td>
+                        <th> <img src="@dato.urlImg" class="card-img-top"  width="40" height="120"></th>
+                        <td>@dato.detalles</td>
+                        <td><a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" 
+                               onclick="return mifuncion(@Html.DisplayFor(modelItem => dato.id_Facilidades),
+                                                         '@Html.DisplayFor(modelItem => dato.nombre)',
+                                                         '@Html.DisplayFor(modelItem => dato.reglas)',
+                                                         '@Html.DisplayFor(modelItem => dato.urlImg)',
+                                                         '@Html.DisplayFor(modelItem => dato.detalles)')">Modificar</a></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modificar Facilidad</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input type="hidden" class="form-control" id="idf" name="idf">
+                            <label>Nombre Facilidad</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre">
+                            <br>
+                            <label>Reglas</label>
+                            <input type="text" class="form-control" id="regla" name="regla">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>  Imagen Actual</label>
+                                            <img name="modalimg" id="modalimg" width="100" height="100" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileUpload" name="fileUpload">
+                                                <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label>Detalles</label>
+                            <textarea type="text" class="form-control" id="detalle" name="detalle"> </textarea>
+                            <br>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
+                        <button type="button" id="btn" name="btn" class="btn btn-primary">Guadar Cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    function mifuncion(id, nombre, reglas, img, detalle) {
+                var img2 = img.substring(10, img.length);
+                $("#idf").val(id);
+                $("#nombre").val(nombre);
+                $("#regla").val(reglas);
+                $("#detalle").val(detalle);
+                var newRuta = "/Content/img/" + img2;
+                $("#modalimg").attr("src", newRuta);
+    }
+      $(document).ready(function (){
+
+                        $("#btn").click(function (){
+                            var selectFile = ($("#fileUpload"))[0].files[0];
+                            var dataString = new FormData();
+
+                            var id = $("#idf").val();
+                            var nombre = $("#nombre").val();
+                            var regla =  $("#regla").val();
+                            var detalle = $("#detalle").val();
+
+                         
+                            dataString.append("fileUpload", selectFile);
+                            dataString.append("idf", id);
+                            dataString.append("nombre", nombre);
+                            dataString.append("regla", regla);
+                            dataString.append("detalle", detalle);
+
+                            $.ajax({
+
+                                url: '@Url.Action("ModificarFacilidades", "Contenido")',
+                                type: 'POST',
+                                data: dataString,
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                success: function () {
+                                    alert('Imagen Subida con exito');
+                                    $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
+                                    if (typeof (data.Value) != "undefined") {
+                                        alert(data.Message);
+                                    } else { alert('Imagen Subida con exito'); }
+                                },
+                                error: function (data) {
+                                }
+                            });
+                        });
+
+                    });
+              
+</script>

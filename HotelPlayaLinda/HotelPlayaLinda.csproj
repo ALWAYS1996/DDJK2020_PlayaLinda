@@ -454,6 +454,7 @@
     <Content Include="Views\Contenido\Administrar_Inicio.cshtml" />
     <Content Include="Views\Mapa\AdministrarContenido.cshtml" />
     <Content Include="Views\Habitaciones\adm_estadohoy.cshtml" />
+    <Content Include="Views\Contenido\FacilidadesAdm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

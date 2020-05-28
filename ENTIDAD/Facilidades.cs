@@ -12,7 +12,7 @@ namespace ENTIDAD
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Código")]
         
-        public string id_Facilidades { get; set; }
+        public int id_Facilidades { get; set; }
 
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
         [Display(Name = "Nombre")]
@@ -36,7 +36,7 @@ namespace ENTIDAD
 
         public Facilidades() { }
 
-        public Facilidades(string id_Facilidades, string nombre, string reglas, string urlImg, string detalles)
+        public Facilidades(int id_Facilidades, string nombre, string reglas, string urlImg, string detalles)
         {
             this.id_Facilidades = id_Facilidades;
             this.nombre = nombre;
