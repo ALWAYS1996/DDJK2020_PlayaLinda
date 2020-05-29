@@ -55,9 +55,15 @@ namespace HotelPlayaLinda.Controllers
 
         [Authorize(Roles = "Admin")]
         public ActionResult FacilidadesAdm()
-        {
-           
+        {  
             return View(facilidades.listadoFacilidades2());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult HomeAdm()
+        {
+
+            return View("Administrar_Home", img.listadoImagenes(new ENTIDAD.Imagen(2)));
         }
 
         [Authorize(Roles = "Admin")]
@@ -115,6 +121,30 @@ namespace HotelPlayaLinda.Controllers
                 img.modificarImagenes(galeria);
                 ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
                 return View("SobreNosotrosAdm", img.listadoImagenes(new ENTIDAD.Imagen(1)));
+            }
+            catch (Exception e)
+            {
+                return Json(new { Value = false, Message = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult ModificarImagenHome(int idImagen, Imagen img) {
+            try
+            {
+                Imagen image = new Imagen();
+                string filename = Path.GetFileNameWithoutExtension(img.ImageFile.FileName);
+                string extension = Path.GetExtension(img.ImageFile.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+
+                img.idImagen = idImagen;
+                img.imgPath= "/Content/img/" + filename;
+
+                filename = Path.Combine(Server.MapPath("~/Content/img/"), filename);
+                img.ImageFile.SaveAs(filename);
+
+                this.img.modificarImagenes(img);
+                //ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
+                return View("Administrar_Home", this.img.listadoImagenes(new ENTIDAD.Imagen(2)));
             }
             catch (Exception e)
             {
