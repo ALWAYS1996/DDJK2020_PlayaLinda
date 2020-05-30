@@ -460,15 +460,22 @@ ALTER PROCEDURE PA_VerificarReservacion(@fechaLlegada date,@fechaSalida date, @t
 AS SET NOCOUNT ON;
 SELECT 
 count(*) as rangoFechas
---case 
---when count(1) >1 then 1 else 0 end as rangoFechas
-from Reservacion r  join Habitacion o on r.idHabitacion=o.idHabitacion
-where o.idTipoHabitacion =@tipoHabitacion and
+from Reservacion r 
+join Habitacion o on r.idHabitacion=o.idHabitacion
+join TipoHabitacion t on o.idTipoHabitacion=t.idTipoHabitacion
+where o.idTipoHabitacion =t.idTipoHabitacion 
+and r.idHabitacion=o.idHabitacion
+and
 (select min(r.fechaLlegada) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion where o.idTipoHabitacion =@tipoHabitacion ) < @fechaSalida
 AND (select max(r.fechaSalida) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion  where o.idTipoHabitacion =@tipoHabitacion ) > @fechaLlegada
 AND o.estado=1
  GO
  
+
+ select * from TipoHabitacion
+ select * from Habitacion
+ select * from Reservacion
+ update Reservacion set idHabitacion=2 where idReservacion=11
 ------------------------------------------------------------------------------------------------------------------------
 alter procedure PA_Login( @Usuario varchar(30),  @Contra  varchar(30), @TipoUsuario int)
 as	SET NOCOUNT ON;
@@ -500,13 +507,20 @@ join TipoHabitacion t on t.idTipoHabitacion=h.idTipoHabitacion
 ----------------------------------------------------------------------------------------------------------------------------
 select * from Habitacion
 select * from Reservacion
-CREATE TRIGGER TR_CambiarEstado on Reservacion
+
+ALTER TRIGGER TR_CambiarEstado on Reservacion
 After update
 AS
-declare @fechaActual datetime;
-set @fechaActual=getdate();
-if exists (select * from inserted ) and not exists(select * from deleted)begin
-update Habitacion
-set estado=0 where fechaLlegada<@fechaActual
+declare @fechaActual datetime,@idHabitacion int ,@IdReserva int; set @fechaActual=getdate();
+if exists (select * from inserted ) and  exists(select * from deleted)begin
+if(select fechaSalida from inserted ) < @fechaActual begin 
+set @idHabitacion=(select idHabitacion from inserted)
+set @idReserva=(select idReservacion from inserted)
+update Habitacion set estado=0 where idHabitacion=@idHabitacion;
+--delete  from Reservacion  where idReservacion=@IdReserva;
+end
 end
 GO
+
+select *from Habitacion
+select *from Reservacion

@@ -74,13 +74,12 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 function mifuncion(id, img) {
-                //var img2 = img.substring(10, img.length);
-                //var dataString = new FormData();
+       var img2 = img.substring(10, img.length);
 
-                $("#idImagen").val(id);
+          $("#idImagen").val(id);
 
-                //var newRuta = "/Content/img/" + img;
-                $("#modalimg").attr("src", img);
+                var newRuta = "/Content/img/" + img2;
+    $("#modalimg").attr("src", newRuta);
     } 
 
 
