@@ -18,7 +18,7 @@
     <div class="col-md-6">
         @using (Html.BeginForm("DatosUsuario", "Reserva", FormMethod.Post))
         {
-            <input type="text" id="codigoHabitacion" name="codigoHabitacion" hidden>
+            <input type="text" id="codigoTipoHabitacion" name="codigoTipoHabitacion" hidden>
             <input type="text" id="codigoCliente" name="codigoCliente" value="1" hidden>
             <p>Fecha inicio: <input type="date" id="inicio" name="fechaLlegada"></p>
             <p>Fecha final: <input type="date" id="final" name="fechaSalida"></p>
@@ -32,6 +32,6 @@
 
     function llenaDatos() {
         var name = document.getElementById("sel1").value;
-        document.getElementById("codigoHabitacion").value = name;
+        document.getElementById("codigoTipoHabitacion").value = name;
     }
 </script>

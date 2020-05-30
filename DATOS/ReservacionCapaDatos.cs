@@ -26,9 +26,9 @@ namespace DATOS
             {
                 conexion.Open();
                 comando.Connection = conexion;
-                comando.CommandText = "exec PA_RegistrarReservacion @idTipoHabitacion,@idCliente,@fechaLlegada,@fechaSalida";
-                comando.Parameters.AddWithValue("@idTipoHabitacion", reservacion.codigoHabitacion);
-                comando.Parameters.AddWithValue("@idCliente", reservacion.codigoCliente);
+                comando.CommandText = "exec PA_RegistrarReservacion @idHabitacion, @idCliente,@fechaLlegada,@fechaSalida";
+                comando.Parameters.AddWithValue("@idHabitacion", 1);
+                comando.Parameters.AddWithValue("@idCliente", 1);
                 comando.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaLlegada);
                 comando.Parameters.AddWithValue("@fechaSalida", reservacion.fechaSalida);
                 int result = comando.ExecuteNonQuery();
@@ -41,7 +41,10 @@ namespace DATOS
                     return -1;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             finally { conexion.Close(); }
             return 0;
         }//fin
@@ -67,9 +70,9 @@ namespace DATOS
                 
                 //}
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                throw ex;
             }
             finally
             {

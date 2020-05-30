@@ -1,7 +1,7 @@
 ﻿<div class="col-4" style="margin: 25px;">
     @using (Html.BeginForm("GenerarReservacion", "Reserva", FormMethod.Post))
     {
-        <input type="text" class="form-control" id="idHabitacion" value="@ViewData["idHabitacion"]" name="idHabitacion" >
+        <input type="text" class="form-control" id="codigoTipoHabitacion" value="@ViewData["codigoTipoHabitacion"]" name="codigoTipoHabitacion" >
         <input type="text" class="form-control" id="fechaInicio" value="@ViewData["fechaInicio"]" name="fechaInicio" >
         <input type="text" class="form-control" id="fechaFin" value="@ViewData["fechaFin"]" name="fechaFin" >
         <div class="form-group">

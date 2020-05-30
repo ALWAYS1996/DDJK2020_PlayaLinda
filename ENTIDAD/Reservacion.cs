@@ -58,14 +58,13 @@ namespace ENTIDAD
         public Reservacion(string idHabitacio, string fechaLlegada, string fechaSalida)
         {
             this.idHabitacionTemp = idHabitacio;
-            this.codigoHabitacion = codigoHabitacion;
             this.fechaL = fechaLlegada;
             this.fechaS = fechaSalida;
         }
 
         public Reservacion(int idTipoHabitacion, DateTime fechaLlegada, DateTime fechaSalida)
         {
-            this.idTipoHabitacion = idTipoHabitacion;
+            this.idHabitacionTemp = idTipoHabitacion.ToString();
             this.fechaLlegada = fechaLlegada;
             this.fechaSalida = fechaSalida;
         }
