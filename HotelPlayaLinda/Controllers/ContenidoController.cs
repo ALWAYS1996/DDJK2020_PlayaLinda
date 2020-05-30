@@ -62,8 +62,9 @@ namespace HotelPlayaLinda.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult HomeAdm()
         {
-
-            return View("Administrar_Home", img.listadoImagenes(new ENTIDAD.Imagen(2)));
+            ViewData["contenidoInicio"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(4));
+            ViewData["contenidoImagen"] = img.listadoImagenes(new ENTIDAD.Imagen(2));
+            return View("Administrar_Home");
         }
 
         [Authorize(Roles = "Admin")]
@@ -101,6 +102,14 @@ namespace HotelPlayaLinda.Controllers
             capaNegocios.modificarContenido(new Contenido(1, contenido, titulo));
             ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
             return View("SobreNosotrosAdm", img.listadoImagenes(new ENTIDAD.Imagen(1)));
+        }
+
+        public ActionResult ModificarTextoInicio(string contenido, string titulo)
+        {
+            capaNegocios.modificarContenido(new Contenido(4, contenido, titulo));
+            ViewData["contenidoInicio"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(4));
+            ViewData["contenidoImagen"] = img.listadoImagenes(new ENTIDAD.Imagen(2));
+            return View("Administrar_Home");
         }
 
         [Authorize(Roles = "Admin")]
