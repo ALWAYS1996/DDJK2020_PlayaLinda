@@ -107,17 +107,19 @@ ALTER TABLE Promocion ADD rebaja int;
 ALTER TABLE Promocion DROP COLUMN dummy;
 ALTER TABLE Promocion ADD CONSTRAINT PK_Promocion PRIMARY KEY(idPromocion);
 
-select * from Promocion
-delete from Promocion where idPromocion=4
+select * from Publicidad
+
 DROP TABLE IF EXISTS Publicidad;
 CREATE TABLE Publicidad(dummy int);
 ALTER TABLE Publicidad ADD idPublicidad smallint IDENTITY(1,1);
 ALTER TABLE Publicidad ADD rutaImagen varchar(255);
+ALTER TABLE Publicidad ADD textoPublicitario varchar(255);
 ALTER TABLE Publicidad ADD link varchar(255);
 ALTER TABLE Publicidad DROP COLUMN dummy;
 ALTER TABLE Publicidad ADD CONSTRAINT PK_Publicidad PRIMARY KEY(idPublicidad);
 
-
+insert into Publicidad  (rutaImagen,link,textoPublicitario) values('\Content\img\publicidad4.gif', 'https://www.coca-cola.com.co/cr/es/home','Coca Cola')
+select * from Imagen
 --------------------------
 -- FIN Definicion de tablas --
 --------------------------
@@ -404,10 +406,11 @@ AS SET NOCOUNT ON;
 Delete From Publicidad WHERE idPublicidad= @idPublicidad 
 GO
 -------------------------------------------------------------------------------------------------------------------------
-CREATE PROCEDURE PA_ListarPublicidad 
+ALTER PROCEDURE PA_ListarPublicidad 
 AS SET NOCOUNT ON;
-Select idPublicidad,rutaImagen,link From Publicidad 
+Select idPublicidad,rutaImagen,link,textoPublicitario From Publicidad 
 GO
+exec PA_ListarPublicidad
 -------------------------------------------------------------------------------------------------------------------------
 CREATE PROCEDURE PA_ModificarContenido( @contenido varchar(max),@titulo varchar(40), @idContenido int)
 AS SET NOCOUNT ON;
@@ -459,7 +462,8 @@ GO
 ALTER PROCEDURE PA_VerificarReservacion(@fechaLlegada date,@fechaSalida date, @tipoHabitacion int)
 AS SET NOCOUNT ON;
 SELECT 
-count(*) as rangoFechas
+ o.idHabitacion
+
 from Reservacion r 
 join Habitacion o on r.idHabitacion=o.idHabitacion
 join TipoHabitacion t on o.idTipoHabitacion=t.idTipoHabitacion
@@ -470,12 +474,25 @@ and
 AND (select max(r.fechaSalida) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion  where o.idTipoHabitacion =@tipoHabitacion ) > @fechaLlegada
 AND o.estado=1
  GO
+
+ ALTER PROCEDURE PA_VerificarReservacion2(@fechaLlegada date,@fechaSalida date, @tipoHabitacion int)
+ AS SET NOCOUNT ON;
+
+if ((select min(r.fechaLlegada) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion where o.idTipoHabitacion =@tipoHabitacion ) < @fechaSalida
+AND (select max(r.fechaSalida) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion  where o.idTipoHabitacion =@tipoHabitacion ) > @fechaLlegada
+AND o.estado=1)then
+
+end
+ Select * from Reservacion r join Habitacion h  on r.idHabitacion=h.idHabitacion
+ join TipoHabitacion t on  t.idTipoHabitacion=h.idTipoHabitacion
+ where 
+
+ GO
+ select top 1 idHabitacion from Habitacion where estado=0
+
  
 
- select * from TipoHabitacion
- select * from Habitacion
- select * from Reservacion
- update Reservacion set idHabitacion=2 where idReservacion=11
+ exec PA_VerificarReservacion '2020-06-11','2020-06-21',1
 ------------------------------------------------------------------------------------------------------------------------
 alter procedure PA_Login( @Usuario varchar(30),  @Contra  varchar(30), @TipoUsuario int)
 as	SET NOCOUNT ON;
@@ -497,17 +514,23 @@ CREATE PROCEDURE PA_ModificarImagen(@idImagen int, @ruta varchar(30))
  select * from Imagen
  update Imagen set ruta=@ruta where idImagen=@idImagen
  go
+ ---------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------
 alter procedure PA_EstadoHoyHabitacion
 as set nocount on;
 select h.idHabitacion, t.nombreTipoHabitacion, h.estado from Reservacion r join Habitacion h on r.idHabitacion=h.idHabitacion
 join TipoHabitacion t on t.idTipoHabitacion=h.idTipoHabitacion  
+where r.fechaLlegada<=getdate() and GETDATE()<=r.fechaSalida
 
- GO
+
+
+select r.idReservacion, r.idHabitacion,t.idTipoHabitacion, r.fechaLlegada,r.fechaSalida,h.estado,t.nombreTipoHabitacion  from Reservacion r join Habitacion  h  on r.idHabitacion=h.idHabitacion
+join TipoHabitacion t on t.idTipoHabitacion=h.idTipoHabitacion
+
 ----------------------------------------------------------------------------------------------------------------------------
-select * from Habitacion
+select * from TipoHabitacion
 select * from Reservacion
-
+select * from Cliente
 ALTER TRIGGER TR_CambiarEstado on Reservacion
 After update
 AS

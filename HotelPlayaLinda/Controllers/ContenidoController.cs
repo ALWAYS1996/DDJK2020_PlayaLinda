@@ -17,6 +17,7 @@ namespace HotelPlayaLinda.Controllers
         NEGOCIO.ImagenCapaNegocio img = new NEGOCIO.ImagenCapaNegocio();
         NEGOCIO.PromocionCapaNegocio promocionCapaNegocio = new NEGOCIO.PromocionCapaNegocio();
         NEGOCIO.FacilidadesCapaNegocio facilidades = new NEGOCIO.FacilidadesCapaNegocio();
+        NEGOCIO.PublicidadCapaNegocio publicidad = new NEGOCIO.PublicidadCapaNegocio();
         public ActionResult Contacto()
         {
 
@@ -146,14 +147,17 @@ namespace HotelPlayaLinda.Controllers
                 filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
 
                 img.idImagen = idImagen;
-                img.imgPath= "/Content/img/" + filename;
+                img.imgPath= "\\Content\\img\\" + filename;
 
-                filename = Path.Combine(Server.MapPath("~/Content/img/"), filename);
+                filename = Path.Combine(Server.MapPath("\\Content\\img\\"), filename);
                 img.ImageFile.SaveAs(filename);
 
                 this.img.modificarImagenes(img);
-                //ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
-                return View("Administrar_Home", this.img.listadoImagenes(new ENTIDAD.Imagen(2)));
+               ViewData["contenidoInicio"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(4));
+                //return View("Administrar_Home", img.listadoImagenes(new ENTIDAD.Imagen(2)));
+
+                ViewData["contenidoImagen"] = this.img.listadoImagenes(new ENTIDAD.Imagen(2));
+                return View("Administrar_Home");
             }
             catch (Exception e)
             {
@@ -161,11 +165,20 @@ namespace HotelPlayaLinda.Controllers
             }
         }
 
+        //public ActionResult _Publicidad() {
+        //    //  ViewData["publicidad"] = publicidad.listadoPublicidad();
+        //    var getPublicity = publicidad.getPublicity().ToList();
+        //    return PartialView("_Publicid", getPublicity);
+        //}
+
         public ActionResult Inicio()
         {
 
             ViewData["listadoPromociones"] = promocionCapaNegocio.listadoPromociones();
             ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(4));
+            
+            ViewData["listarPublicidad"] = publicidad.listadoPublicidad();
+
             return View(img.listadoImagenes(new ENTIDAD.Imagen(2)));
         }
 

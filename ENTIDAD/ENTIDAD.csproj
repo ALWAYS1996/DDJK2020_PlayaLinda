@@ -203,6 +203,7 @@
     <Compile Include="Mapa.cs" />
     <Compile Include="Promocion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publicidad.cs" />
     <Compile Include="Reservacion.cs" />
     <Compile Include="TipoHabitacion.cs" />
   </ItemGroup>

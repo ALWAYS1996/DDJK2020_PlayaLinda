@@ -9,7 +9,42 @@ a {
     text-decoration: dashed;
 }
 
-  
+#navPrin {
+    height: 450px;
+    width: 300px;
+}
+
+div.img {
+    display: table;
+}
+
+    div.img img {
+        margin: 0;
+        padding: 0;
+    }
+
+    div.img span {
+        line-height: normal;
+        font-size: 17px;
+        display: table-caption;
+        color: white;
+        font-style: italic;
+    }
+
+
+
+
+
+.Rotate-90 {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    width: 100px;
+    position: relative;
+    top: 200px;
+}
 
     a:hover {
         background-color: #ede9e9;

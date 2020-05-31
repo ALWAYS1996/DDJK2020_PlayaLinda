@@ -1,0 +1,14 @@
+﻿
+@model List<ENTIDAD.Imagen>
+    
+
+    @foreach (ENTIDAD.Imagen  publici in Model)
+    {
+
+          @Html.DisplayFor(modelItem => publici.idPublicidad)
+            <img src="@Html.DisplayFor(modelItem => publici.rutaImg)" id="imagenI" class="container-fluid ">
+        //    @Html.DisplayFor(modelItem => publici.descripcion)
+        //    @Html.DisplayFor(modelItem => publici.link)
+        }
+    @*<img src="~/Content/img/publicidad4.gif" id="imagenI" class="container-fluid ">
+    <span size="5" class="Rotate-90 animated infinite fadeInRight slow">COCA COLA</span>*@

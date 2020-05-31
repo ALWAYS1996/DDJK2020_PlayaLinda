@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ENTIDAD
 {
-    public class Imagen
+    public class Imagen 
     {
       
         [DisplayFormat(NullDisplayText = "Sin Respuesta")]
