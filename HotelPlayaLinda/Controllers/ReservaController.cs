@@ -47,7 +47,7 @@ namespace HotelPlayaLinda.Controllers
         public ActionResult Estado(Reservacion reservacion)
         {
 
-            if (reservacionCapaNegocios.verificarReservacion(reservacion) > 0)
+            if (reservacionCapaNegocios.verificarReservacion(reservacion)==-1)
             {
                 ViewBag.mensaje = "Lo sentimos, el rango de fechas que seleccionaste se encuentran ocupadas. En este calendario podrás ver que fechas se encuentran disponibles";
                 return View(reservacionCapaNegocios.sugerirReservacion());
@@ -76,17 +76,19 @@ namespace HotelPlayaLinda.Controllers
 
         public ActionResult DatosUsuario(string codigoTipoHabitacion, string fechaLlegada, string fechaSalida)
         {
-            if (reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoTipoHabitacion, fechaLlegada, fechaSalida)) > 0)
+            if (reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoTipoHabitacion, fechaLlegada, fechaSalida)) ==-1)
             {
                 ViewBag.mensaje = "Lo sentimos, el rango de fechas que seleccionaste se encuentran ocupadas. En este calendario podrás ver que fechas se encuentran disponibles:";
                 return View("Estado", reservacionCapaNegocios.sugerirReservacion());
             }
             else
             {
+                var resultado = (reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoTipoHabitacion, fechaLlegada, fechaSalida)));
                 Reservacion reservacion = new Reservacion();
                 ViewData["codigoTipoHabitacion"] = codigoTipoHabitacion;
                 ViewData["fechaInicio"] =fechaLlegada;
                 ViewData["fechaFin"] = fechaSalida;
+                ViewData["NumeroHabitacion"] = resultado;
                 ViewBag.mensaje = "Habitación disponible para ser reservada";
                 return View();
             }

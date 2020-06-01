@@ -411,6 +411,8 @@ AS SET NOCOUNT ON;
 Select idPublicidad,rutaImagen,link,textoPublicitario From Publicidad 
 GO
 exec PA_ListarPublicidad
+update Publicidad set rutaImagen='https://www.coca-cola.com.co/cr/es/home'
+delete from Publicidad where idPublicidad=2
 -------------------------------------------------------------------------------------------------------------------------
 CREATE PROCEDURE PA_ModificarContenido( @contenido varchar(max),@titulo varchar(40), @idContenido int)
 AS SET NOCOUNT ON;
@@ -459,40 +461,6 @@ SELECT fechaLlegada,fechaSalida, idHabitacion FROM Reservacion
 GO
 
 -------------------------------------------------------------------------------------------------------------------------
-ALTER PROCEDURE PA_VerificarReservacion(@fechaLlegada date,@fechaSalida date, @tipoHabitacion int)
-AS SET NOCOUNT ON;
-SELECT 
- o.idHabitacion
-
-from Reservacion r 
-join Habitacion o on r.idHabitacion=o.idHabitacion
-join TipoHabitacion t on o.idTipoHabitacion=t.idTipoHabitacion
-where o.idTipoHabitacion =t.idTipoHabitacion 
-and r.idHabitacion=o.idHabitacion
-and
-(select min(r.fechaLlegada) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion where o.idTipoHabitacion =@tipoHabitacion ) < @fechaSalida
-AND (select max(r.fechaSalida) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion  where o.idTipoHabitacion =@tipoHabitacion ) > @fechaLlegada
-AND o.estado=1
- GO
-
- ALTER PROCEDURE PA_VerificarReservacion2(@fechaLlegada date,@fechaSalida date, @tipoHabitacion int)
- AS SET NOCOUNT ON;
-
-if ((select min(r.fechaLlegada) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion where o.idTipoHabitacion =@tipoHabitacion ) < @fechaSalida
-AND (select max(r.fechaSalida) from Reservacion r join Habitacion o on r.idHabitacion=o.idHabitacion  where o.idTipoHabitacion =@tipoHabitacion ) > @fechaLlegada
-AND o.estado=1)then
-
-end
- Select * from Reservacion r join Habitacion h  on r.idHabitacion=h.idHabitacion
- join TipoHabitacion t on  t.idTipoHabitacion=h.idTipoHabitacion
- where 
-
- GO
- select top 1 idHabitacion from Habitacion where estado=0
-
- 
-
- exec PA_VerificarReservacion '2020-06-11','2020-06-21',1
 ------------------------------------------------------------------------------------------------------------------------
 alter procedure PA_Login( @Usuario varchar(30),  @Contra  varchar(30), @TipoUsuario int)
 as	SET NOCOUNT ON;

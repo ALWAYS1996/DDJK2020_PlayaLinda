@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ENTIDAD;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -46,11 +47,12 @@ namespace DATOS
                 throw ex;
             }
             finally { conexion.Close(); }
-            return 0;
+         
         }//fin
 
         /*Obtener*/
         public int verificarReservacion(ENTIDAD.Reservacion reservacion) {
+            ENTIDAD.Reservacion reserva = new ENTIDAD.Reservacion();
             int cantidad = 0;// ""; 
             try
             {
@@ -59,16 +61,23 @@ namespace DATOS
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaL);
                 cmd.Parameters.AddWithValue("@fechaSalida", reservacion.fechaS);
-                cmd.Parameters.AddWithValue("@tipoHabitacion", reservacion.idHabitacionTemp);
-                
-                SqlDataReader rdr = cmd.ExecuteReader();
-                // while (
-                rdr.Read();//)
-                           //{
+          cmd.Parameters.AddWithValue("@tipoHabitacion", reservacion.idHabitacionTemp);//EN REALIDAD TIENE QUE SER TIPO DE HABITACION, NO SE CONFUNDA
+                cmd.Parameters.AddWithValue("@parametroSalida", SqlDbType.Int).Direction=ParameterDirection.Output;
 
-                cantidad = (rdr.GetInt32(rdr.GetOrdinal("rangoFechas")));
-                
-                //}
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                rdr.Read();
+
+                cantidad = Convert.ToInt32(cmd.Parameters["@parametroSalida"].Value);
+
+                if (cantidad > 0)
+               reservacion.codigoHabitacion = cantidad;
+              
+
+
+                return cantidad;
+                //cantidad = (rdr.GetInt32(rdr.GetOrdinal("rangoFechas")));
+              
             }
             catch (Exception ex)
             {
@@ -78,7 +87,7 @@ namespace DATOS
             {
                 conexion.Close();
             }
-            return cantidad;
+          
 
 
         }//fin

@@ -46,5 +46,6 @@ namespace ENTIDAD
             this.codigoHabitacion = codigoHabitacion;
             this.vacante = vacante;
         }
+       
     }
 }

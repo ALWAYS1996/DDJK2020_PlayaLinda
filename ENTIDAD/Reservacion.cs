@@ -16,6 +16,7 @@ namespace ENTIDAD
 
         public int codigoHabitacion { get; set; }
 
+        //No quitar, la necesito para el calendario por eso es temporal
         public string idHabitacionTemp{ get; set; }
 
         public int idTipoHabitacion { get; set; }
@@ -32,8 +33,13 @@ namespace ENTIDAD
         public DateTime fechaLlegada { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+
+
+        //No quitar, la necesito para el calendario por eso es temporal
         public string fechaL { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+
+        //No quitar, la necesito para el calendario por eso es temporal
         public string fechaS { get; set; }
 
 
@@ -55,9 +61,9 @@ namespace ENTIDAD
             this.fechaLlegada = fechaLlegada;
             this.fechaSalida = fechaSalida;
         }
-        public Reservacion(string idHabitacio, string fechaLlegada, string fechaSalida)
+        public Reservacion(string idTipoHabitacion, string fechaLlegada, string fechaSalida)
         {
-            this.idHabitacionTemp = idHabitacio;
+            this.idHabitacionTemp = idTipoHabitacion;
             this.fechaL = fechaLlegada;
             this.fechaS = fechaSalida;
         }
@@ -73,5 +79,6 @@ namespace ENTIDAD
             this.codigoReservacion = idReserva;
 
         }
+       
     }
 }
