@@ -5,12 +5,13 @@
     width:auto;
     height:auto;*/
 }
+
 a {
     text-decoration: dashed;
 }
 
 #navPrin {
-    height: 450px;
+    height: 870px;
     width: 300px;
 }
 
@@ -36,26 +37,28 @@ div.img {
 
 
 .Rotate-90 {
+    line-height: normal;
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     transform: rotate(-90deg);
     width: 100px;
-    position: relative;
-    top: 200px;
+    top: 0px;
+    color: red;
+    font-size: 19px;
+    font-weight: bold;
 }
 
-    a:hover {
-        background-color: #ede9e9;
-    }
-    
+a:hover {
+    background-color: #ede9e9;
+}
 
 
-    a:active {
-     background: #808080;
-     
-    }
+
+a:active {
+    background: #808080;
+}
 
 
 
@@ -64,7 +67,6 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-   
 }
 
 a, a:hover, a:focus {

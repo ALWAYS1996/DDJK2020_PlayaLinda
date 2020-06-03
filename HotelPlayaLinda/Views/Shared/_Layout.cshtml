@@ -43,6 +43,7 @@
         <nav class="shadow nav navbar-brand bg-light" id="navPrin">
 
             <ul class="">
+
                 <li class="nav-link">
                     <a class="nav-link" href="/Contenido/Inicio"> Inicio </a>
                 </li>
@@ -67,12 +68,16 @@
                 </li>
 
 
-            </ul>
-            <div class="img">
-                <br> <br>
+                <li class="nav-link  animated infinite jello slow">
+                    <a id="linkpublicidad" name="linkpublicidad">   <img id="imgPublicidad" class="container-fluid" name="imgPublicidad" width="230" height="400" /> </a>
 
-             
-            </div>
+                </li>
+
+                <li style="color:white">  <h5 id="etiquetaPublicidad" name="etiquetaPublicidad" class=" Rotate-90 animated infinite bounceInRight slow"> </h5></li>
+
+
+            </ul>
+
         </nav>
 
 
@@ -132,22 +137,29 @@
         </div>
     </footer>
     <script>
-        //$.ajax({
-        //    type: 'POST',
+        $(document).ready(function () {
+            jQuery.ajax({
+                type: 'POST',
+                url: "/Contenido/listadoPublicidad",
+                dataType: 'json', // ** ensure you add this line **
+                success: function (data) {
+                    console.log(data);
+                    jQuery.each(data, function (index, item) {
 
-        //    url: "/Contenido/_Publicidad",
-        //    data: { criterioid: filtro },
-        //    success: function (response) {
-        //        console.log(response);
-        //        $.each(JSON.parse(response), function (i, item) {
-                 
-        //            $("#valorid").append('  <option selected value="2">Valores </option>   ');
+                        $("#imgPublicidad").attr("src", item.rutaImg);
+                        $("#linkpublicidad").attr("href", item.link);//.val(item.link;
+                        // $("#etiquetaPublicidad").innerHTML = "'item.descripcion'";//attr("value", item.descripcion);//val(item.descripcion);//attr("h5", item.descripcion);//.val(item.descripcion);
+                        document.getElementById("etiquetaPublicidad").innerHTML = item.descripcion;
+                    });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error");
+                }
+            });
 
-                  
-        //        });
+        });//fin metodo
 
-        //    }
-        //});
+
 
     </script>
 

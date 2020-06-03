@@ -25,6 +25,13 @@ namespace HotelPlayaLinda.Controllers
             return View();
         }
 
+
+        public JsonResult listadoPublicidad()
+        {
+
+            return Json((publicidad.listadoPublicidad()));
+
+        }
         [Authorize(Roles = "Admin")]
         public ActionResult Administrar_Publicidad() {
             return View();
@@ -177,8 +184,7 @@ namespace HotelPlayaLinda.Controllers
             ViewData["listadoPromociones"] = promocionCapaNegocio.listadoPromociones();
             ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(4));
             
-            ViewData["listarPublicidad"] = publicidad.listadoPublicidad();
-
+           
             return View(img.listadoImagenes(new ENTIDAD.Imagen(2)));
         }
 
