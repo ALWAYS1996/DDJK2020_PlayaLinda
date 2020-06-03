@@ -25,7 +25,7 @@ namespace DATOS
             SqlCommand comando = new SqlCommand();
             try
             {
-                conexion.Open();
+               conexion.Open();
                 comando.Connection = conexion;
                 comando.CommandText = "exec PA_RegistrarReservacion @idHabitacion, @idCliente,@fechaLlegada,@fechaSalida";
                 comando.Parameters.AddWithValue("@idHabitacion", reservacion.codigoHabitacion);

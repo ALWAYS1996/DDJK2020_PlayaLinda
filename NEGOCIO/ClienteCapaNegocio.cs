@@ -8,9 +8,9 @@ namespace NEGOCIO
     public class ClienteCapaNegocio
     {
         DATOS.ClienteCapaDatos capaDatos = new DATOS.ClienteCapaDatos();
-        public IEnumerable<ENTIDAD.Cliente> listadoClientes()
+        public IEnumerable<ENTIDAD.Cliente> listadoClientes(Cliente cliente)
         {
-            return capaDatos.listadoClientes();
+            return capaDatos.listadoClientes(cliente);
         }
 
         public int registrarCliente(Cliente cliente)

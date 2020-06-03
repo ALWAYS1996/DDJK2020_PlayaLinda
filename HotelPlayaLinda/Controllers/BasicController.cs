@@ -21,7 +21,13 @@ namespace HotelPlayaLinda.Controllers
             return View(FacilidadesCapaNegocio.listadoFacilidades());
         }
 
+        public JsonResult getClientes(string pasaporte)
 
+        {
+            NEGOCIO.ClienteCapaNegocio c = new NEGOCIO.ClienteCapaNegocio();
+
+            return Json(c.listadoClientes(new ENTIDAD.Cliente(pasaporte)));
+        }
 
         public ActionResult Tarifas()
         {

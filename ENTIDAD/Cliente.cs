@@ -52,6 +52,10 @@ namespace ENTIDAD
         public Cliente()
         {
         }
+        public Cliente(string pasaporte)
+        {
+            this.pasaporte = pasaporte;
+        }
 
         public Cliente(int codigoCliente, string pasaporte, string nombre, string apellido1, string apellido2, string correo, string nacionalidad, int edad)
         {

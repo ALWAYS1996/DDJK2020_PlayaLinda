@@ -21,15 +21,15 @@ namespace DATOS
 
 
         private List<ENTIDAD.Cliente> listarCliente = new List<ENTIDAD.Cliente>();
-        public IEnumerable<ENTIDAD.Cliente> listadoClientes()
+        public IEnumerable<ENTIDAD.Cliente> listadoClientes(ENTIDAD.Cliente client)
         {
             SqlCommand comando = new SqlCommand();
             try
             {
                 comando.Connection = conexion;
                 conexion.Open();
-                comando.CommandText = "exec PA_ListarClientes";
-
+                comando.CommandText = "exec PA_ListarClientes @pasaporte";
+                comando.Parameters.AddWithValue("@pasaporte", client.pasaporte);
                 SqlDataAdapter da = new SqlDataAdapter(comando);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -45,10 +45,10 @@ namespace DATOS
                         cliente.pasaporte = (ds.Tables[0].Rows[i][1].ToString());
                         cliente.nombre = (ds.Tables[0].Rows[i][2].ToString());
                         cliente.apellido1 = (ds.Tables[0].Rows[i][3].ToString());
-                        cliente.apellido2 = (ds.Tables[0].Rows[i][4].ToString());
-                        cliente.edad = int.Parse(ds.Tables[0].Rows[i][5].ToString());
-                        cliente.correo = (ds.Tables[0].Rows[i][6].ToString());
-                        cliente.nacionalidad = (ds.Tables[0].Rows[i][7].ToString());
+                     //   cliente.apellido2 = (ds.Tables[0].Rows[i][4].ToString());
+                     //   cliente.edad = int.Parse(ds.Tables[0].Rows[i][5].ToString());
+                        cliente.correo = (ds.Tables[0].Rows[i][4].ToString());
+                     //   cliente.nacionalidad = (ds.Tables[0].Rows[i][7].ToString());
                         listarCliente.Add(cliente);
                     }
                 }
@@ -60,6 +60,7 @@ namespace DATOS
             finally { conexion.Close(); }
             return listarCliente;
         }//Fin
+
 
         public int registrarCliente(Cliente cliente)
         {
@@ -83,10 +84,9 @@ namespace DATOS
                     return -1;
                 }
             }
-            catch (Exception ex) {
-                throw ex;
-            }
+            catch (Exception) { }
             finally { conexion.Close(); }
+            return 0;
         }
     }
 }
