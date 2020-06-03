@@ -465,7 +465,6 @@
     <Content Include="Views\Contenido\FacilidadesAdm.cshtml" />
     <Content Include="Views\Habitaciones\View_pdf.cshtml" />
     <Content Include="Views\Contenido\Administrar_Home.cshtml" />
-    <Content Include="Views\Contenido\_Publicidad.cshtml" />
     <Content Include="Views\Reserva\Reservado.cshtml" />
   </ItemGroup>
   <ItemGroup>

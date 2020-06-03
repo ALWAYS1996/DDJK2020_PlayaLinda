@@ -14,6 +14,14 @@ namespace NEGOCIO
         {
             return capaDatos.modificarImagenes(imagen);
         }
+        public int eliminarImagenes(ENTIDAD.Imagen imagen)
+        {
+            return capaDatos.eliminarImagenes(imagen);
+        }
+        public int registrarImagenes(ENTIDAD.Imagen imagen)
+        {
+            return capaDatos.registrarImagenes(imagen);
+        }
 
         public IEnumerable<ENTIDAD.Imagen> listadoImagenes(ENTIDAD.Imagen imagen)
         {

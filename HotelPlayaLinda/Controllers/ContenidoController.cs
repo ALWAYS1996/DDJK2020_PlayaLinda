@@ -107,7 +107,17 @@ namespace HotelPlayaLinda.Controllers
 
         [Authorize(Roles = "Admin")]
         public ActionResult ModificarContenido(string contenido, string titulo) {
-            capaNegocios.modificarContenido(new Contenido(1, contenido, titulo));
+            if (capaNegocios.modificarContenido(new Contenido(1, contenido, titulo)) > 0)
+            {
+                ViewBag.mensaje = "Modificado Correctamente";
+            }
+            else
+            {
+                ViewBag.mensaje = "No Modificado Correctamente";
+            }
+                
+
+              //  capaNegocios.modificarContenido(new Contenido(1, contenido, titulo));
             ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
             return View("SobreNosotrosAdm", img.listadoImagenes(new ENTIDAD.Imagen(1)));
         }
@@ -144,6 +154,41 @@ namespace HotelPlayaLinda.Controllers
                 return Json(new { Value = false, Message = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        
+               [Authorize(Roles = "Admin")]
+        public ActionResult RegistrarSobreNosotros(HttpPostedFileBase fileUpload1)
+        {
+            try
+            {
+                string path = Server.MapPath("~/Content/img/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                fileUpload1.SaveAs(path + Path.GetFileName(fileUpload1.FileName));
+                ENTIDAD.Imagen galeria = new ENTIDAD.Imagen();
+        
+                galeria.imgPath = "\\Content\\img\\" + fileUpload1.FileName;
+                galeria.tipo = 1;
+                img.registrarImagenes(galeria);
+               
+                ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
+                return View("SobreNosotrosAdm", img.listadoImagenes(new ENTIDAD.Imagen(1)));
+            }
+            catch (Exception e)
+            {
+                return Json(new { Value = false, Message = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult eliminarSobreNosotros(int idImagen) {
+            ENTIDAD.Imagen galeria = new ENTIDAD.Imagen();
+            galeria.idImagen = idImagen;
+            img.eliminarImagenes(galeria);
+            ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
+            return View("SobreNosotrosAdm", img.listadoImagenes(new ENTIDAD.Imagen(1)));
+        }
+
 
         public ActionResult ModificarImagenHome(int idImagen, Imagen img) {
             try

@@ -10,30 +10,39 @@
 
             </div>
             <div class="col-md-6">
+                <div>
+                    @if (@ViewBag.mensaje != null)
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            Mensaje:<strong> @ViewBag.mensaje</strong>
+                        </div>
+                    }
+                </div>
+
                 @foreach (var dato in contenido)
                 {
                     <form action="/Contenido/ModificarContenido" method="post">
-                    <br>
-                    <hr style="color: #47748b">
-                    <center> <font size="4">Sobre Nosotros </font></center>
-                    <div class="form-group">
-                        <label> Titulo</label>
-                        <input class="form-control" placeholder="Titulo" value="@dato.titulo" name="titulo" id="titulo">
-                    </div>
-                    <div class="form-group">
-                        <label> Contenido</label>
-                        <textarea class="form-control" placeholder="Contenido" name="contenido" 
-                                  id="contenido" value="@dato.contenido">@dato.contenido </textarea>
-                    </div>
-                    <div class="form-group">
 
-                        <center> <button type="submit" class="btn btn-warning"> Modificar</button></center>
-                    </div>
-                        </form>
+                        <hr style="color: #47748b">
+                        <center> <font size="4">Sobre Nosotros </font></center>
+                        <div class="form-group">
+                            <label> Titulo</label>
+                            <input class="form-control" placeholder="Titulo" value="@dato.titulo" name="titulo" id="titulo">
+                        </div>
+                        <div class="form-group">
+                            <label> Contenido</label>
+                            <textarea class="form-control" placeholder="Contenido" name="contenido"
+                                      id="contenido" value="@dato.contenido">@dato.contenido </textarea>
+                        </div>
+                        <div class="form-group">
+
+                            <center> <button type="submit" class="btn btn-warning"> Modificar</button></center>
+                        </div>
+                    </form>
                 }
                 <br><br>
                 <div class="form-group">
-                   <center> <a href="#" class="badge badge-info"> Agregar Nueva Imagen</a> </center>
+                    <center> <a href="#" class="badge badge-info" data-toggle="modal" data-target="#exampleModalCenter"> Agregar Nueva Imagen</a> </center>
                     <br>
                     <table class="table table-striped">
                         <thead>
@@ -58,7 +67,8 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a>
+                                        <a href="@Url.Action("eliminarSobreNosotros", "Contenido", new { idImagen = @item.idImagen})">
+                                            @*@Html.ActionLink("Contenido", "eliminarSobreNosotros", new { idImagen = @item.idImagen }, new { @class = "btn btn-danger" }, new{@src=""})*@
 
                                             <img src="~/Content/img/eliminar.svg" width="30" height="30" />
                                         </a>
@@ -85,7 +95,6 @@
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label>  Imagen Actual</label>
                                                                     <img name="modalimg" id="modalimg" width="100" height="100" />
                                                                 </div>
                                                                 <div class="form-group">
@@ -100,7 +109,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button"  class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                                 <button type="button" name="btn" id="btn" class="btn btn-outline-warning">Modificar</button>
                                             </div>
                                         </div>
@@ -111,7 +120,7 @@
                     </table>
                 </div>
 
-                
+
 
                 <br>
                 <center> <button class="btn btn-primary"> Regresar</button></center>
@@ -123,6 +132,35 @@
 
             </div>
 
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Agregar Imagen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="javascripts:;">
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="fileUpload1" name="fileUpload1">
+                                    <label class="custom-file-label" for="customFile">Agregar nueva Imagen</label>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnAdd" name="btnAdd" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="~/Scripts/jquery-3.3.1.js"></script>
         <script type="text/javascript">
@@ -138,7 +176,7 @@
                             var selectFile = ($("#fileUpload"))[0].files[0];
                             var dataString = new FormData();
                             var idImagen = $("#modalid").val();
-                         
+
                             dataString.append("fileUpload", selectFile);
                            dataString.append("idImagen", idImagen);
 
@@ -151,8 +189,9 @@
                                 processData: false,
                                 async: false,
                                 success: function () {
-                                    alert('Imagen Subida con exito');
-                                    $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
+                                    alert('Imagen Modificada con exito');
+                                  //  $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
+
                                     if (typeof (data.Value) != "undefined") {
                                         alert(data.Message);
                                     } else { alert('Imagen Subida con exito'); }
@@ -162,13 +201,44 @@
                             });
                         });
 
+
+
+                   $("#btnAdd").click(function (){
+                            var selectFile = ($("#fileUpload1"))[0].files[0];
+                            var dataString = new FormData();
+ 
+                         dataString.append("fileUpload1", selectFile);
+
+                            $.ajax({
+
+                                url: '@Url.Action("RegistrarSobreNosotros", "Contenido")',
+                                type: 'POST',
+                                data: dataString,
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                success: function () {
+                                    alert('Imagen Subida con exito');
+                                  //  $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
+
+                                    if (typeof (data.Value) != "undefined") {
+                                        alert(data.Message);
+                                    } else { alert('Imagen Subida con exito'); }
+                                },
+                                error: function (data) {
+                                }
+                            });
+                        });
                     });
         </script>
-        
+
         <br>
         <br>
         <br>
         <br>
         <br>
         <br>
+
+
+
     </div>

@@ -2,7 +2,11 @@
 
 CREATE  DATABASE DDJK;
 USE DDJK
+
+exec PA_ObtenerIdCliente @pasaporte, @id
 GO
+
+select * from Cliente
 --------------------------
 -- Definicion de tablas --
 --------------------------
@@ -45,6 +49,10 @@ ALTER TABLE Cliente ADD nacionalidad varchar(25);
 ALTER TABLE Cliente ADD correo varchar(50);
 ALTER TABLE Cliente ADD CONSTRAINT PK_Cliente PRIMARY KEY (idCliente);
 ALTER TABLE Cliente DROP COLUMN dummy;
+
+select * from Cliente
+select * from Reservacion
+select * from Habitacion
 
 
 CREATE TABLE Contenido (idContenido smallint identity(1,1) PRIMARY KEY, titulo varchar(255), contenido varchar(max))
@@ -167,10 +175,19 @@ AS SET NOCOUNT ON;
 Delete From Cliente  WHERE idCliente=@idCliente  
 GO
 -------------------------------------------------------------------------------------------------------------------------
-ALTER PROCEDURE PA_ListarClientes
+ALTER PROCEDURE PA_ListarClientes(@pasaporte varchar(25) )
 AS SET NOCOUNT ON;
-Select  idCliente, pasaporte, nombre, primerApellido, segundoApellido, edad, correo, nacionalidad From Cliente   
+Select  idCliente, pasaporte, nombre, primerApellido, correo From Cliente   where  pasaporte=@pasaporte
 GO
+
+exec  PA_ListarClientes 777
+select * from Cliente
+exec PA_ListarClientes 88
+
+select * from Reservacion
+Select * from Habitacion
+Select * from TipoHabitacion
+select * from Cliente
 -------------------------------------------------------------------------------------------------------------------------
 ALTER PROCEDURE PA_RegistrarHabitacion(
 @idTipoHabitacion INT,
@@ -482,6 +499,16 @@ CREATE PROCEDURE PA_ModificarImagen(@idImagen int, @ruta varchar(30))
  select * from Imagen
  update Imagen set ruta=@ruta where idImagen=@idImagen
  go
+
+ ----------------------------------------------------------------------------------------------------------------------------------
+ CREATE PROCEDURE PA_RegistrarImagen(@idImagen int, @ruta varchar(30))
+ as set nocount on;
+ select * from Imagen
+ update Imagen set ruta=@ruta where idImagen=@idImagen
+ go
+
+
+
  ---------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------
 alter procedure PA_EstadoHoyHabitacion

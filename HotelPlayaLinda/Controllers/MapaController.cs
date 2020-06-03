@@ -26,7 +26,13 @@ namespace HotelPlayaLinda.Controllers
         [Authorize(Roles = "Admin")]
 
         public ActionResult ModificarContenido(string contenido1, string titulo) {
-            contenido.modificarContenido(new Contenido(3, contenido1,titulo));
+            if (contenido.modificarContenido(new Contenido(3, contenido1, titulo)) > 0)
+            {
+                ViewBag.mensaje = "Se ha registrado correctamente";
+            }
+            else {
+                ViewBag.mensaje = "Lo sentimos. No ha sido posible modificarlo";
+            }
             return View("AdministrarContenido", contenido.listadoContenido(new ENTIDAD.Contenido(3)));
         }
         public ActionResult Llegar()

@@ -18,7 +18,53 @@ namespace DATOS
             this.conexion = Conexion.getConexion();
         }
 
-
+        public int eliminarImagenes(ENTIDAD.Imagen imagen)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_EliminarImagen @idImagen";
+                comando.Parameters.AddWithValue("@idImagen", imagen.idImagen);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
+        public int registrarImagenes(ENTIDAD.Imagen imagen)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_RegistrarImagen @ruta,@tipo";
+                comando.Parameters.AddWithValue("@ruta", imagen.imgPath);
+                comando.Parameters.AddWithValue("@tipo", imagen.tipo);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
         public int modificarImagenes(ENTIDAD.Imagen imagen)
         {
             SqlCommand comando = new SqlCommand();
