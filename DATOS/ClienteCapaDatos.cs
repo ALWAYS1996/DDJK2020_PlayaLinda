@@ -68,24 +68,33 @@ namespace DATOS
             {
                 conexion.Open();
                 comando.Connection = conexion;
-                comando.CommandText = "exec PA_RegistrarReservacion @idTipoHabitacion,@idCliente,@fechaLlegada,@fechaSalida";
+                comando.CommandText = "exec PA_RegistrarCliente @pasaporte, @nombre, @apellido1, @correo";
                 comando.Parameters.AddWithValue("@pasaporte", cliente.pasaporte);
                 comando.Parameters.AddWithValue("@nombre", cliente.nombre);
-                comando.Parameters.AddWithValue("@apellido", cliente.apellido1);
+                comando.Parameters.AddWithValue("@apellido1", cliente.apellido1);
                 comando.Parameters.AddWithValue("@correo", cliente.correo);
                 int result = comando.ExecuteNonQuery();
                 if (result == -1)
                 {
-                    return 1;
+                    comando.CommandText = "exec PA_ObtenerIdCliente @pasaporte, @id";
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@pasaporte", cliente.pasaporte);
+                    comando.Parameters.AddWithValue("@id", SqlDbType.Int);
+
+                    var returnParameter = comando.Parameters.Add("@id", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+                    comando.ExecuteNonQuery();
+                    return (int)returnParameter.Value;
                 }
                 else
                 {
                     return -1;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) {
+                throw ex;
+            }
             finally { conexion.Close(); }
-            return 0;
         }
     }
 }

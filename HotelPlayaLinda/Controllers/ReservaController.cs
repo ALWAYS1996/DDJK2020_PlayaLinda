@@ -76,9 +76,11 @@ namespace HotelPlayaLinda.Controllers
 
         public ActionResult DatosUsuario(string codigoTipoHabitacion, string fechaLlegada, string fechaSalida)
         {
-            if (reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoTipoHabitacion, fechaLlegada, fechaSalida)) ==-1)
+            int codigoHabitacion = reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoTipoHabitacion, fechaLlegada, fechaSalida));
+            if (codigoHabitacion == -1)
             {
                 ViewBag.mensaje = "Lo sentimos, el rango de fechas que seleccionaste se encuentran ocupadas. En este calendario podrás ver que fechas se encuentran disponibles:";
+                ViewData["codigoTipoHabitacion"] = codigoHabitacion;
                 return View("Estado", reservacionCapaNegocios.sugerirReservacion());
             }
             else
@@ -86,6 +88,7 @@ namespace HotelPlayaLinda.Controllers
                 var resultado = (reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoTipoHabitacion, fechaLlegada, fechaSalida)));
                 Reservacion reservacion = new Reservacion();
                 ViewData["codigoTipoHabitacion"] = codigoTipoHabitacion;
+                ViewData["codigoHabitacion"] = codigoHabitacion;
                 ViewData["fechaInicio"] =fechaLlegada;
                 ViewData["fechaFin"] = fechaSalida;
                 ViewData["NumeroHabitacion"] = resultado;
@@ -94,19 +97,20 @@ namespace HotelPlayaLinda.Controllers
             }
         }
 
-        public ActionResult GenerarReservacion(int codigoTipoHabitacion, string fechaInicio, string fechaFin, string pasaporte, string nombre, string apellido, string email, string tarjeta)
+        public ActionResult GenerarReservacion(int codigoHabitacion, string fechaInicio, string fechaFin, string pasaporte, string nombre, string apellido, string email, string tarjeta)
         {
-            Reservacion reservacion = new Reservacion();
-            reservacion.codigoHabitacion = 1;
-            reservacion.fechaLlegada = Convert.ToDateTime(fechaInicio);
-            reservacion.fechaSalida = Convert.ToDateTime(fechaFin);
-
             Cliente cliente = new Cliente();
             cliente.apellido1 = apellido;
             cliente.nombre = nombre;
             cliente.pasaporte = pasaporte;
             cliente.correo = email;
-            clienteCapaNegocio.registrarCliente(cliente);
+            cliente.codigoCliente = clienteCapaNegocio.registrarCliente(cliente);
+
+            Reservacion reservacion = new Reservacion();
+            reservacion.codigoHabitacion = codigoHabitacion;
+            reservacion.codigoCliente = cliente.codigoCliente;
+            reservacion.fechaLlegada = Convert.ToDateTime(fechaInicio);
+            reservacion.fechaSalida = Convert.ToDateTime(fechaFin);
 
             if (reservacionCapaNegocios.registrarReservacion(reservacion) == 1)
             {

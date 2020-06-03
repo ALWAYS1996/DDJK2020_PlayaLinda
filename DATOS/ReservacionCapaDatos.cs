@@ -28,8 +28,8 @@ namespace DATOS
                 conexion.Open();
                 comando.Connection = conexion;
                 comando.CommandText = "exec PA_RegistrarReservacion @idHabitacion, @idCliente,@fechaLlegada,@fechaSalida";
-                comando.Parameters.AddWithValue("@idHabitacion", 1);
-                comando.Parameters.AddWithValue("@idCliente", 1);
+                comando.Parameters.AddWithValue("@idHabitacion", reservacion.codigoHabitacion);
+                comando.Parameters.AddWithValue("@idCliente", reservacion.codigoCliente);
                 comando.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaLlegada);
                 comando.Parameters.AddWithValue("@fechaSalida", reservacion.fechaSalida);
                 int result = comando.ExecuteNonQuery();
@@ -52,32 +52,24 @@ namespace DATOS
 
         /*Obtener*/
         public int verificarReservacion(ENTIDAD.Reservacion reservacion) {
-            ENTIDAD.Reservacion reserva = new ENTIDAD.Reservacion();
-            int cantidad = 0;// ""; 
+            int habitacion = 0;// ""; 
             try
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("PA_VerificarReservacion", conexion);
+                SqlCommand cmd = new SqlCommand("PA_VerificarReserva", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaL);
                 cmd.Parameters.AddWithValue("@fechaSalida", reservacion.fechaS);
-          cmd.Parameters.AddWithValue("@tipoHabitacion", reservacion.idHabitacionTemp);//EN REALIDAD TIENE QUE SER TIPO DE HABITACION, NO SE CONFUNDA
-                cmd.Parameters.AddWithValue("@parametroSalida", SqlDbType.Int).Direction=ParameterDirection.Output;
+                cmd.Parameters.AddWithValue("@tipoHabitacion", reservacion.idHabitacionTemp);
+                cmd.Parameters.AddWithValue("@retorno", SqlDbType.Int);
+                var returnParameter = cmd.Parameters.Add("@retorno", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+                cmd.ExecuteNonQuery();
+                
 
-
-                SqlDataReader rdr = cmd.ExecuteReader();
-                rdr.Read();
-
-                cantidad = Convert.ToInt32(cmd.Parameters["@parametroSalida"].Value);
-
-                if (cantidad > 0)
-               reservacion.codigoHabitacion = cantidad;
-              
-
-
-                return cantidad;
-                //cantidad = (rdr.GetInt32(rdr.GetOrdinal("rangoFechas")));
-              
+                habitacion = (int)returnParameter.Value;
+                
+                //}
             }
             catch (Exception ex)
             {
@@ -87,7 +79,7 @@ namespace DATOS
             {
                 conexion.Close();
             }
-          
+            return habitacion;
 
 
         }//fin
