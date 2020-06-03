@@ -1,10 +1,10 @@
 ﻿<div class="col-4" style="margin: 25px;">
     @using (Html.BeginForm("GenerarReservacion", "Reserva", FormMethod.Post))
     {
-        <input type="text" class="form-control" id="codigoTipoHabitacion" value="@ViewData["codigoTipoHabitacion"]" name="codigoTipoHabitacion">
-        <input type="text" class="form-control" id="codigoHabitacion" value="@ViewData["codigoHabitacion"]" name="codigoHabitacion">
-        <input type="text" class="form-control" id="fechaInicio" value="@ViewData["fechaInicio"]" name="fechaInicio">
-        <input type="text" class="form-control" id="fechaFin" value="@ViewData["fechaFin"]" name="fechaFin">
+        <input type="text" class="form-control" id="codigoTipoHabitacion" value="@ViewData["codigoTipoHabitacion"]" name="codigoTipoHabitacion" hidden>
+        <input type="text" class="form-control" id="codigoHabitacion" value="@ViewData["codigoHabitacion"]" name="codigoHabitacion" hidden>
+        <input type="text" class="form-control" id="fechaInicio" value="@ViewData["fechaInicio"]" name="fechaInicio" hidden>
+        <input type="text" class="form-control" id="fechaFin" value="@ViewData["fechaFin"]" name="fechaFin" hidden>
         <div class="form-group">
             <label for="exampleInputPassword1">Pasaporte</label>
             <input type="text" class="form-control" id="pasaporte" name="pasaporte">

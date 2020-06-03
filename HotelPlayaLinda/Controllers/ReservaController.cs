@@ -104,11 +104,11 @@ namespace HotelPlayaLinda.Controllers
             cliente.nombre = nombre;
             cliente.pasaporte = pasaporte;
             cliente.correo = email;
-            cliente.codigoCliente = clienteCapaNegocio.registrarCliente(cliente);
+            clienteCapaNegocio.registrarCliente(cliente);
 
             Reservacion reservacion = new Reservacion();
             reservacion.codigoHabitacion = codigoHabitacion;
-            reservacion.codigoCliente = cliente.codigoCliente;
+            reservacion.codigoCliente = Int32.Parse(pasaporte);
             reservacion.fechaLlegada = Convert.ToDateTime(fechaInicio);
             reservacion.fechaSalida = Convert.ToDateTime(fechaFin);
 

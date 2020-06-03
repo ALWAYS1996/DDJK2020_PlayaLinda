@@ -76,15 +76,7 @@ namespace DATOS
                 int result = comando.ExecuteNonQuery();
                 if (result == -1)
                 {
-                    comando.CommandText = "exec PA_ObtenerIdCliente @pasaporte, @id";
-                    comando.Parameters.Clear();
-                    comando.Parameters.AddWithValue("@pasaporte", cliente.pasaporte);
-                    comando.Parameters.AddWithValue("@id", SqlDbType.Int);
-
-                    var returnParameter = comando.Parameters.Add("@id", SqlDbType.Int);
-                    returnParameter.Direction = ParameterDirection.ReturnValue;
-                    comando.ExecuteNonQuery();
-                    return (int)returnParameter.Value;
+                    return 1;
                 }
                 else
                 {
