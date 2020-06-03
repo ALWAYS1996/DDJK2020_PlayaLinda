@@ -116,9 +116,15 @@ namespace HotelPlayaLinda.Controllers
             {
                 return View("Reservado");
             }
-            return View("Cancelado");
+            return View("Reservado");
         }
-        [Authorize(Roles = "Admin")]
+
+
+        public ActionResult Reservado() {
+            return View("Reservado");
+
+        }
+    [Authorize(Roles = "Admin")]
         public ActionResult EliminarReservacion(int reservaid)
         {
 
