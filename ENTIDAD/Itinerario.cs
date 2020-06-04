@@ -64,5 +64,10 @@ namespace ENTIDAD
         public Itinerario()
         {
         }
+
+        public Itinerario(int idItinerario)
+        {
+            this.idItinerario = idItinerario;
+        }
     }
 }

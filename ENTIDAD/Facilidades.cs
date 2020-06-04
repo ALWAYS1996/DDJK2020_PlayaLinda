@@ -35,7 +35,7 @@ namespace ENTIDAD
         public string detalles { get; set; }
 
         public Facilidades() { }
-
+        public Facilidades(int id_Facilidades) { this.id_Facilidades = id_Facilidades; }
         public Facilidades(int id_Facilidades, string nombre, string reglas, string urlImg, string detalles)
         {
             this.id_Facilidades = id_Facilidades;

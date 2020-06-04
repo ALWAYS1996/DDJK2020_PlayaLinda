@@ -92,6 +92,33 @@ namespace DATOS
             return listarFacilidades2;
         }//Fin
 
+
+        
+
+                public int eliminarFacilidades(ENTIDAD.Facilidades facilidades)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_EliminarFacilidades @idFacilidades";
+                comando.Parameters.AddWithValue("@idFacilidades", facilidades.id_Facilidades);
+             
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
         public int modificarFacilidades(ENTIDAD.Facilidades facilidades)
         {
             SqlCommand comando = new SqlCommand();

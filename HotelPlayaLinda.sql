@@ -58,11 +58,10 @@ select * from Habitacion
 CREATE TABLE Contenido (idContenido smallint identity(1,1) PRIMARY KEY, titulo varchar(255), contenido varchar(max))
 CREATE TABLE Imagen (idImagen smallint identity(1,1) PRIMARY KEY, ruta varchar(max))
 ALTER TABLE Imagen ADD tipo tinyint;
-
+alter table Imagen alter column ruta varchar(max)
 select * from Imagen
 
-insert into Imagen values('\Content\img\playa5.jpg',2)
-
+update Imagen set ruta='\Content\img\playa202127548.jpg' where idImagen=5
 DROP TABLE IF EXISTS Habitacion;
 CREATE TABLE Habitacion(dummy int);
 ALTER TABLE Habitacion ADD idHabitacion tinyint IDENTITY(1,1);
@@ -494,22 +493,43 @@ as	SET NOCOUNT ON;
 INSERT INTO [dbo].[Empleado] ([tipoEmpleado],[idUsuario],[contrasenna]) VALUES (1,  'admin' , ENCRYPTBYPASSPHRASE('password','admin' ))
 GO
 ------------------------------------------------------------------------------------------------------------------------
-CREATE PROCEDURE PA_ModificarImagen(@idImagen int, @ruta varchar(30))
+ALTER PROCEDURE PA_ModificarImagen(@idImagen int, @ruta varchar(max))
  as set nocount on;
- select * from Imagen
+
  update Imagen set ruta=@ruta where idImagen=@idImagen
  go
 
  ----------------------------------------------------------------------------------------------------------------------------------
- CREATE PROCEDURE PA_RegistrarImagen(@idImagen int, @ruta varchar(30))
+ alter PROCEDURE PA_RegistrarImagen(@ruta varchar(max), @tipo int)
  as set nocount on;
- select * from Imagen
- update Imagen set ruta=@ruta where idImagen=@idImagen
+ INSERT INTO Imagen (ruta,tipo) values (@ruta,@tipo);
+ go
+ select * from Itinerario
+
+CREATE PROCEDURE PA_EliminarImagen(@idImagen varchar(max))
+ as set nocount on;
+delete from Imagen where idImagen=@idImagen
  go
 
-
-
- ---------------------------------------
+-------------------------------------------------------------------
+ALTER PROCEDURE PA_EliminarItinerario(@idItinerario int)
+ as set nocount on;
+delete from Itinerario where idItinerario=@idItinerario
+ go
+------------------------------------------------------------------------
+ 
+ CREATE PROCEDURE PA_EliminarFacilidades(@idFacilidades  int)
+ as set nocount on;
+delete from Facilidades where id_Facilidades=@idFacilidades
+ go
+ -----------------------------------------------------------------------
+ CREATE PROCEDURE PA_RegistrarItinerario( @dia varchar(max),@desayuno varchar(max), @imgDesayuno varchar(max),
+ @almuerzo varchar(max),@imgAlmuerzo varchar(max),@cena varchar(max),@imgCena varchar(max))
+ as set nocount on;
+insert into Itinerario(dia, desayuno,imagenDesayuno,almuerzo,imagenAlmuerzo,cena,imagenCena) values
+(@dia,@desayuno,@imgDesayuno,@almuerzo,@imgAlmuerzo,@cena,@imgCena);
+ go
+ select * from Itinerario
 ---------------------------------------------------------------------------------------------------------------------------
 alter procedure PA_EstadoHoyHabitacion
 as set nocount on;

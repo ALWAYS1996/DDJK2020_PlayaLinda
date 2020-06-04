@@ -2,11 +2,14 @@
 @model IEnumerable<ENTIDAD.Facilidades>
 
     <div class="container ">
+        <br>
+        <br>
+        <br>
         <center>
-            <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2">Agregar nueva Facilidad</a>
-        </center> 
+            <a class="" data-toggle="modal" data-target="#exampleModal2">Agregar nueva <img src="~/Content/img/add.svg" width="30" height="30" /></a>
+        </center>
         <br>
-        <br>
+
         <div class="row">
 
             <table class="table table-hover">
@@ -30,12 +33,19 @@
                             <th> <img src="@dato.urlImg" class="card-img-top" width="40" height="120"></th>
                             <td>@dato.detalles</td>
                             <td>
-                                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
+                                <a href="@Url.Action("eliminarFacilidad", "Contenido", new { id = @dato.id_Facilidades})">
+                                    @*@Html.ActionLink("Contenido", "eliminarSobreNosotros", new { idImagen = @item.idImagen }, new { @class = "btn btn-danger" }, new{@src=""})*@
+
+                                    <img src="~/Content/img/eliminar.svg" width="30" height="30" />
+                                </a>
+                            </td>
+                            <td>
+                                <a class="" data-toggle="modal" data-target="#exampleModal"
                                    onclick="return mifuncion(@Html.DisplayFor(modelItem => dato.id_Facilidades),
                                                          '@Html.DisplayFor(modelItem => dato.nombre)',
                                                          '@Html.DisplayFor(modelItem => dato.reglas)',
                                                          '@Html.DisplayFor(modelItem => dato.urlImg)',
-                                                         '@Html.DisplayFor(modelItem => dato.detalles)')">Modificar</a>
+                                                         '@Html.DisplayFor(modelItem => dato.detalles)')"> <img src="~/Content/img/mod1.svg" width="30" height="30" /></a>
                             </td>
 
                         </tr>
@@ -113,7 +123,7 @@
                                 <br>
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-sm-12">                                           
+                                        <div class="col-sm-12">
                                             <div class="form-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="fileUpload2" name="fileUpload2">
@@ -207,7 +217,6 @@
                             var regla =  $("#regla2").val();
                             var detalle = $("#detalle2").val();
 
-                            alert(nombre+regla+detalle);
                             dataString.append("fileUpload", selectFile);
                             dataString.append("nombre", nombre);
                             dataString.append("regla", regla);

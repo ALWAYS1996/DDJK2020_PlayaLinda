@@ -131,5 +131,63 @@ namespace DATOS
             return 0;
         }//fin
 
+
+
+
+        public int eliminarItinerario(ENTIDAD.Itinerario itinerario)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_EliminarItinerario @idItinerario";
+                comando.Parameters.AddWithValue("@idItinerario", itinerario.idItinerario);
+
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
+
+        public int registrarItinerario(ENTIDAD.Itinerario itinerario)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_RegistrarItinerario @dia,@desayuno,@imgDesayuno,@almuerzo,@imgAlmuerzo,@cena,@imgCena";
+                comando.Parameters.AddWithValue("@dia", itinerario.dia);
+                comando.Parameters.AddWithValue("@desayuno", itinerario.desayuno);
+                comando.Parameters.AddWithValue("@imgDesayuno", itinerario.imgUrlDesayuno);
+                comando.Parameters.AddWithValue("@almuerzo", itinerario.almuerzo);
+                comando.Parameters.AddWithValue("@imgAlmuerzo", itinerario.imgUrlAlmuerzo);
+                comando.Parameters.AddWithValue("@cena", itinerario.cena);
+                comando.Parameters.AddWithValue("@imgCena", itinerario.imgUrlCena);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }//fin
+
     }
 }

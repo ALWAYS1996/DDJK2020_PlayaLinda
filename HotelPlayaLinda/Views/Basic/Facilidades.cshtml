@@ -1,46 +1,7 @@
 ﻿
 
 @model IEnumerable<ENTIDAD.Facilidades>
-<style>
-    .gallery {
-        filter: brightness(110%);
-        animation: escalar;
-        cursor: pointer;
-        animation: escalar 1.4s infinite alternate;
-    }
 
-    .modal-dialog {
-        max-width: 800px;
-        margin: 30px auto;
-    }
-
-
-
-    .modal-body {
-        position: relative;
-        padding: 0px;
-        min-height: 400px;
-        background: #ccc;
-    }
-
-
-
-
-    .close {
-        position: absolute;
-        right: -30px;
-        top: 0;
-        z-index: 999;
-        font-size: 2rem;
-        font-weight: normal;
-        color: #fff;
-        opacity: 1;
-    }
-
-    #image {
-        min-height: 200px;
-    }
-</style>
 <div class="container">
     <div class="row">
         <div class="col-4"></div>
@@ -81,9 +42,9 @@
                         </font>
                     </p>
                     <p class="card-text text-justify  btn btn-outline-dark">Reglas: @dato.reglas</p>
-                    <h5 class="btn btn-outline-info animated infinite bounceIn slow">Detalles @dato.detalles</h5>
+                    <h5 class="btn btn-outline-info ">Detalles @dato.detalles</h5>
                     <br>
-                    <h5 class="btn btn-dark animated infinite bounceInRight slow">Más Información</h5>
+                    <h5 class="btn btn-dark ">Más Información</h5>
                 </div>
                 <hr style="border-top: 5px solid #FF0000">
             </div>

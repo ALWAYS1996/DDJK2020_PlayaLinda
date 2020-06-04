@@ -66,6 +66,14 @@ namespace HotelPlayaLinda.Controllers
         {  
             return View(facilidades.listadoFacilidades2());
         }
+        [Authorize(Roles = "Admin")]
+        public ActionResult EliminarFacilidad(int id)
+        {
+            facilidades.eliminarFacilidades(new Facilidades(id));
+            return View("FacilidadesAdm", facilidades.listadoFacilidades2());
+        }
+
+        
 
         [Authorize(Roles = "Admin")]
         public ActionResult RegistrarFacilidades(HttpPostedFileBase fileUpload, string nombre, string regla, string detalle)
@@ -248,12 +256,7 @@ namespace HotelPlayaLinda.Controllers
             }
         }
 
-        //public ActionResult _Publicidad() {
-        //    //  ViewData["publicidad"] = publicidad.listadoPublicidad();
-        //    var getPublicity = publicidad.getPublicity().ToList();
-        //    return PartialView("_Publicid", getPublicity);
-        //}
-
+      
         public ActionResult Inicio()
         {
 

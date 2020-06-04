@@ -22,6 +22,14 @@ namespace NEGOCIO
         {
             return itinerario.modificarItinerario(itinerarios);
         }
+        public int registrarItinerario(Itinerario itinerarios)
+        {
+            return itinerario.registrarItinerario(itinerarios);
+        }
+        public int eliminarItinerario(Itinerario itinerarios)
+        {
+            return itinerario.eliminarItinerario(itinerarios);
+        }
 
     }
 }

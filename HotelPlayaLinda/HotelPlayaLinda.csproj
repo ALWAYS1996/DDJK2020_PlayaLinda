@@ -314,6 +314,7 @@
     <Content Include="Content\css\estiloGaleriaImagenes.css" />
     <Content Include="Content\css\Estilos.css" />
     <Content Include="Content\css\estiloVistazoH.css" />
+    <Content Include="Content\img\add.svg" />
     <Content Include="Content\img\almuerzo.jpg" />
     <Content Include="Content\img\bar.jpg" />
     <Content Include="Content\img\business.png" />
