@@ -19,6 +19,11 @@ namespace NEGOCIO
             return facilidadesCapaDatos.modificarFacilidades(facilidades);
         }
 
+        public int registrarFacilidades(Facilidades facilidades)
+        { 
+            return facilidadesCapaDatos.registrarFacilidad(facilidades); 
+        }
+
     }
 }
 

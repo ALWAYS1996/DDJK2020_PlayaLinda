@@ -44,5 +44,13 @@ namespace ENTIDAD
             this.urlImg = urlImg;
             this.detalles = detalles;
         }
+
+        public Facilidades(string nombre, string reglas, string urlImg, string detalles)
+        {
+            this.nombre = nombre;
+            this.reglas = reglas;
+            this.urlImg = urlImg;
+            this.detalles = detalles;
+        }
     }
 }

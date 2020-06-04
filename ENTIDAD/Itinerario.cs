@@ -38,5 +38,31 @@ namespace ENTIDAD
         [Display(Name = "Imagen")]
         public string imgUrlCena { get; set; }
 
+        public Itinerario(int idItinerario, string dia, string desayuno, string imgUrlDesayuno, string imgUrlAlmuerzo, string almuerzo, string cena, string imgUrlCena)
+        {
+            this.idItinerario = idItinerario;
+            this.dia = dia;
+            this.desayuno = desayuno;
+            this.imgUrlDesayuno = imgUrlDesayuno;
+            this.imgUrlAlmuerzo = imgUrlAlmuerzo;
+            this.almuerzo = almuerzo;
+            this.cena = cena;
+            this.imgUrlCena = imgUrlCena;
+        }
+
+        public Itinerario(string dia, string desayuno, string imgUrlDesayuno, string imgUrlAlmuerzo, string almuerzo, string cena, string imgUrlCena)
+        {
+            this.dia = dia;
+            this.desayuno = desayuno;
+            this.imgUrlDesayuno = imgUrlDesayuno;
+            this.imgUrlAlmuerzo = imgUrlAlmuerzo;
+            this.almuerzo = almuerzo;
+            this.cena = cena;
+            this.imgUrlCena = imgUrlCena;
+        }
+
+        public Itinerario()
+        {
+        }
     }
 }

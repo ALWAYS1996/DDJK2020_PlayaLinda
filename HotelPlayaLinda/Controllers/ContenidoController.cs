@@ -68,6 +68,37 @@ namespace HotelPlayaLinda.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        public ActionResult RegistrarFacilidades(HttpPostedFileBase fileUpload, string nombre, string regla, string detalle)
+        {
+            try
+            {
+
+                string path = Server.MapPath("~/Content/img/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                fileUpload.SaveAs(path + Path.GetFileName(fileUpload.FileName));
+                Facilidades facilidad = new Facilidades();
+                facilidad.nombre = nombre;
+                facilidad.reglas = regla;
+                facilidad.detalles = detalle;
+                facilidad.urlImg = "\\Content\\img\\" + fileUpload.FileName;
+                facilidades.registrarFacilidades(facilidad);
+                return View("FacilidadesAdm", facilidades.listadoFacilidades2());
+            }catch (Exception e)
+            {
+                return Json(new { Value = false, Message = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+
+
+
+
+        [Authorize(Roles = "Admin")]
         public ActionResult HomeAdm()
         {
             ViewData["contenidoInicio"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(4));

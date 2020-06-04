@@ -119,5 +119,46 @@ namespace DATOS
             finally { conexion.Close(); }
             return 0;
         }//fin
+
+
+
+        public int registrarFacilidad(ENTIDAD.Facilidades facilidad)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_RegistrarFacilidad @nombre,@reglas,@img,@detalles";
+                comando.Parameters.AddWithValue("@nombre", facilidad.nombre);
+                comando.Parameters.AddWithValue("@reglas", facilidad.reglas);
+                comando.Parameters.AddWithValue("@img", facilidad.urlImg);
+                comando.Parameters.AddWithValue("@detalles", facilidad.detalles);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally { conexion.Close(); }
+
+        }//fin
+
+
+
+
+
+
+
+
+
     }
 }
