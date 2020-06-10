@@ -44,6 +44,7 @@ namespace DATOS
             }
             catch (Exception ex)
             {
+                conexion.Close();
                 throw ex;
             }
             finally { conexion.Close(); }
