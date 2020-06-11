@@ -468,6 +468,7 @@
     <Content Include="Views\Contenido\Administrar_Home.cshtml" />
     <Content Include="Views\Reserva\Reservado.cshtml" />
     <Content Include="Views\Itinerario\ItinerarioAdm.cshtml" />
+    <Content Include="Views\Reserva\view_pdf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

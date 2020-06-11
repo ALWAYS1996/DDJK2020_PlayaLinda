@@ -22,6 +22,7 @@ namespace DATOS
 
         public int registrarReservacion(ENTIDAD.Reservacion reservacion)
         {
+            conexion.Close();
             SqlCommand comando = new SqlCommand();
             try
             {

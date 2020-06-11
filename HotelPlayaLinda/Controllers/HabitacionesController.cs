@@ -25,7 +25,6 @@ namespace HotelPlayaLinda.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult view_pdf()
         {
-            
             return new ViewAsPdf("View_pdf", HabitacionesCapaNegocio.listarEstadoHoyHabitacion()) ; 
         }
 

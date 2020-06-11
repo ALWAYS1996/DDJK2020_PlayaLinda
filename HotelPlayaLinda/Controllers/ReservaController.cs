@@ -1,7 +1,10 @@
 ﻿using ENTIDAD;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -96,7 +99,10 @@ namespace HotelPlayaLinda.Controllers
                 return View();
             }
         }
-
+        public ActionResult view_pdf(Cliente cliente, Reservacion reservacion) {
+            ViewData["Cliente"] = cliente;
+            ViewData["reservacion"] = reservacion;
+            return new ViewAsPdf("View_pdf"); }
         public ActionResult GenerarReservacion(int codigoHabitacion, string fechaInicio, string fechaFin, string pasaporte, string nombre, string apellido, string email, string tarjeta)
         {
             Cliente cliente = new Cliente();
@@ -112,11 +118,44 @@ namespace HotelPlayaLinda.Controllers
             reservacion.fechaLlegada = Convert.ToDateTime(fechaInicio);
             reservacion.fechaSalida = Convert.ToDateTime(fechaFin);
 
+            ViewData["cliente"] = cliente;
+            ViewData["reservacion"] = reservacion;
+            //ViewData["fechaFin"] = reservacion.fechaSalida;
+
             if (reservacionCapaNegocios.registrarReservacion(reservacion) == 1)
             {
+                SendMail(cliente,reservacion);
                 return View("Reservado");
             }
             return View("Reservado");
+        }
+
+
+
+        public void SendMail(Cliente cliente,Reservacion reservacion) {
+            try
+            {
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("dabrinltecr@gmail.com");
+                mailMessage.To.Add(cliente.correo);
+                mailMessage.Subject = "Hotel playa linda:";
+                mailMessage.Body = "Usted:" + cliente.nombre + " " + cliente.apellido1 + ". Ha realizado una reservación de la habitación: " + reservacion.codigoHabitacion + 
+                    " Fecha de llegada: " + reservacion.fechaLlegada + "Fecha salida: " + reservacion.fechaSalida;
+
+                System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient("smtp.gmail.com");
+                smtpClient.Port = 587;
+                smtpClient.Credentials = new NetworkCredential("dabrinltecr@gmail.com", "dab_Najera123");
+                smtpClient.EnableSsl = true;
+                smtpClient.Send(mailMessage);
+                //Response.Write("Correo Envíado");
+                //HttpContext.Session.SetString("entro", "Se envió un correo de confirmación");
+                //Label1.Text = "Correo Enviado";
+            }
+            catch (Exception ex)
+            {
+
+            }
+
         }
 
 

@@ -1,0 +1,40 @@
+﻿
+@{  var cliente = (ENTIDAD.Cliente)ViewData["cliente"];
+    var Reserva = (ENTIDAD.Reservacion)ViewData["reservacion"];
+    Layout = null;
+}
+
+
+<div class="container">
+    <center>
+        <div class="row">
+            <div class="col-4">  </div>
+            <div class="col-4">
+                <div class="alert alert-info" role="alert">
+                    Gracias Por su Reservacion. Vuelva Pronto
+                </div>
+
+            </div>
+            <div class="col-4">  </div>
+            <div class="container">
+                <h5>Nombre cliente:</h5><p>@cliente.nombre @cliente.apellido1</p> <br />
+                <h5>Correo cliente:</h5><p>@cliente.correo</p><br />
+                <h5>Codigo Habitacion:</h5><p>@Reserva.codigoHabitacion</p><br />
+                <h5>Fecha llegada:</h5><p>@Reserva.fechaLlegada</p><br />
+                <h5>Fecha salida:</h5><p>@Reserva.fechaSalida</p><br />
+
+               
+
+
+            </div>
+
+        </div>
+    </center>
+
+
+</div>
+
+
+
+
+

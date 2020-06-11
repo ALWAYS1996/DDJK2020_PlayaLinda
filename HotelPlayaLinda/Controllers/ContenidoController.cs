@@ -20,7 +20,6 @@ namespace HotelPlayaLinda.Controllers
         NEGOCIO.PublicidadCapaNegocio publicidad = new NEGOCIO.PublicidadCapaNegocio();
         public ActionResult Contacto()
         {
-
             ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(2));
             return View();
         }
