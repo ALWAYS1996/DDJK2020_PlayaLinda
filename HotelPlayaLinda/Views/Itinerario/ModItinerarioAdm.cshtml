@@ -1,0 +1,144 @@
+﻿@model IEnumerable<ENTIDAD.Itinerario>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-4"></div>
+        <div class="col-4">
+            <h4><strong> <u>Modificar Itinerario </u></strong></h4>
+
+            
+        </div>
+
+        <div class="col-4"></div>
+    </div>
+
+
+
+    @using (Html.BeginForm("ModificarItinerario", "Itinerario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <br><br>
+
+
+
+
+        <form id="">
+            <div class="row ">
+                @foreach (var dato in Model)
+                {
+                <div class="col-lg-4">
+
+                    <div class="form-group">
+
+                        <input type="hidden" class="form-control" id="idf" name="idf" value="@dato.idItinerario">
+
+                        <label><strong>Desayuno </strong></label>
+                        <input type="text" class="form-control" id="desayuno" name="desayuno" value="@dato.desayuno">
+                        <br>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input id="img1" name="img1" type="hidden" value="@dato.imgUrlDesayuno">
+                                        <img name="modalimg" id="modalimg" width="100" height="100" src="@dato.imgUrlDesayuno" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="fileUpload" name="fileUpload">
+                                            <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    @if (ViewBag.mensaje != null)
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Estado!</strong> @ViewBag.mensaje
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label><strong>Almuerzo </strong></label>
+                            <input type="text" class="form-control" id="almuerzo" name="almuerzo" value="@dato.almuerzo">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input id="img2" name="img2" type="hidden" value="@dato.imgUrlAlmuerzo">
+                                            <img name="modalimg2" id="modalimg2" width="100" height="100" src="@dato.imgUrlAlmuerzo" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileUpload2" name="fileUpload2">
+                                                <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <label><strong>Dia </strong></label>
+                            <input type="text" class="form-control" id="dia" name="dia" value="@dato.dia">
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+
+                            <center>
+                                <button type="submit" id="btn" name="btn" class="btn btn-outline-warning"><img src="~/Content/img/mod1.svg" width="30" height="30" /> Guadar Cambios</button>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label><strong>Cena </strong></label>
+                            <input type="text" class="form-control" id="cena" name="cena" value="@dato.cena">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+
+                                            <input id="img3" name="img3" type="hidden" value="@dato.imgUrlCena">
+                                            <img name="modalimg3" id="modalimg3" width="100" height="100" src="@dato.imgUrlCena" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileUpload3" name="fileUpload3">
+                                                <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </form>
+
+
+    }
+
+  
+    <a href="/Itinerario/ItinerarioAdm" class="">Regresar</a>
+</div>
+
+
+
+<br>
+<br>
+<br>

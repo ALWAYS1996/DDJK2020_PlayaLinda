@@ -11,14 +11,14 @@
         <table class="table table-hover" aria-label="Page navigation example">
             <thead>
                 <tr>
-                    <th scope="col">Código</th>
+                    <th scope="col">#</th>
                     <th scope="col">Dia</th>
-                    <th scope="col">Descripcion Desayuno</th>
-                    <th scope="col">Desayuno</th>
-                    <th scope="col">Descripcion Almuerzo</th>
-                    <th scope="col">Almuerzo</th>
-                    <th scope="col">Descripcion Cena</th>
-                    <th scope="col">Cena</th>
+                    <th scope="col"> Desayuno</th>
+                    <th scope="col">Comida</th>
+                    <th scope="col"> Almuerzo</th>
+                    <th scope="col">Comida</th>
+                    <th scope="col"> Cena</th>
+                    <th scope="col">Comida</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,17 +33,9 @@
                         <td>@dato.almuerzo</td>
                         <th> <img src="@dato.imgUrlAlmuerzo" class="card-img-top" width="40" height="120"></th>
                         <td>@dato.cena</td>
-                        <th> <img src="@dato.imgUrlCena" class="card-img-top" width="40" height="120"></th>
+                        <th> <img src="@dato.imgUrlCena"      class="card-img-top"     width="40" height="120"></th>
                         <td>
-                            <a class="" data-toggle="modal" data-target="#exampleModal"
-                               onclick="return mifuncion(@Html.DisplayFor(modelItem => dato.idItinerario),
-                                                         '@Html.DisplayFor(modelItem => dato.dia)',
-                                                         '@Html.DisplayFor(modelItem => dato.desayuno)',
-                                                         '@Html.DisplayFor(modelItem => dato.imgUrlDesayuno)',
-                                                         '@Html.DisplayFor(modelItem => dato.almuerzo)',
-                                                         '@Html.DisplayFor(modelItem => dato.imgUrlAlmuerzo)',
-                                                         '@Html.DisplayFor(modelItem => dato.cena)',
-                                                         '@Html.DisplayFor(modelItem => dato.imgUrlCena)',)">   <img src="~/Content/img/mod1.svg" width="30" height="30" /></a>
+                            <a href="@Url.Action("ListarItinerarioById", "Itinerario", new { id= dato.idItinerario})">   <img src="~/Content/img/mod1.svg" width="30" height="30" /></a>
                         </td>
                         <td>
                             <a href="@Url.Action("EliminarItinerario", "Itinerario", new { id= dato.idItinerario})">
@@ -76,89 +68,6 @@
           
         </table>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modificar Itinerario</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <input type="hidden" class="form-control" id="idf" name="idf">
-                            <label>Dia</label>
-                            <input type="text" class="form-control" id="dia" name="dia">
-                            <br>
-                            <label>Desayuno</label>
-                            <input type="text" class="form-control" id="desayuno" name="desayuno">
-                            <br>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>  Imagen Actual</label>
-                                            <img name="modalimg" id="modalimg" width="100" height="100" />
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="fileUpload" name="fileUpload">
-                                                <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <label>Almuerzo</label>
-                            <input type="text" class="form-control" id="almuerzo" name="almuerzo">
-                            <br>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>  Imagen Actual</label>
-                                            <img name="modalimg2" id="modalimg2" width="100" height="100" />
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="fileUpload2" name="fileUpload2">
-                                                <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <label>Cena</label>
-                            <input type="text" class="form-control" id="cena" name="cena">
-                            <br>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>  Imagen Actual</label>
-                                            <img name="modalimg3" id="modalimg3" width="100" height="100" />
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="fileUpload3" name="fileUpload3">
-                                                <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btn" name="btn" class="btn btn-primary">Guadar Cambios</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
         <!----------------------------Modal Registrar------------------------------------------------->>
@@ -243,71 +152,6 @@
 
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<script type="text/javascript">
-
-    function mifuncion(id, dia, desayuno, img,almuerzo,img2,cena,img3) {
-                var imgdesayuno = img.substring(10, img.length);
-                var imgalmuerzo = img2.substring(10, img2.length);
-                var imgcena = img3.substring(10, img3.length);
-                $("#idf").val(id);
-                $("#dia").val(dia);
-                $("#desayuno").val(desayuno);
-                $("#almuerzo").val(almuerzo);
-                $("#cena").val(cena);
-                var newRuta = "/Content/img/" + imgdesayuno;
-                var newRuta2 = "/Content/img/" + imgalmuerzo;
-                var newRuta3 = "/Content/img/" + imgcena;
-                $("#modalimg").attr("src", newRuta);
-                $("#modalimg2").attr("src", newRuta2);
-                $("#modalimg3").attr("src", newRuta3);
-    }
-      $(document).ready(function (){
-
-                        $("#btn").click(function (){
-                            var selectFile = ($("#fileUpload"))[0].files[0];
-                            var selectFile2 = ($("#fileUpload2"))[0].files[0];
-                            var selectFile3 = ($("#fileUpload3"))[0].files[0];
-                            var dataString = new FormData();
-
-                            var id = $("#idf").val();
-                            var dia = $("#dia").val();
-                            var desayuno = $("#desayuno").val();
-                            var almuerzo =  $("#almuerzo").val();
-                            var cena = $("#cena").val();
-
-
-                            dataString.append("fileUpload", selectFile);
-                            dataString.append("fileUpload2", selectFile2);
-                            dataString.append("fileUpload3", selectFile3);
-                            dataString.append("idf", id);
-                            dataString.append("dia", dia);
-                            dataString.append("desayuno", desayuno);
-                            dataString.append("almuerzo", almuerzo);
-                            dataString.append("cena", cena);
-
-                            $.ajax({
-
-                                url: '@Url.Action("ModificarItinerario", "Itinerario")',
-                                type: 'POST',
-                                data: dataString,
-                                contentType: false,
-                                processData: false,
-                                async: false,
-                                success: function () {
-                                    alert('Modificado con exito');
-                                    $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
-                                    if (typeof (data.Value) != "undefined") {
-                                        alert(data.Message);
-                                    } else { alert('Imagen Subida con exito'); }
-                                },
-                                error: function (data) {
-                                }
-                            });
-                        });
-
-                    });
-
-</script>
 
 <script>
           $(document).ready(function (){

@@ -29,7 +29,12 @@ namespace HotelPlayaLinda.Controllers
 
         }
 
+        public ActionResult ListarItinerarioById(int id)
+        {
+        
+            return View("ModItinerarioAdm", itinerario.listarItinerarioById(new ENTIDAD.Itinerario(id)));
 
+        }
 
         [Authorize(Roles = "Admin")]
         public ActionResult RegistrarItinerario(HttpPostedFileBase fileUpload, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3, string dia, string desayuno, string almuerzo, string cena)
@@ -64,8 +69,11 @@ namespace HotelPlayaLinda.Controllers
             }
 
         }
+
         [Authorize(Roles = "Admin")]
-        public ActionResult ModificarItinerario(HttpPostedFileBase fileUpload, HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3, int idf, string dia, string desayuno, string almuerzo,string cena)
+        public ActionResult ModificarItinerario(HttpPostedFileBase fileUpload,
+              HttpPostedFileBase fileUpload2, HttpPostedFileBase fileUpload3, int idf, string dia, string desayuno, string almuerzo, string cena,
+              string img1, string img2, string img3)
         {
 
             try
@@ -76,20 +84,23 @@ namespace HotelPlayaLinda.Controllers
                 {
                     Directory.CreateDirectory(path);
                 }
-                fileUpload.SaveAs(path + Path.GetFileName(fileUpload.FileName));
-                fileUpload2.SaveAs(path + Path.GetFileName(fileUpload2.FileName));
-                fileUpload3.SaveAs(path + Path.GetFileName(fileUpload3.FileName));
+
+                if (fileUpload != null) { fileUpload.SaveAs(path + Path.GetFileName(fileUpload.FileName)); }
+                else if (fileUpload != null) { fileUpload2.SaveAs(path + Path.GetFileName(fileUpload2.FileName)); }
+               else  if (fileUpload != null) { fileUpload3.SaveAs(path + Path.GetFileName(fileUpload3.FileName)); }
+
                 ENTIDAD.Itinerario galeria = new Itinerario();
                 galeria.idItinerario = idf;
                 galeria.dia = dia;
                 galeria.desayuno = desayuno;
                 galeria.almuerzo = almuerzo;
                 galeria.cena = cena;
-                galeria.imgUrlDesayuno = "\\Content\\img\\" + fileUpload.FileName;
-                galeria.imgUrlAlmuerzo = "\\Content\\img\\" + fileUpload2.FileName;
-                galeria.imgUrlCena = "\\Content\\img\\" + fileUpload3.FileName;
-                itinerario.modificarItinerario(galeria);
-                return View("ItinerarioAdm", itinerario.listadoItinerario2());
+
+                if (fileUpload != null) { galeria.imgUrlDesayuno = "\\Content\\img\\" + fileUpload.FileName; } else { galeria.imgUrlDesayuno =  img1; }
+                if (fileUpload2 != null) { galeria.imgUrlAlmuerzo = "\\Content\\img\\" + fileUpload2.FileName; } else { galeria.imgUrlAlmuerzo =  img2; }
+                if (fileUpload3 != null) { galeria.imgUrlCena = "\\Content\\img\\" + fileUpload3.FileName; } else { galeria.imgUrlCena =img3; }
+                if (itinerario.modificarItinerario(galeria)>=1) { ViewBag.mensaje = "Se ha modificado correctamente"; } else { ViewBag.mensaje = "Lo sentimos, no ha sido posible modificarlo"; }
+                return View("ModItinerarioAdm", itinerario.listarItinerarioById(new ENTIDAD.Itinerario(idf)));
             }
             catch (Exception e)
             {

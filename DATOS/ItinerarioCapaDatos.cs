@@ -59,6 +59,49 @@ namespace DATOS
             return listarItinerario;
         }//Fin
 
+
+        private List<ENTIDAD.Itinerario> listandoItinerarioById = new List<ENTIDAD.Itinerario>();
+        public IEnumerable<ENTIDAD.Itinerario> listarItinerarioById(ENTIDAD.Itinerario itinerarios)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                comando.Connection = conexion;
+                conexion.Open();
+                comando.CommandText = "exec PA_ListarItinerarioById @idItinerario";
+                comando.Parameters.AddWithValue("@idItinerario", itinerarios.idItinerario);
+
+                SqlDataAdapter da = new SqlDataAdapter(comando);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                ENTIDAD.Itinerario itinerario = null;
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        itinerario = new ENTIDAD.Itinerario();
+                        itinerario.idItinerario = int.Parse(ds.Tables[0].Rows[i][0].ToString());
+                        itinerario.dia = (ds.Tables[0].Rows[i][1].ToString());
+                        itinerario.desayuno = (ds.Tables[0].Rows[i][2].ToString());
+                        itinerario.imgUrlDesayuno = (ds.Tables[0].Rows[i][3].ToString());
+                        itinerario.almuerzo = (ds.Tables[0].Rows[i][4].ToString());
+                        itinerario.imgUrlAlmuerzo = (ds.Tables[0].Rows[i][5].ToString());
+                        itinerario.cena = (ds.Tables[0].Rows[i][6].ToString());
+                        itinerario.imgUrlCena = (ds.Tables[0].Rows[i][7].ToString());
+                        listandoItinerarioById.Add(itinerario);
+                    }
+                }
+                int result = comando.ExecuteNonQuery();
+
+                return listandoItinerarioById;
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return listandoItinerarioById;
+        }//Fin
+
         public IEnumerable<ENTIDAD.Itinerario> listadoItinerario2()
         {
             SqlCommand comando = new SqlCommand();

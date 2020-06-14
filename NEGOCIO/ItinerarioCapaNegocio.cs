@@ -17,7 +17,11 @@ namespace NEGOCIO
         {
             return itinerario.listadoItinerario2();
         }
-
+        public IEnumerable<ENTIDAD.Itinerario> listarItinerarioById(Itinerario itinerarios)
+        {
+            return itinerario.listarItinerarioById(itinerarios);
+        }
+        
         public int modificarItinerario(Itinerario itinerarios)
         {
             return itinerario.modificarItinerario(itinerarios);
