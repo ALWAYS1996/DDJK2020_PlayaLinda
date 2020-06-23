@@ -25,8 +25,15 @@
                     {
                         <input type="text" id="codigoTipoHabitacion" name="codigoTipoHabitacion" value="1" hidden>
                         <input type="text" id="codigoCliente" name="codigoCliente" value="1" hidden>
-                        <p>Fecha inicio: <input type="date" id="inicio" name="fechaLlegada"></p>
-                        <p>Fecha final: <input type="date" id="final" name="fechaSalida"></p>
+                        <p>
+                            Fecha inicio: <input type="datetime-local" id="inicio" name="fechaLlegada" value="2020-06-12T19:30"
+                                           >
+                        </p>
+                        <p>
+                            Fecha final: <input type="datetime-local" id="final" name="fechaSalida" value="2020-06-12T19:30"
+                                            >
+                        </p>
+                      
                         <button type="submit" class="btn btn-info" name="action">Enviar</button>
                     }
                 </div>
@@ -41,4 +48,16 @@
                 var name = document.getElementById("sel1").value;
                 document.getElementById("codigoTipoHabitacion").value = name;
             }
+
+            var fecha = new Date();
+            var annio = fecha.getFullYear();
+            var mes = fecha.getMonth();
+            var dia = fecha.toDateString();
+            var dia1=dia.substring(8, 10);
+            var fechaReal = annio + '-0' + (mes + 1) +'-'+ dia1+'T00:00';
+          
+            var campoFecha = document.getElementById("fechaNacimiento");
+         
+            document.getElementById("inicio").min = fechaReal;
+            document.getElementById("final").min = fechaReal;
         </script>

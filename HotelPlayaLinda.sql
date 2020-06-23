@@ -21,6 +21,11 @@ ALTER TABLE Mapa ADD longitudDestino varchar(max);
 ALTER TABLE Mapa ADD CONSTRAINT PK_Mapa PRIMARY KEY (idMapa);
 ALTER TABLE Mapa DROP COLUMN dummy;
 
+select * from Itinerario;
+
+
+update Itinerario set imagenDesayuno='\Content\img\portada-desayuno-m.jpg'
+
 
 CREATE TABLE Itinerario(dummy int);
 ALTER TABLE Itinerario ADD idItinerario int identity(1,1);
@@ -458,6 +463,14 @@ AS SET NOCOUNT ON;
 SELECT dia,desayuno,imagenDesayuno,almuerzo,imagenAlmuerzo,cena,imagenCena FROM Itinerario
 GO
 -------------------------------------------------------------------------------------------------------------------------
+CREATE PROCEDURE PA_ListarItinerarioById(@idItinerario int)
+AS SET NOCOUNT ON;
+SELECT idItinerario,dia,desayuno,imagenDesayuno,almuerzo,imagenAlmuerzo,cena,imagenCena FROM Itinerario where idItinerario=@idItinerario
+GO
+
+PA_ListarItinerarioById 1
+
+-------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE PA_ListarContenido(@idContenido smallint)
 AS SET NOCOUNT ON;
@@ -539,26 +552,5 @@ where r.fechaLlegada<=getdate() and GETDATE()<=r.fechaSalida
 
 
 
-select r.idReservacion, r.idHabitacion,t.idTipoHabitacion, r.fechaLlegada,r.fechaSalida,h.estado,t.nombreTipoHabitacion  from Reservacion r join Habitacion  h  on r.idHabitacion=h.idHabitacion
-join TipoHabitacion t on t.idTipoHabitacion=h.idTipoHabitacion
 
 ----------------------------------------------------------------------------------------------------------------------------
-select * from TipoHabitacion
-select * from Reservacion
-select * from Cliente
-ALTER TRIGGER TR_CambiarEstado on Reservacion
-After update
-AS
-declare @fechaActual datetime,@idHabitacion int ,@IdReserva int; set @fechaActual=getdate();
-if exists (select * from inserted ) and  exists(select * from deleted)begin
-if(select fechaSalida from inserted ) < @fechaActual begin 
-set @idHabitacion=(select idHabitacion from inserted)
-set @idReserva=(select idReservacion from inserted)
-update Habitacion set estado=0 where idHabitacion=@idHabitacion;
---delete  from Reservacion  where idReservacion=@IdReserva;
-end
-end
-GO
-
-select *from Habitacion
-select *from Reservacion
