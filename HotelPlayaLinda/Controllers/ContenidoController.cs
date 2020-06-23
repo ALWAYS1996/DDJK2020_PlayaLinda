@@ -114,24 +114,42 @@ namespace HotelPlayaLinda.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult ModificarFacilidades(HttpPostedFileBase fileUpload,int idf,string nombre, string regla,string detalle)
+        public ActionResult ModificarFacilidades(HttpPostedFileBase fileUpload,int idf,string nombre, string regla,string detalle, string img)
         {
 
             try
             {
 
                 string path = Server.MapPath("~/Content/img/");
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
+                if (fileUpload != null ) {
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    fileUpload.SaveAs(path + Path.GetFileName(fileUpload.FileName));
+
                 }
-                fileUpload.SaveAs(path + Path.GetFileName(fileUpload.FileName));
+               
                 ENTIDAD.Facilidades galeria = new Facilidades();
                 galeria.id_Facilidades = idf;
                 galeria.nombre = nombre;
                 galeria.reglas = regla;
                 galeria.detalles = detalle;
-                galeria.urlImg = "\\Content\\img\\" + fileUpload.FileName;
+
+                if (fileUpload != null)
+                {
+
+                    galeria.urlImg = "\\Content\\img\\" + fileUpload.FileName;
+
+                }
+                else 
+                {
+
+                    galeria.urlImg = "\\Content\\img\\" + img;
+
+                }
+
                 facilidades.modificarFacilidades(galeria);
                 return View("FacilidadesAdm", facilidades.listadoFacilidades2());
             }

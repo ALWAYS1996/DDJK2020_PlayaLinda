@@ -75,7 +75,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>  Imagen Actual</label>
+                                                <input id="modalimgtem" name="modalimgtem" type="hidden">
                                                 <img name="modalimg" id="modalimg" width="100" height="100" />
                                             </div>
                                             <div class="form-group">
@@ -96,7 +96,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" id="btn" name="btn" class="btn btn-primary">Guadar Cambios</button>
+                            <button type="button" id="btn" name="btn" class="btn btn-warning">Guadar Cambios</button>
                         </div>
                     </div>
                 </div>
@@ -116,17 +116,17 @@
                         <div class="modal-body">
                             <form>
                                 <label>Nombre Facilidad</label>
-                                <input type="text" class="form-control" id="nombre2" name="nombre2">
+                                <input type="text" class="form-control" id="nombre2" name="nombre2" required>
                                 <br>
                                 <label>Reglas</label>
-                                <input type="text" class="form-control" id="regla2" name="regla2">
+                                <input type="text" class="form-control" id="regla2" name="regla2" required>
                                 <br>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="fileUpload2" name="fileUpload2">
+                                                    <input type="file" class="custom-file-input" id="fileUpload2" name="fileUpload2" required>
                                                     <label class="custom-file-label" for="customFile">Subir Imagen</label>
                                                 </div>
                                             </div>
@@ -135,7 +135,7 @@
                                 </div>
 
                                 <label>Detalles</label>
-                                <textarea type="text" class="form-control" id="detalle2" name="detalle2"> </textarea>
+                                <textarea type="text" class="form-control" id="detalle2" name="detalle2" required> </textarea>
                                 <br>
 
                             </form>
@@ -161,7 +161,8 @@
                 $("#regla").val(reglas);
                 $("#detalle").val(detalle);
                 var newRuta = "/Content/img/" + img2;
-                $("#modalimg").attr("src", newRuta);
+        $("#modalimg").attr("src", newRuta);
+        $("#modalimgtem").val(img2);
     }
       $(document).ready(function (){
 
@@ -173,13 +174,15 @@
                             var nombre = $("#nombre").val();
                             var regla =  $("#regla").val();
                             var detalle = $("#detalle").val();
+                            var imagen = $("#modalimgtem").val();
 
-                         
+                    
                             dataString.append("fileUpload", selectFile);
                             dataString.append("idf", id);
                             dataString.append("nombre", nombre);
                             dataString.append("regla", regla);
                             dataString.append("detalle", detalle);
+                            dataString.append("img", imagen);
 
                             $.ajax({
 
@@ -190,7 +193,7 @@
                                 processData: false,
                                 async: false,
                                 success: function () {
-                                    alert('Imagen Subida con exito');
+                                    alert('Se ha modificado exitosamente');
                                     $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
                                     if (typeof (data.Value) != "undefined") {
                                         alert(data.Message);
