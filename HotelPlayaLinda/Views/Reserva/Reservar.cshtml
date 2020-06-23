@@ -26,15 +26,15 @@
                         <input type="text" id="codigoTipoHabitacion" name="codigoTipoHabitacion" value="1" hidden>
                         <input type="text" id="codigoCliente" name="codigoCliente" value="1" hidden>
                         <p>
-                            Fecha inicio: <input type="datetime-local" id="inicio" name="fechaLlegada" value="2020-06-12T19:30"
+                            Fecha inicio: <input type="datetime-local" id="inicio" onchange="compare_date()"  name="fechaLlegada" value="2020-06-12T19:30"
                                            >
                         </p>
                         <p>
-                            Fecha final: <input type="datetime-local" id="final" name="fechaSalida" value="2020-06-12T19:30"
+                            Fecha final: <input type="datetime-local" id="final" onchange="compare_date()" name="fechaSalida" value="2020-06-12T19:30"
                                             >
                         </p>
                       
-                        <button type="submit" class="btn btn-info" name="action">Enviar</button>
+                        <button type="submit" class="btn btn-info" id="boton" disabled name="action">Enviar</button>
                     }
                 </div>
             </div>
@@ -60,4 +60,13 @@
             document.getElementById("inicio").min = fechaReal;
             document.getElementById("final").min = fechaReal;
             ///////////////////////////////////////////////////
+            ////Validar fechaInicio sea menor
+            function compare_date() {
+                if (document.getElementById("inicio").value < document.getElementById("final").value) {
+                    document.getElementById("boton").disabled = false;
+                    console.log("----")
+                } else
+                    document.getElementById("boton").disabled = true;
+            }
+            //////////////////////////////////////////////////////////////
         </script>
