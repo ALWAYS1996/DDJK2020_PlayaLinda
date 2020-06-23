@@ -49,15 +49,15 @@
                 document.getElementById("codigoTipoHabitacion").value = name;
             }
 
+            ///validar fecha anterior se bloquee
             var fecha = new Date();
             var annio = fecha.getFullYear();
             var mes = fecha.getMonth();
             var dia = fecha.toDateString();
             var dia1=dia.substring(8, 10);
             var fechaReal = annio + '-0' + (mes + 1) +'-'+ dia1+'T00:00';
-          
-            var campoFecha = document.getElementById("fechaNacimiento");
-         
+ 
             document.getElementById("inicio").min = fechaReal;
             document.getElementById("final").min = fechaReal;
+            ///////////////////////////////////////////////////
         </script>
