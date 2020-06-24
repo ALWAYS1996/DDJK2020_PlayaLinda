@@ -33,9 +33,19 @@ div.img {
     }
 
 
+.enlaceMenu {
+    background: none;
+}
+
+    .enlaceMenu:hover {
+        background-color: none;
+    }
 
 
 
+    .enlaceMenu:active {
+        background: none;
+    }
 .Rotate-90 {
     line-height: normal;
     -webkit-transform: rotate(-90deg);

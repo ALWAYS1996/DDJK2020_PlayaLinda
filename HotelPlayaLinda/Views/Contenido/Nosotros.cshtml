@@ -1,7 +1,4 @@
-﻿
-
-
-<!--------------------------- ------------------------------------>
+﻿<!--------------------------- ------------------------------------>
 @model IEnumerable<ENTIDAD.Imagen>
 
 @{ var contenido = (IEnumerable<ENTIDAD.Contenido>)ViewData["contenidoVista"];
@@ -9,44 +6,140 @@
 }
 
 
-<body class="scroll">
-
-    <div class="container ">
-        <div class="row">
+    <body class="scroll">
+        <style>
 
 
-            <div class="col-sm-2">  </div>
-            <center>
-                <div class="col-sm-10">
+            .modal-dialog {
+                max-width: 800px;
+                margin: 30px auto;
+            }
 
-                    @foreach (var dato in contenido)
-                    {
-                        <hr style="color: #47748b">
-                        <center ><strong> @Html.DisplayFor(modelItem => dato.titulo)</strong> </center>
-                        <hr style="color: #47748b">
+
+
+            .modal-body {
+                position: relative;
+                padding: 0px;
+                min-height: 400px;
+                background: #fff;
+            }
+
+
+
+
+            .close {
+                position: absolute;
+                right: -30px;
+                top: 0;
+                z-index: 999;
+                font-size: 2rem;
+                font-weight: normal;
+                color: #fff;
+                opacity: 1;
+            }
+
+            #image {
+                min-height: 200px;
+            }
+        </style>
+        <div class="container ">
+            <div class="row">
+
+
+                <div class="col-sm-2">  </div>
+                <center>
+                    <div class="col-sm-10">
+
+                        @foreach (var dato in contenido)
+                        {
+                            <hr style="border-top: 1px solid #47748b;" width="40%">
+                            <center><strong>  <font style="text-transform: uppercase;"> @Html.DisplayFor(modelItem => dato.titulo)</font></strong> </center>
+                            <hr style="border-top: 1px solid #47748b;" width="40%">
+
+                            <br>
+                            <center class="">          <div style="text-align: justify;">@Html.DisplayFor(modelItem => dato.contenido) </div></center>
+
+                        }
+
                         <br>
-                        <center class="" >          <div style="text-align: justify;">@Html.DisplayFor(modelItem => dato.contenido) </div></center>
+                        <a href="/Itinerario/Itinerario">
+                            <img src="~/Content/img/calendario.svg" height="30" width="30" />Ver  Itinerario del Hotel
+                        </a>
+                    </div>
+                </center>
 
-                    }
-
-                    <br>
-                    <a href="/Itinerario/Itinerario">
-                        <img src="~/Content/img/calendario.svg" height="30" width="30" />Ver  Itinerario del Hotel
-                    </a>
-                </div>
-            </center>
-        
-        </div>
+            </div>
             <br>
             <br>
-        
-           
-            <div class="contenedor-galeria">
+
+
+            <div class="contenedor-galeria gallery">
                 @foreach (var item in Model)
                 {
-                    <img src="@Html.DisplayFor(modelItem=> item.imgPath)" class="galeria__img" />
+
+                    <img src="@Html.DisplayFor(modelItem=> item.imgPath)" class="galeria__img" data-target="#myModal" data-toggle="modal" data-bigimage="@item.imgPath" />
                 }
             </div>
 
+
         </div>
-</body>
+    </body>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="border-top:8px solid white">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+            <div class="modal-body">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div style="border-top:8px solid white">
+                    <center>
+                        <img src="//media.tenor.com/images/556e9ff845b7dd0c62dcdbbb00babb4b/tenor.gif" alt="" id="image" class="img-fluid">
+                    </center>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Gets the video src from the data-src on each button
+        var $imageSrc;
+        $('.gallery img').click(function () {
+            $imageSrc = $(this).data('bigimage');
+        });
+        console.log($imageSrc);
+
+
+
+        // when the modal is opened autoplay it
+        $('#myModal').on('shown.bs.modal', function (e) {
+
+            // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+
+            $("#image").attr('src', $imageSrc);
+        })
+
+        // reset the modal image
+        $('#myModal').on('hide.bs.modal', function (e) {
+            // a poor man's stop video
+            $("#image").attr('src', '');
+        })
+
+        // document ready
+    });
+
+</script>

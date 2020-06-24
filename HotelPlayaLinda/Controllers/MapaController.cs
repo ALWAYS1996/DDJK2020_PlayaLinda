@@ -28,7 +28,7 @@ namespace HotelPlayaLinda.Controllers
         public ActionResult ModificarContenido(string contenido1, string titulo) {
             if (contenido.modificarContenido(new Contenido(3, contenido1, titulo)) > 0)
             {
-                ViewBag.mensaje = "Se ha registrado correctamente";
+                ViewBag.mensaje = "Se ha modificado correctamente";
             }
             else {
                 ViewBag.mensaje = "Lo sentimos. No ha sido posible modificarlo";

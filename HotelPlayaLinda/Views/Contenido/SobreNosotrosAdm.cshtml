@@ -10,14 +10,16 @@
 
             </div>
             <div class="col-md-6">
-                <div>
-                    @if (@ViewBag.mensaje != null)
-                    {
-                        <div class="alert alert-warning" role="alert">
-                            Mensaje:<strong> @ViewBag.mensaje</strong>
-                        </div>
-                    }
-                </div>
+               
+                @if (ViewBag.mensaje != null)
+                {
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Estado!</strong> @ViewBag.mensaje
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                }
 
                 @foreach (var dato in contenido)
                 {
@@ -42,9 +44,12 @@
                 }
                 <br><br>
                 <div class="form-group">
-                    <center> <a href="#" data-toggle="modal" data-target="#exampleModalCenter">Nuevo Registro
-    <img src="~/Content/img/add.svg" width="30" height="30" />
-</a> </center>
+                    <center>
+                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            Nuevo Registro
+                            <img src="~/Content/img/add.svg" width="30" height="30" />
+                        </a>
+                    </center>
                     <br>
                     <table class="table table-striped">
                         <thead>

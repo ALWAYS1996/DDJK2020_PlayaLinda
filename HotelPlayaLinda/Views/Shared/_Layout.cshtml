@@ -68,7 +68,7 @@
                 </li>
 
 
-                <li class="nav-link  animated infinite ">
+                <li class="nav-link  animated infinite bounceOutUp slow">
                     <a id="linkpublicidad" name="linkpublicidad">   <img id="imgPublicidad" class="container-fluid" name="imgPublicidad" width="230" height="400" /> </a>
 
                 </li>
@@ -148,8 +148,7 @@
 
                         $("#imgPublicidad").attr("src", item.rutaImg);
                         $("#linkpublicidad").attr("href", item.link);//.val(item.link;
-                        // $("#etiquetaPublicidad").innerHTML = "'item.descripcion'";//attr("value", item.descripcion);//val(item.descripcion);//attr("h5", item.descripcion);//.val(item.descripcion);
-                        document.getElementById("etiquetaPublicidad").innerHTML = item.descripcion;
+                      //  document.getElementById("etiquetaPublicidad").innerHTML = item.descripcion;
                     });
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

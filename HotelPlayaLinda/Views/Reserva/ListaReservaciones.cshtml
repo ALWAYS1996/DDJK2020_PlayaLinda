@@ -2,61 +2,71 @@
 @model IEnumerable<ENTIDAD.Reservacion>
 
 
+<div class="col-md-1"></div>
+<div class="col-md-1"></div>
 <div class="container">
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <center>
+            <div class="col-md-12">
 
-            <table id="table" class="table">
-                <thead>
-                    <tr>
-                        <th>Codigo Habitacion</th>
-                        <th>Codigo Reservación</th>
-                        <th>Codigo Cliente</th>
-                        <th>Fecha llegada</th>
-                        <th>Fecha salida</th>
-                        <th>Eliminar</th>
-                        <th>Detalle</th>
-                        <th>Modificar</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (var dato in Model)
-                    {
+                <table id="table" class="table table-hover">
+                    <thead>
                         <tr>
-                            <td>@dato.codigoHabitacion</td>
-                            <td>@dato.codigoReservacion</td>
-                            <td>@dato.codigoCliente</td>
-                            <td>@dato.fechaL</td>
-                            <td>@dato.fechaS</td>
-                            <td>
-                                <button class=" btn btn-danger" type="submit"
-                                        onclick="return  eliminar(  @Html.DisplayFor(modelItem => dato.codigoReservacion))">
-                                    Eliminar
-                                    <span class="glyphicon glyphicon-remove" style="color:white"></span>
-
-                                </button>
-
-                            </td>
-                            <td>
-                                @Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion }, new { @class = "btn btn-info" })
-                            </td>
-                            <td>
-                                @Html.ActionLink("Actualizar", "filtrandoReservacionById", new { codigoReservacion = dato.codigoReservacion }, new { @class = "btn btn-warning" })
-                            </td>
+                            <th>Codigo Habitacion</th>
+                            <th>Codigo Reservación</th>
+                            <th>Codigo Cliente</th>
+                            <th>Fecha llegada</th>
+                            <th>Fecha salida</th>
+                            <th>Eliminar</th>
+                            <th>Detalle</th>
+                            <th>Modificar</th>
                         </tr>
+                    </thead>
+                    <tbody>
 
-                    }
+                        @foreach (var dato in Model)
+                        {
+                            <tr>
+                                <td>@dato.codigoHabitacion</td>
+                                <td>@dato.codigoReservacion</td>
+                                <td>@dato.codigoCliente</td>
+                                <td>@dato.fechaL</td>
+                                <td>@dato.fechaS</td>
+                                <td>
+                                    <button class=" btn btn-danger" type="submit"
+                                            onclick="return  eliminar(  @Html.DisplayFor(modelItem => dato.codigoReservacion))">
 
-                </tbody>
-            </table>
+                                        <img src="~/Content/img/eliminar.svg" width="30" height="30" />
 
-        </div>
+                                    </button>
 
-        <div class="col-md-1"></div>
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("Detalles", "ConsultarReservacion", new { codigoReservacion = dato.codigoReservacion }, new { @class = "btn btn-info" })*@
+                                    <a href="@Url.Action("ConsultarReservacion", "Reserva", new { codigoReservacion = dato.codigoReservacion})">
+
+                                        <img src="~/Content/img/register.svg" width="40" height="40" />
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("filtrandoReservacionById", "Reserva", new { codigoReservacion = dato.codigoReservacion})">
+
+                                        <img src="~/Content/img/mod1.svg" width="40" height="40" />
+                                    </a>
+                                    @*@Html.ActionLink("Actualizar", "filtrandoReservacionById", new { codigoReservacion = dato.codigoReservacion }, new { @class = "btn btn-warning" })*@
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </center>
+
     </div>
-    </div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -97,7 +107,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script>
-    
+
         function eliminar(valor) {
             var clienteid = valor;
             swal({

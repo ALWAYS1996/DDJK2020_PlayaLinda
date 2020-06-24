@@ -7,18 +7,6 @@
     ViewBag.Title = "Inicio";
 }
 
-<style>
-    .gallery {
-        filter: brightness(100%);
-        animation: escalar;
-        cursor: pointer;
-        animation: escalar 1.8s infinite alternate;
-    }
-
-    #image {
-        min-height: 0px;
-    }
-</style>
 <body>
     <div class="container">
 
@@ -54,12 +42,12 @@
                     </center>
 
                     <!-- Left and right controls -->
-                    <a id="j" class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
+                    @*<a id="enlaceMenu" class="carousel-control-prev enlaceMenu" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon "></span>
                     </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <a id="enlaceMenu" class="carousel-control-next enlaceMenu" href="#demo" data-slide="next">
                         <span class="carousel-control-next-icon"></span>
-                    </a>
+                    </a>*@
 
                 </div>
             </div>
@@ -67,15 +55,17 @@
         <br><br>
         <div class="row">
             <center>
-                <div class="col-md-10">
-                    @foreach (var dato in contenido)
-                    {
-                        <hr style="border-top: 1px solid #ebe3e3;" width="100%">
-                        <center>  <h2 class=""> @Html.DisplayFor(modelItem => dato.titulo)</h2></center>
-                        <hr style="border-top: 1px solid #ebe3e3;" width="100%">
-                        <center>  <p class="text-justify"> @Html.DisplayFor(modelItem => dato.contenido) </p></center>
-                    }
-                </div>
+                @foreach (var dato in contenido)
+                {
+                    <div class="card mb-3 " style="border:2px solid #ebe3e3; background-color:#ffffff">
+                        <div class="card-header"><h5 class="card-title"> <strong>@Html.DisplayFor(modelItem => dato.titulo) </strong></h5></div>
+                        <div class="card-body text-dark">
+                            @*<h5 class="card-title">Dark card title</h5>*@
+                            <p class="card-text text-justify">@Html.DisplayFor(modelItem => dato.contenido)</p>
+                        </div>
+                    </div>
+                }
+
             </center>
             <div class="col-md-2"> </div>
 
@@ -89,37 +79,34 @@
 
             @foreach (var dato1 in listadoPromociones)
             {
-                <div class="card  " style="width: 18rem;border:2px solid #ebe3e3; background-color:#ffffff">
+                <div class="card" style="width: 18rem;border:2px solid #ebe3e3; background-color:#ffffff">
                     <p class="card-text">
                         <font style="text-transform: uppercase;">
                             <center>
+                                <strong class="">
 
-                                <strong style="background-color:antiquewhite">Promociones Especiales  </strong>
-
+                                    <hr style="border-top: 1px solid black;" width="80%">
+                                    Promociones Especiales
+                                    <hr style="border-top: 1px solid black;" width="80%">
+                                </strong>
                             </center>
                         </font>
                     </p>
-
-                    <img src="@dato1.imgUrl" class="card-img-top  " width="100" height="100" alt="...">
+                    <img src="@dato1.imgUrl" class="card-img-top" alt="..." width="100" height="100">
                     <div class="card-body">
 
-
-                        <p class="card-text text-justify">@dato1.informacion</p>
-                        <h5 class="btn btn-outline-info">Precio: ₡ @dato1.precio</h5>
-                        <br>
-                        <h5 class="btn btn-outline-info ">RESERVAR AHORA!</h5>
-
-                        <h5 class="btn btn-dark ">Más Información</h5>
+                        <p class="card-text">@dato1.informacion</p> <h5 class="card-title btn btn-outline-primary ">Precio: ₡@dato1.precio</h5>
+                        <a href="#" class="btn btn-outline-primary">Reservar AHORA!</a>
                     </div>
-                    <hr style="border-top: 5px solid #808080">
                 </div>
-                <hr style="        border-top: 1px solid #ebe3e3;">
+                <hr style="border-top: 5px solid #808080">
+
             }
 
 
 
         </div>
-    
+
     </div>
 
 </body>
