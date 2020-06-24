@@ -237,6 +237,33 @@ namespace HotelPlayaLinda.Controllers
                 return Json(new { Value = false, Message = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult ActualizarPublicidad(HttpPostedFileBase fileUpload1, string url, string nombre)
+        {
+            try
+            {
+                string path = Server.MapPath("~/Content/img/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                fileUpload1.SaveAs(path + Path.GetFileName(fileUpload1.FileName));
+                ENTIDAD.Imagen galeria = new ENTIDAD.Imagen();
+
+                galeria.imgPath = "\\Content\\img\\" + fileUpload1.FileName;
+                galeria.tipo = 1;
+                img.registrarImagenes(galeria);
+                publicidad.actualizarPublicidad(1, galeria.imgPath, url, nombre);
+
+                ViewData["contenidoVista"] = capaNegocios.listadoContenido(new ENTIDAD.Contenido(1));
+                return View("Administrar_Publicidad", img.listadoImagenes(new ENTIDAD.Imagen(1)));
+            }
+            catch (Exception e)
+            {
+                return Json(new { Value = false, Message = "Error" + e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public ActionResult eliminarSobreNosotros(int idImagen) {
             ENTIDAD.Imagen galeria = new ENTIDAD.Imagen();
             galeria.idImagen = idImagen;

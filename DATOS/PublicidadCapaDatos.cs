@@ -24,6 +24,34 @@ namespace DATOS
 
 
     private List<ENTIDAD.Publicidad> listarPublicidad = new List<ENTIDAD.Publicidad>();
+
+        public int actualizarPublicidad(int id, string imagen, string url, string nombre)
+        {
+            SqlCommand comando = new SqlCommand();
+            try
+            {
+                conexion.Open();
+                comando.Connection = conexion;
+                comando.CommandText = "exec PA_ModificarPublicidad @idPublicidad, @rutaImagen, @link, @nombre";
+                comando.Parameters.AddWithValue("@idPublicidad", id);
+                comando.Parameters.AddWithValue("@rutaImagen", imagen);
+                comando.Parameters.AddWithValue("@link", url);
+                comando.Parameters.AddWithValue("@nombre", nombre);
+                int result = comando.ExecuteNonQuery();
+                if (result == -1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (Exception) { }
+            finally { conexion.Close(); }
+            return 0;
+        }
+
         public IEnumerable<ENTIDAD.Publicidad> listadoPublicidad()
         {
             SqlCommand comando = new SqlCommand();

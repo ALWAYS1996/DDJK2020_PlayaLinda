@@ -1,1 +1,61 @@
-﻿
+﻿<div class="container">
+    <div class="row">
+        <form>
+            <label>Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre">
+            <br>
+            <label>Url</label>
+            <input type="text" class="form-control" id="url" name="url">
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fileUpload1" name="fileUpload1">
+                                <label class="custom-file-label" for="customFile">Subir Imagen</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <button type="button" name="btnAdd" id="btnAdd" class="btn btn-outline-warning">Modificar</button>
+            <br>
+        </form>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+            
+               $(document).ready(function (){
+
+                   $("#btnAdd").click(function (){
+                            var selectFile = ($("#fileUpload1"))[0].files[0];
+                            var dataString = new FormData();
+
+                           dataString.append("fileUpload1", selectFile);
+                           dataString.append("url", $("#url").val());
+                           dataString.append("nombre", $("#nombre").val());
+
+                            $.ajax({
+
+                                url: '@Url.Action("ActualizarPublicidad", "Contenido")',
+                                type: 'POST',
+                                data: dataString,
+                                contentType: false,
+                                processData: false,
+                                async: false,
+                                success: function () {
+                                    alert('Imagen Subida con exito');
+                                  //  $("#alertControl").html('<div class="alert alert-success" id="alert">' + 'Exito' + '</div>');
+
+                                    if (typeof (data.Value) != "undefined") {
+                                        alert(data.Message);
+                                    } else { alert('Publicidad modificada'); }
+                                },
+                                error: function (data) {
+                                }
+                            });
+                        });
+                    });
+</script>
