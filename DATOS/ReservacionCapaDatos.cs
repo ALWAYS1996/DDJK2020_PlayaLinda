@@ -60,8 +60,8 @@ namespace DATOS
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("PA_VerificarReserva", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaL);
-                cmd.Parameters.AddWithValue("@fechaSalida", reservacion.fechaS);
+                cmd.Parameters.AddWithValue("@fechaLlegada", reservacion.fechaLlegada);
+                cmd.Parameters.AddWithValue("@fechaSalida", reservacion.fechaSalida);
                 cmd.Parameters.AddWithValue("@tipoHabitacion", reservacion.idHabitacionTemp);
                 cmd.Parameters.AddWithValue("@retorno", SqlDbType.Int);
                 var returnParameter = cmd.Parameters.Add("@retorno", SqlDbType.Int);

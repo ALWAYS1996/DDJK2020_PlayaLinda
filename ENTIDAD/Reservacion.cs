@@ -61,11 +61,11 @@ namespace ENTIDAD
             this.fechaLlegada = fechaLlegada;
             this.fechaSalida = fechaSalida;
         }
-        public Reservacion(string idTipoHabitacion, string fechaLlegada, string fechaSalida)
+        public Reservacion(string idTipoHabitacion, DateTime fechaLlegada, DateTime fechaSalida)
         {
             this.idHabitacionTemp = idTipoHabitacion;
-            this.fechaL = fechaLlegada;
-            this.fechaS = fechaSalida;
+            this.fechaLlegada = fechaLlegada;
+            this.fechaSalida = fechaSalida;
         }
 
         public Reservacion(int idTipoHabitacion, DateTime fechaLlegada, DateTime fechaSalida)

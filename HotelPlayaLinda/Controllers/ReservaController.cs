@@ -77,7 +77,7 @@ namespace HotelPlayaLinda.Controllers
             return View(reservacionCapaNegocios.consultarReservaciones(new Reservacion(codigoReservacion)));
         }
 
-        public ActionResult DatosUsuario(string codigoTipoHabitacion, string fechaLlegada, string fechaSalida)
+        public ActionResult DatosUsuario(string codigoTipoHabitacion, DateTime fechaLlegada, DateTime fechaSalida)
         {
             int codigoHabitacion = reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoTipoHabitacion, fechaLlegada, fechaSalida));
             if (codigoHabitacion == -1)
