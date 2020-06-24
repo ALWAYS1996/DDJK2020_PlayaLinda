@@ -10,9 +10,14 @@ a {
     text-decoration: dashed;
 }
 
+.header .navbar{
+    
+}
+
 #navPrin {
     height: 870px;
     width: 300px;
+    background-color: transparent !important;
 }
 
 div.img {

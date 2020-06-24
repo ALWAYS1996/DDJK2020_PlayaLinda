@@ -146,7 +146,6 @@ namespace DATOS
                     for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
                     {
                         reservacion = new ENTIDAD.Reservacion();
-                      
                         reservacion.codigoReservacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
                         reservacion.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][1].ToString());
                         reservacion.codigoCliente = int.Parse(ds.Tables[0].Rows[i][2].ToString());

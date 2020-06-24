@@ -57,86 +57,93 @@
             {
 
             <div class="card" style="width: 19rem;">
-                <p class="card-text">
-                    <font style="text-transform: uppercase;">
-                        <center>
-                            <hr style="border-top: 1px solid black;" width="50%">
-                            <center class="">    <img src="~/Content/img/isla.png" /><strong> @dato.dia  </strong></center>
-                            <hr style="border-top: 1px solid black;" width="50%">
-                        </center>
-                    </font>
-                </p>
-                <hr style="border-top: 1px solid gray;">
+                
+                <div class="card-header">
+                    <p class="card-text">
+                        <font style="text-transform: uppercase;">
+                            <center>
 
-                <div class="gallery">
-                    <img src="@dato.imgUrlDesayuno" class="card-img-top" data-target="#myModal" width="80" height="150" alt="..." data-toggle="modal" data-bigimage="@dato.imgUrlDesayuno">
+                                <center class="">    <img src="~/Content/img/isla.png" /><strong> @dato.dia  </strong></center>
+
+                            </center>
+                        </font>
+                    </p>
+
+
                 </div>
+
+                
                 
                 <div class="card-body">
+                    <div class="gallery">
+                        <img src="@dato.imgUrlDesayuno" class="card-img-top" data-target="#myModal" width="80" height="150" alt="..." data-toggle="modal" data-bigimage="@dato.imgUrlDesayuno">
+                    </div>
+                    <br />
                     <h5 class="card-title">Desayuno</h5>
+                    <br />
                     <p class="card-text">@dato.desayuno</p>
-                    <hr style="border-top: 1px solid gray;">
+                    
                 </div>
-                <hr style="border-top: 5px solid black;">
             </div>
 
 
-                <hr style="border-top: 5px solid gray;">
+                <hr style="border-top: 4px solid gray;">
 
                 <div class="card text-center" style="width: 19rem;">
-                    <p class="card-text">
-                        <font style="text-transform: uppercase;">
-
-                            <center class="">     <hr style="border-top: 1px solid black;" width="50%">  <img src="~/Content/img/isla.png" /><strong> @dato.dia  </strong></center>
-                            <hr style="border-top: 1px solid black;" width="50%">
-                        </font>
-                    </p>
-                    <hr style="border-top:1px solid gray;">
-                    <div class="gallery">
-                        <img src="@dato.imgUrlAlmuerzo" class="card-img-top" data-target="#myModal" width="80" height="150" alt="..." data-toggle="modal" data-bigimage="@dato.imgUrlAlmuerzo">
+                    <div class="card-header">
+                        <p class="card-text">
+                            <font style="text-transform: uppercase;">
+                                <center class="">
+                                <img src="~/Content/img/isla.png" /><strong> @dato.dia  </strong></center>
+                            </font>
+                        </p>
                     </div>
-
-                   <div class="card-body">
+                    <div class="card-body">
+                        <div class="gallery">
+                            <img src="@dato.imgUrlAlmuerzo" class="card-img-top" data-target="#myModal" width="80" height="150" alt="..." data-toggle="modal" data-bigimage="@dato.imgUrlAlmuerzo">
+                        </div>
+                        <br />
                         <h5 class="card-title">Almuerzo</h5>
+                        <br />
                         <p class="card-text">@dato.almuerzo</p>
-                        <hr style="border-top: 1px solid gray;">
                     </div>
-                    <hr style="border-top: 5px solid black;">
+                   
                 </div>
 
 
-                <hr style="border-top: 5px solid black;">
+                <hr style="border-top: 4px solid black;">
 
 
                 <div class="card text-right" style="width: 19rem;">
-                    <p class="card-text">
-                        <font style="text-transform: uppercase;">
 
-                            <center class="">
-                                <hr style="border-top: 1px solid black ;" width="50%">   <img src="~/Content/img/isla.png" /><strong>
-                                    @dato.dia
-                                </strong>
-                            </center>
+                    <div class="card-header">
+                        <p class="card-text">
+                            <font style="text-transform: uppercase;">
+                                <center class="">
+                                   <img src="~/Content/img/isla.png" /><strong>
+                                        @dato.dia
+                                    </strong>
+                                </center>
+                            </font>
+                        </p>
 
-                            <hr style="border-top: 1px solid black;" width="50%">
-                        </font>
-                    </p>
-                    <hr style="border-top: 1px solid gray;">
-                    <div class="gallery">
-                        <img src="@dato.imgUrlCena" class="card-img-top" data-target="#myModal" width="80" height="150" alt="..." data-toggle="modal" data-bigimage="@dato.imgUrlCena">
                     </div>
 
                     <div class="card-body">
+
+                        <div class="gallery">
+                            <img src="@dato.imgUrlCena" class="card-img-top" data-target="#myModal" width="80" height="150" alt="..." data-toggle="modal" data-bigimage="@dato.imgUrlCena">
+                        </div>
+                        <br />
                         <h5 class="card-title">Cena</h5>
+                        <br />
                         <p class="card-text">@dato.cena</p>
-                        <hr style="border-top: 1px solid gray;">
                     </div>
-                    <hr style="border-top: 5px solid  black;">
 
                 </div>
 
-            }
-
+                
+            
 
         </div>
 

@@ -10,6 +10,8 @@ button {
     cursor: pointer;
 }
 
+
+
 button {
     width: auto; /* ie */
     overflow: visible; /* ie */

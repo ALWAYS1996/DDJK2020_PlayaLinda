@@ -63,7 +63,7 @@
 
             {
                 @*<img src="@dato.urlImg" alt="" data-toggle="modal" data-bigimage="@dato.urlImg" data-target="#myModal" class="img-fluid">*@
-                <div class="card " style="width: 20rem;border:2px solid #ebe3e3">
+                <div class="card " style="width: 20rem;border:2px solid #ebe3e3; margin: 2px;">
 
                     <div class="gallery">
                         <img src="@dato.urlImg" class="card-img-top" data-target="#myModal" width="700" height="300" alt="..." data-toggle="modal" data-bigimage="@dato.urlImg">
@@ -75,22 +75,20 @@
                         <p class="card-text">
                             <font style="text-transform: uppercase;">
                                 <center>
-                                    <hr style="border-top: 1px solid black;" width="50%">
+                                    
                                     <strong> @dato.nombre  </strong>
-                                    <hr style="border-top: 1px solid black;" width="50%">
+                                    
                                 </center>
                             </font>
                         </p>
+                        <br />
                         <p class="card-text text-justify  btn btn-outline-dark"><strong>Reglas:</strong> @dato.reglas</p>
                         <h5 class="btn btn-outline-info "><strong>Detalles:</strong> @dato.detalles</h5>
                         <br>
 
                     </div>
-                    <hr style="border-top: 8px solid black">
                 </div>
-
-
-                <hr style="        border-top: 1px solid #ebe3e3;">
+                
 
             }
         </div>

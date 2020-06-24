@@ -29,12 +29,26 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="~/Content/img/playa1.jpg" class="container-fluid" alt="Los Angeles" width="850" height="300">
+                                <div class="carousel-caption">
+                                    @foreach (var item in contenido)
+                                    {
+                                        <h2><strong>@Html.DisplayFor(modelItem => item.titulo) </strong></h2>
+
+                                    }
+                                </div>
                             </div>
                             @foreach (var dato in Model)
                             {
                                 <div class="carousel-item">
                                     <img src="@dato.imgPath" class="container-fluid" alt="Los Angeles" width="850" height="300">
-
+                                    <div class="carousel-caption">
+                                        @foreach (var item in contenido)
+                                        {
+                                                <h2><strong>@Html.DisplayFor(modelItem => item.titulo) </strong></h2>
+                                                
+                                            
+                                        }
+                                    </div>
                                 </div>
                             }
                         </div>
@@ -57,44 +71,33 @@
             <center>
                 @foreach (var dato in contenido)
                 {
-                    <div class="card mb-3 " style="border:2px solid #ebe3e3; background-color:#ffffff">
-                        <div class="card-header"><h5 class="card-title"> <strong>@Html.DisplayFor(modelItem => dato.titulo) </strong></h5></div>
+                    
+                      
                         <div class="card-body text-dark">
                             @*<h5 class="card-title">Dark card title</h5>*@
-                            <p class="card-text text-justify">@Html.DisplayFor(modelItem => dato.contenido)</p>
+                            <p class="card-text text-justify btn btn-outline-dark">@Html.DisplayFor(modelItem => dato.contenido)</p>
                         </div>
-                    </div>
+                 
                 }
-
             </center>
             <div class="col-md-2"> </div>
-
         </div>
-
-
-
-
         <br><br>
         <div class="row  ">
-
             @foreach (var dato1 in listadoPromociones)
             {
-                <div class="card" style="width: 18rem;border:2px solid #ebe3e3; background-color:#ffffff">
+                <div class="card " style="width: 18rem;border:2px solid #ebe3e3; background-color:#ffffff">
                     <p class="card-text">
                         <font style="text-transform: uppercase;">
                             <center>
                                 <strong class="">
-
-                                    <hr style="border-top: 1px solid black;" width="80%">
                                     Promociones Especiales
-                                    <hr style="border-top: 1px solid black;" width="80%">
                                 </strong>
                             </center>
                         </font>
                     </p>
-                    <img src="@dato1.imgUrl" class="card-img-top" alt="..." width="100" height="100">
                     <div class="card-body">
-
+                        <img src="@dato1.imgUrl" class="card-img-top" alt="..." width="100" height="100">
                         <p class="card-text">@dato1.informacion</p> <h5 class="card-title btn btn-outline-primary ">Precio: ₡@dato1.precio</h5>
                         <a href="#" class="btn btn-outline-primary">Reservar AHORA!</a>
                     </div>
