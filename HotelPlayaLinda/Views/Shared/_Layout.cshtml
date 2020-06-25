@@ -13,59 +13,72 @@
     <link href="~/Content/css/estiloGaleriaImagenes.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/Site.css">
     <link rel="icon" type="image/png" href="~/Content/img/hotel.svg" />
-
-
     <script src="~/Scripts/JQuery.js"></script>
 
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/Content/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/Content/assets/css/style.css" rel="stylesheet">
 </head>
 
-<body>
-    
+<body >
+
     <nav class="navbar navbar-dark bg-dark">
 
         <a class="navbar-brand" href="#">
             <img src="~/Content/img/hotel.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             Hotel Playa Linda
         </a>
-        <a href="/Administrador/Login/" class="btn btn-outline-danger">
-            <img src="~/Content/img/avatar.png">
-
+        <a href="/Administrador/Login/" class="btn btn-outline-light">
+            <i class="bx bx-user"></i>
             Inicio de Session
         </a>
     </nav>
 
 
-    <div class="wrapper">
-        <nav class="navbar navbar-light bg-light" id="navPrin" >
-            
-            <ul class="navbar-nav">
+    <div class="wrapper" >
+        <nav class=" shadow nav-menu" id="navPrin" >
 
+            <!-- .nav-menu -->
+            <ul class="navbar-nav" style="background-color:white">
                 <li class="nav-item">
-                    <a class="nav-link" href="/Contenido/Inicio"> Inicio </a>
+                    <a href="/Contenido/Inicio"><i class="bx bxs-down-arrow"></i> <strong>Hotel Playa Linda</strong></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Contenido/Nosotros"> Sobre Nosotros </a>
+                    <a href="/Contenido/Inicio"><i class="bx bx-home"></i> <span>Inicio</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Basic/Facilidades"> Facilidades </a>
+                    <a href="/Contenido/Nosotros"><i class="bx bx-user"></i> <span>Sobre Nosotros</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Mapa/Llegar"> Cómo llegar </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Basic/Tarifas"> Tarifas </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Reserva/Reservar"> Reservaciones </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Contenido/Contacto"> Contáctenos </a>
+                    <a href="/Basic/Facilidades"><i class="bx bx-file-blank"></i> <span>Facilidades</span></a>
 
                 </li>
+                <li class="nav-item">
+                    <a href="/Mapa/Llegar"> <i class="bx bxs-map bx-spin-hover"></i> <span>Cómo llegar </span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Basic/Tarifas"><i class="bx bx-dollar-circle bx-spin-hover"></i> <span>  Tarifas  </span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Reserva/Reservar"><i class="bx bx-notepad bx-spin-hover"></i>  <span>Reservaciones </span></a>
+
+                </li>
+                <li class="nav-item">
+                    <a href="/Contenido/Contacto"><i class="bx bx-envelope"></i> Contáctenos</a>
+                </li>
 
 
-                <li class="nav-item  animated infinite bounceOutUp slow">
+                <li class="nav-item ">
                     <a id="linkpublicidad" name="linkpublicidad">   <img id="imgPublicidad" class="container-fluid" name="imgPublicidad" width="230" height="400" /> </a>
 
                 </li>
@@ -86,51 +99,51 @@
     <br>
     <br>
     <br>
-    <footer class="page-footer bg-light" id="foote" name="foote">
-        <div class="container bg-light">
-            <div class="row">
+    <footer class="page-footer bg-dark" >
+        <div class="container" style="color:white">
+            <div class="row"  >
                 <div class="col 12 s3">
                     <h5 class="white-text">Contactenos</h5>
                     <ul>
-                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/conference-call.png" /><a class="grey-text text-lighten-3" href="#!">Administracion Sitio Web</a></li>
-                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/phone.png" /><a class="grey-text text-lighten-3" href="#!">Oficinas Centrales</a></li>
-                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/whatsapp.png" /><a class="grey-text text-lighten-3" href="#!">WhatApps</a></li>
+                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/conference-call.png" width="30" height="30" /><a style="color:white" href="#!"> Administracion Sitio Web</a></li>
+                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/phone.png"  width="30" height="30"/><a style="color:white"  href="#!"> Oficinas Centrales</a></li>
+                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/whatsapp.png" /><a style="color:white" href="#!"> WhatApps</a></li>
                     </ul>
                 </div>
-                <div class="col 12  s3">
+                <div class="col 12  s3" style="color:white" >
                     <h5 class="white-text">Navegación</h5>
                     <ul>
-                        <li><img src="https://img.icons8.com/material-sharp/24/000000/home.png" /><a class="grey-text text-lighten-3" href="#!">Inicio</a></li>
-                        <li><img src="https://img.icons8.com/material-rounded/24/000000/home-button.png" /><a id="ftextoA4" class="grey-text text-lighten-3" href="#!">Menu Principal</a></li>
+                        <li><img src="https://img.icons8.com/material-sharp/24/000000/home.png"  width="30" height="30" /><a style="color:white"  href="#!">Inicio</a></li>
+                        <li><img src="https://img.icons8.com/material-rounded/24/000000/home-button.png"  width="30" height="30" /><a  style="color:white" class="" href="#!">Menu Principal</a></li>
                     </ul>
 
                 </div>
 
                 <div class="col 12  s3">
                     <h5 class="white-text">Redes Sociales</h5>
-                    
-                        
 
-                            <img src="https://img.icons8.com/color/48/000000/facebook-circled.png" />
-                               <br />
-                            <img src="https://img.icons8.com/fluent/48/000000/twitter.png" />
-                            <!--<a class="grey-text text-lighten-3" href="#!">Twitter </a>-->
-                            
-                             <br />
-                        
-                            <img src="https://img.icons8.com/fluent/48/000000/instagram-new.png" />
-                            <!--<a class="grey-text text-lighten-3" href="#!">Instagram </a>-->
-                            
-                        
 
-                   
+
+                    <img src="https://img.icons8.com/color/48/000000/facebook-circled.png"  width="30" height="30" /> Facebook
+                    <br />
+                    <img src="https://img.icons8.com/fluent/48/000000/twitter.png"  width="30" height="30" /> Twitter
+                    <!--<a class="grey-text text-lighten-3" href="#!">Twitter </a>-->
+
+                    <br />
+
+                    <img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"   width="30" height="30"/> Instagram
+                    <!--<a class="grey-text text-lighten-3" href="#!">Instagram </a>-->
+
+
+
+
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
+        <div class="footer-copyright" style="color:white">
             <div id="ftextoA15" class="container">
                 © 2020 Hotel Playa Linda
-                <a class="grey-text text-lighten-4 right" id="ftextoA13" href="#!">Má   s Información</a>
+                <a class="grey-text text-lighten-4 right" id="ftextoA13" href="#!">Más Información</a>
             </div>
         </div>
     </footer>
@@ -146,7 +159,7 @@
 
                         $("#imgPublicidad").attr("src", item.rutaImg);
                         $("#linkpublicidad").attr("href", item.link);//.val(item.link;
-                      //  document.getElementById("etiquetaPublicidad").innerHTML = item.descripcion;
+                        //  document.getElementById("etiquetaPublicidad").innerHTML = item.descripcion;
                     });
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -162,6 +175,19 @@
 
     <script src="~/Scripts/Popper.js"></script>
     <script src="~/Scripts/Bootstrap.js"></script>
+
+
+    <script src="~/Content/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="~/Content/assets/vendor/php-email-form/validate.js"></script>
+    <script src="~/Content/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="~/Content/assets/vendor/counterup/counterup.min.js"></script>
+    <script src="~/Content/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/vendor/venobox/venobox.min.js"></script>
+    <script src="~/Content/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/assets/vendor/typed.js/typed.min.js"></script>
+    <script src="~/Content/assets/vendor/aos/aos.js"></script>
 
 </body>
 </html>

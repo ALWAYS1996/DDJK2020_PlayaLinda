@@ -6,6 +6,13 @@
     height:auto;*/
 }
 
+.bodyLogin {
+    background-image: url(img/slide1205904360.jpg);
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+}
+
 a {
     text-decoration: dashed;
 }
