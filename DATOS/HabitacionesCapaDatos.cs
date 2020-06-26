@@ -165,7 +165,7 @@ namespace DATOS
                     {
                         habitacionDisp = new ENTIDAD.Habitacion();
                         habitacionDisp.codigoHabitacion = int.Parse(ds.Tables[0].Rows[i][0].ToString());
-                        habitacionDisp.idTipoHabitacion = int.Parse(ds.Tables[0].Rows[i][1].ToString());
+                        habitacionDisp.nombre = ds.Tables[0].Rows[i][1].ToString();
                         habitacionDisp.capacidad = int.Parse(ds.Tables[0].Rows[i][2].ToString());
 
                         listarDisponibilidadHabitacion.Add(habitacionDisp);

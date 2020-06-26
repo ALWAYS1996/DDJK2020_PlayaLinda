@@ -127,6 +127,7 @@ namespace HotelPlayaLinda.Controllers
         }
         public ActionResult MostrarDisponibles(Reservacion reservacion)
         {
+           
             return View(HabitacionesCapaNegocio.listarDisponibilidadHabitacion(reservacion));
         }
     }
