@@ -97,7 +97,7 @@ namespace DATOS
             try
             {
                 comando.Connection = conexion;
-                conexion.Open();
+               // conexion.Open();
                 comando.CommandText = "exec PA_ListarImagenes @tipo";
                 comando.Parameters.AddWithValue("@tipo", imagen.tipo);
                 SqlDataAdapter da = new SqlDataAdapter(comando);
