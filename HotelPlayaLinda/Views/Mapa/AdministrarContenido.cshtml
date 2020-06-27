@@ -1,40 +1,46 @@
 ﻿@model IEnumerable<ENTIDAD.Contenido>
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
 
 
-        </div>
-        <div class="col-md-6">
-            @if (ViewBag.mensaje != null)
-            {
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Estado!</strong> @ViewBag.mensaje
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            }
-
-
-            <hr style="color: #47748b">
-            <center> <font size="4">Como Llegar </font></center>
-            <hr style="color: #47748b">
-            <form action="/Mapa/ModificarContenido" method="post">
-                @foreach (var item in Model)
+            </div>
+            <div class="col-md-6">
+                @if (ViewBag.mensaje != null)
                 {
-                    <div class="form-group">
-                        <label> Titulo</label>
-                        <input class="form-control" placeholder="Titulo" value="@item.titulo" name="titulo" id="titulo">
-                    </div>
-                    <div class="form-group">
-                        <label> Contenido</label>
-                        <textarea class="form-control" rows="10" placeholder="Modifica el contenido" value="@item.contenido" name="contenido1" id="contenido1">@item.contenido</textarea>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Estado!</strong> @ViewBag.mensaje
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 }
-                <center> <button type="submit" class="btn btn-outline-warning">Modificar</button></center>
-            </form>
-        </div>
-    </div>
 
-</div>
+
+                <hr style="color: #47748b">
+                <center> <font size="4">Como Llegar </font></center>
+                <hr style="color: #47748b">
+                <form action="/Mapa/ModificarContenido" method="post">
+                    @foreach (var item in Model)
+                    {
+                        <div class="form-group">
+                            <label> Titulo</label>
+                            <input class="form-control" placeholder="Titulo" value="@item.titulo" name="titulo" id="titulo">
+                        </div>
+                        <div class="form-group">
+                            <label> Contenido</label>
+                            <textarea class="form-control" rows="10" placeholder="Modifica el contenido" value="@item.contenido" name="contenido1" id="contenido1">@item.contenido</textarea>
+                        </div>
+                    }
+                    <center> <button type="submit" class="btn btn-outline-warning"><i class="bx
+bx-revision"></i>Modificar</button></center>
+
+                </form>
+
+            </div>
+
+        </div>
+        <a href="/Contenido/AdministrarPaginas" class="btn btn-primary"><i class="bx 
+bx-arrow-back"></i> Regresar</a>
+
+    </div>

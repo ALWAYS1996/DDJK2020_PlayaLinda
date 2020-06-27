@@ -10,23 +10,35 @@
     <link rel="stylesheet" href="~/Content/Site.css">
     <link rel="icon" type="image/png" href="~/Content/img/hotel.svg" />
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+    <!-- Vendor CSS Files -->
+    <link href="~/Content/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/Content/assets/css/style.css" rel="stylesheet">
 
 
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark">
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#" style="color:white">
             <img src="~/Content/img/hotel.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             Hotel Playa Linda
         </a>
-        Modulo Administativo
-        <a class="navbar-brand btn btn-outline-dark" asp-area="Identity"
-           title="Manage"><img src="~/Content/img/avatar.png">Bienvenido:@User.Identity.Name</a>
+       <a style="color:white"><u> Modulo Administativo </u></a>
+        <a style="color:white" class="navbar-brand btn btn-outline-dark" asp-area="Identity"
+           title="Manage"> <i class="bx 
+bx-user-circle"></i>Bienvenido: @User.Identity.Name</a>
 
-        <a class="btn btn-outline-danger" href="@Url.Action("SignOut","Administrador")"> <img src="~/Content/img/signs.png"> Salir </a>
+        <a class="btn btn-outline-danger" href="@Url.Action("SignOut","Administrador")"> <i class="bx bx-power-off"></i> Cerrar </a>
 
 
 
@@ -40,35 +52,35 @@
         <nav class="shadow nav navbar-brand bg-light">
 
 
-            <ul class="">
+            <ul class="" >
                 <li class="nav-link">
                     @Html.ActionLink("Inicio", "Administrar_Inicio", "Contenido")
                     <br>
                 </li>
 
                 <li class="nav-link">
-                    <a class="nav-link" href="/Contenido/AdministrarPaginas"> Modificar Paginas </a>
+                    <a style="color:black" class="nav-link" href="/Contenido/AdministrarPaginas"> <i class="bx bxs-edit" ></i>Modificar Paginas </a>
+                 
+                </li>
+                <li class="nav-link">
+                    <a style="color:black" class="nav-link" href="/Reserva/ListaReservaciones"><i class="bx bx-book-bookmark"></i> Listado  Reservas </a>
 
                 </li>
                 <li class="nav-link">
-                    <a class="nav-link" href="/Reserva/ListaReservaciones"> Listado  Reservas </a>
+                    <a style="color:black" class="nav-link" href="/Habitaciones/adm_habitaciones"><i class="bx bx-notepad"></i> Administrar habitaciones </a>
+                </li>
+                <li class="nav-link">
+                    <a style="color:black" class="nav-link" href="/Habitaciones/adm_estadohoy"><i class="bx bx-file-blank"></i>Estado del hotel Hoy </a>
 
                 </li>
                 <li class="nav-link">
-                    <a class="nav-link" href="/Habitaciones/adm_habitaciones"> Administrar habitaciones </a>
+                    <a style="color:black" class="nav-link" href="/Habitaciones/disponibilidad_habitaciones"><i class="bx bx-notepad"></i> Disponibilidad Habitaciones </a>
                 </li>
                 <li class="nav-link">
-                    <a class="nav-link" href="/Habitaciones/adm_estadohoy">Estado del hotel Hoy </a>
-
+                    <a style="color:black" class="nav-link" href="/Contenido/Administrar_Publicidad"><i class="bx bx-file-blank"></i> Publicidad </a>
                 </li>
                 <li class="nav-link">
-                    <a class="nav-link" href="/Habitaciones/disponibilidad_habitaciones"> Disponibilidad Habitaciones </a>
-                </li>
-                <li class="nav-link">
-                    <a class="nav-link" href="/Contenido/Administrar_Publicidad"> Publicidad </a>
-                </li>
-                <li class="nav-link">
-                    <a class="nav-link" href="/Contenido/Administrar_ofertas"> Administrar ofertas </a>
+                    <a style="color:black" class="nav-link" href="/Contenido/Administrar_ofertas"><i class="bx bx-notepad"></i> Administrar ofertas </a>
                 </li>
             </ul>
         </nav>
@@ -76,22 +88,26 @@
     </div>
     <br>
 
-    <footer class="page-footer bg-light" id="foote" name="foote">
-        <div class="container bg-light">
+
+    <br>
+    <br>
+    <br>
+    <footer class="page-footer bg-dark">
+        <div class="container" style="color:white">
             <div class="row">
                 <div class="col 12 s3">
                     <h5 class="white-text">Contactenos</h5>
                     <ul>
-                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/conference-call.png" /><a class="grey-text text-lighten-3" href="#!">Administracion Sitio Web</a></li>
-                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/phone.png" /><a class="grey-text text-lighten-3" href="#!">Oficinas Centrales</a></li>
-                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/whatsapp.png" /><a class="grey-text text-lighten-3" href="#!">WhatApps</a></li>
+                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/conference-call.png" width="30" height="30" /><a style="color:white" href="#!"> Administracion Sitio Web</a></li>
+                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/phone.png" width="30" height="30" /><a style="color:white" href="#!"> Oficinas Centrales</a></li>
+                        <li><img src="https://img.icons8.com/ios-glyphs/30/000000/whatsapp.png" /><a style="color:white" href="#!"> WhatApps</a></li>
                     </ul>
                 </div>
-                <div class="col 12  s3">
+                <div class="col 12  s3" style="color:white">
                     <h5 class="white-text">Navegación</h5>
                     <ul>
-                        <li><img src="https://img.icons8.com/material-sharp/24/000000/home.png" /><a class="grey-text text-lighten-3" href="#!">Inicio</a></li>
-                        <li><img src="https://img.icons8.com/material-rounded/24/000000/home-button.png" /><a id="ftextoA4" class="grey-text text-lighten-3" href="#!">Menu Principal</a></li>
+                        <li><img src="https://img.icons8.com/material-sharp/24/000000/home.png" width="30" height="30" /><a style="color:white" href="#!">Inicio</a></li>
+                        <li><img src="https://img.icons8.com/material-rounded/24/000000/home-button.png" width="30" height="30" /><a style="color:white" class="" href="#!">Menu Principal</a></li>
                     </ul>
 
                 </div>
@@ -101,12 +117,15 @@
 
 
 
-                    <img src="https://img.icons8.com/color/48/000000/facebook-circled.png" />
+                    <img src="https://img.icons8.com/color/48/000000/facebook-circled.png" width="30" height="30" /> Facebook
                     <br />
-                    <img src="https://img.icons8.com/fluent/48/000000/twitter.png" />
+                    <img src="https://img.icons8.com/fluent/48/000000/twitter.png" width="30" height="30" /> Twitter
+                    <!--<a class="grey-text text-lighten-3" href="#!">Twitter </a>-->
+
                     <br />
-                    <img src="https://img.icons8.com/fluent/48/000000/instagram-new.png" />
-                    
+
+                    <img src="https://img.icons8.com/fluent/48/000000/instagram-new.png" width="30" height="30" /> Instagram
+                    <!--<a class="grey-text text-lighten-3" href="#!">Instagram </a>-->
 
 
 
@@ -114,10 +133,10 @@
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
+        <div class="footer-copyright" style="color:white">
             <div id="ftextoA15" class="container">
                 © 2020 Hotel Playa Linda
-                <a class="grey-text text-lighten-4 right" id="ftextoA13" href="#!">Má   s Información</a>
+                <a class="grey-text text-lighten-4 right" id="ftextoA13" href="#!">Más Información</a>
             </div>
         </div>
     </footer>

@@ -7,47 +7,58 @@
 }
 <div class="container">
     <center>
-    <hr style="color: #47748b">
-    <center>
-        <label for="informacion">Informacion de Inicio</label>
-    </center>
-    <div class="row" style="display:block;">
+        <hr style="color: #47748b">
+        <center>
+            <label for="informacion"><font size="4"><strong><i class="bx
+bx-revision"></i>Modificar de Inicio</strong></font></label>
+        </center>
+        <div class="row" style="display:block;">
 
-        <form action="/Contenido/ModificarTextoInicio" method="post">
-            @foreach (var dato in contenido)
+            <form action="/Contenido/ModificarTextoInicio" method="post">
+                @foreach (var dato in contenido)
+                {
+              
+                    <br>
+                    <div class="form-group">
+                        Titulo:<br><br>
+                        <input class="" value="@dato.titulo" name="titulo" id="titulo">
+                    </div>
+                    <br>
+             
+                    <div class="form-group">
+                        Contenido: <br><br>
+                        <textarea rows="4" cols="100" name="contenido"> @dato.contenido</textarea>
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" class="form-control btn btn-outline-warning" name="subirInfo" id="subirInfo" value="Guardar" style="width:25%;">
+                </div>
+            </form>
+        </div>
+        <br>
+        <center> <a href="/Contenido/AdministrarPaginas" class="btn btn-outline-primary"> <i class="bx
+bx-arrow-back"></i>Regresar</a></center>
+        <br>
+        <div class="row">
+
+
+
+            @foreach (var dato in contenidoImagen)
             {
-                <div class="form-group">
-                    <input class="" value="@dato.titulo" name="titulo" id="titulo">
-                </div>
-                <div class="form-group">
-                    <textarea rows="4" cols="100" name="contenido"> @dato.contenido</textarea>
-                </div>
-            }
-            <div class="form-group">
-                <input type="submit" class="form-control btn btn-warning" name="subirInfo" id="subirInfo" value="Guardar" style="width:25%;">
-            </div>
-        </form>
-    </div>
-    <div class="row">
-
-
-
-        @foreach (var dato in contenidoImagen)
-        {
-            <div class="card col-sm-4">
-                <div class="card-header">@dato.idImagen</div>
-                <div class="card-body">
-                    <img src="@dato.imgPath" class="container-fluid" alt="Los Angeles" width="100" height="200  ">
-                </div>
-                <div class="card-footer">
-                    <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
-                       onclick="return mifuncion(@Html.DisplayFor(modelItem => dato.idImagen),
+                <div class="card col-sm-4">
+                    <div class="card-header">@dato.idImagen</div>
+                    <div class="card-body">
+                        <img src="@dato.imgPath" class="container-fluid" alt="Los Angeles" width="100" height="200  ">
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
+                           onclick="return mifuncion(@Html.DisplayFor(modelItem => dato.idImagen),
                                                          '@Html.DisplayFor(modelItem => dato.imgPath)')">Modificar</a>
+                    </div>
                 </div>
-            </div>
 
-        }
-    </div>
+            }
+        </div>
     </center>
 
 </div>

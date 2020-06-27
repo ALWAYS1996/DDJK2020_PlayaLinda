@@ -1,155 +1,157 @@
 ﻿
 @model IEnumerable<ENTIDAD.Facilidades>
 
-    <div class="container ">
-        <br>
-        <br>
-        <br>
-        <center>
-            <a class="" data-toggle="modal" data-target="#exampleModal2">Agregar nueva <img src="~/Content/img/add.svg" width="30" height="30" /></a>
-        </center>
-        <br>
+<div class="container ">
+    <br>
+    <br>
+    <br>
+    <center>
+        <a class="" data-toggle="modal" data-target="#exampleModal2">Agregar nueva <img src="~/Content/img/add.svg" width="30" height="30" /></a>
+    </center>
+    <br>
 
-        <div class="row">
+    <div class="row">
 
-            <table class="table table-hover">
-                <thead>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Reglas</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dato in Model)
+
+                {
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Reglas</th>
-                        <th scope="col">Imagen</th>
-                        <th scope="col">Detalles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var dato in Model)
+                        <th>@dato.id_Facilidades</th>
+                        <th>@dato.nombre</th>
+                        <td>@dato.reglas</td>
+                        <th> <img src="@dato.urlImg" class="card-img-top" width="40" height="120"></th>
+                        <td>@dato.detalles</td>
+                        <td>
+                            <a href="@Url.Action("eliminarFacilidad", "Contenido", new { id = @dato.id_Facilidades})">
+                                @*@Html.ActionLink("Contenido", "eliminarSobreNosotros", new { idImagen = @item.idImagen }, new { @class = "btn btn-danger" }, new{@src=""})*@
 
-                    {
-                        <tr>
-                            <th>@dato.id_Facilidades</th>
-                            <th>@dato.nombre</th>
-                            <td>@dato.reglas</td>
-                            <th> <img src="@dato.urlImg" class="card-img-top" width="40" height="120"></th>
-                            <td>@dato.detalles</td>
-                            <td>
-                                <a href="@Url.Action("eliminarFacilidad", "Contenido", new { id = @dato.id_Facilidades})">
-                                    @*@Html.ActionLink("Contenido", "eliminarSobreNosotros", new { idImagen = @item.idImagen }, new { @class = "btn btn-danger" }, new{@src=""})*@
-
-                                    <img src="~/Content/img/eliminar.svg" width="30" height="30" />
-                                </a>
-                            </td>
-                            <td>
-                                <a class="" data-toggle="modal" data-target="#exampleModal"
-                                   onclick="return mifuncion(@Html.DisplayFor(modelItem => dato.id_Facilidades),
+                                <img src="~/Content/img/eliminar.svg" width="30" height="30" />
+                            </a>
+                        </td>
+                        <td>
+                            <a class="" data-toggle="modal" data-target="#exampleModal"
+                               onclick="return mifuncion(@Html.DisplayFor(modelItem => dato.id_Facilidades),
                                                          '@Html.DisplayFor(modelItem => dato.nombre)',
                                                          '@Html.DisplayFor(modelItem => dato.reglas)',
                                                          '@Html.DisplayFor(modelItem => dato.urlImg)',
                                                          '@Html.DisplayFor(modelItem => dato.detalles)')"> <img src="~/Content/img/mod1.svg" width="30" height="30" /></a>
-                            </td>
+                        </td>
 
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modificar Facilidad</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <input type="hidden" class="form-control" id="idf" name="idf">
-                                <label>Nombre Facilidad</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre">
-                                <br>
-                                <label>Reglas</label>
-                                <input type="text" class="form-control" id="regla" name="regla">
-                                <br>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <input id="modalimgtem" name="modalimgtem" type="hidden">
-                                                <img name="modalimg" id="modalimg" width="100" height="100" />
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="fileUpload" name="fileUpload">
-                                                    <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
-                                                </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modificar Facilidad</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input type="hidden" class="form-control" id="idf" name="idf">
+                            <label>Nombre Facilidad</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre">
+                            <br>
+                            <label>Reglas</label>
+                            <input type="text" class="form-control" id="regla" name="regla">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input id="modalimgtem" name="modalimgtem" type="hidden">
+                                            <img name="modalimg" id="modalimg" width="100" height="100" />
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileUpload" name="fileUpload">
+                                                <label class="custom-file-label" for="customFile">Cambiar Imagen</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <label>Detalles</label>
-                                <textarea type="text" class="form-control" id="detalle" name="detalle"> </textarea>
-                                <br>
+                            <label>Detalles</label>
+                            <textarea type="text" class="form-control" id="detalle" name="detalle"> </textarea>
+                            <br>
 
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" id="btn" name="btn" class="btn btn-warning">Guadar Cambios</button>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btn" name="btn" class="btn btn-warning">Guadar Cambios</button>
                     </div>
                 </div>
             </div>
-
-
-
-            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Registrar Facilidad</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <label>Nombre Facilidad</label>
-                                <input type="text" class="form-control" id="nombre2" name="nombre2" required>
-                                <br>
-                                <label>Reglas</label>
-                                <input type="text" class="form-control" id="regla2" name="regla2" required>
-                                <br>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="fileUpload2" name="fileUpload2" required>
-                                                    <label class="custom-file-label" for="customFile">Subir Imagen</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <label>Detalles</label>
-                                <textarea type="text" class="form-control" id="detalle2" name="detalle2" required> </textarea>
-                                <br>
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
-                            <button type="button" id="btn2" name="btn" class="btn btn-primary">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+
+
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registrar Facilidad</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <label>Nombre Facilidad</label>
+                            <input type="text" class="form-control" id="nombre2" name="nombre2" required>
+                            <br>
+                            <label>Reglas</label>
+                            <input type="text" class="form-control" id="regla2" name="regla2" required>
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileUpload2" name="fileUpload2" required>
+                                                <label class="custom-file-label" for="customFile">Subir Imagen</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label>Detalles</label>
+                            <textarea type="text" class="form-control" id="detalle2" name="detalle2" required> </textarea>
+                            <br>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
+                        <button type="button" id="btn2" name="btn" class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <center> <a href="/Contenido/AdministrarPaginas" class="btn btn-primary"> <i class="bx
+bx-arrow-back"></i> Regresar</a></center>
+
     </div>
+</div>
 
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
@@ -176,7 +178,7 @@
                             var detalle = $("#detalle").val();
                             var imagen = $("#modalimgtem").val();
 
-                    
+
                             dataString.append("fileUpload", selectFile);
                             dataString.append("idf", id);
                             dataString.append("nombre", nombre);
@@ -205,7 +207,7 @@
                         });
 
                     });
-              
+
 </script>
 
 

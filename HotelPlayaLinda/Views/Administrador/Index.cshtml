@@ -4,10 +4,33 @@
 }
 
 @*@if (User.Identity.IsAuthenticated)
-{
-    <h1>Welcome user @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h1>
-    <a href="@Url.Action("SignOut","Administrador")">Logout</a>
+    {
+        <h1>Welcome user @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h1>
+        <a href="@Url.Action("SignOut","Administrador")">Logout</a>
 
-    //  User.Identity.Name
-}*@
+        //  User.Identity.Name
+    }*@
 
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+
+        </div>
+        <div class="col-6">
+            <br><br>
+            <font size="7" style="border: 2px  solid red">
+             
+                <label>
+                    Sitio Administrativo
+                </label>
+                <br>
+            </font>
+
+            <br><br>
+        </div>
+        <div class="col-3">
+
+        </div>
+    </div>
+</div>
