@@ -8,8 +8,14 @@
         <div class="col-4">  </div>
 
         <div class="col-4" style="margin: 25px;">
+
+
             @using (Html.BeginForm("GenerarReservacion", "Reserva", FormMethod.Post))
             {
+                <hr style="color: #47748b">
+                <center>  <h5><i class="bx bx-edit"></i>Registrar Reservación</h5> </center>
+                <hr style="color: #47748b">
+
                 <input type="text" class="form-control" id="codigoTipoHabitacion" value="@ViewData["codigoTipoHabitacion"]" name="codigoTipoHabitacion" hidden>
                 <input type="text" class="form-control" id="codigoHabitacion" value="@ViewData["codigoHabitacion"]" name="codigoHabitacion" hidden>
                 <input type="text" class="form-control" id="fechaInicio" value="@ViewData["fechaInicio"]" name="fechaInicio" hidden>
@@ -52,9 +58,7 @@
 <script>
     function pulsar() {
 
-        if (!validarEmail($("#email").val(item.correo))) {
-            return;
-        }
+        
         var cedula = $("#pasaporte").val();
 
         jQuery.ajax({
