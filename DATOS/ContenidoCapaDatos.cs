@@ -78,7 +78,7 @@ namespace DATOS
                 return listarContenido;
             }
             catch (Exception) { }
-            finally { conexion.Close(); }
+            finally { }
             return listarContenido;
         }//Fin
     }

@@ -1,4 +1,8 @@
-﻿<div class="container">
+﻿@{
+    var mensaje = ViewBag.Texto;
+}
+
+<div class="container">
 
     <div class="row">
         <div class="col-4">  </div>
@@ -27,7 +31,7 @@
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" required>
+                    <input type="text" class="form-control" id="email" name="email" required> <label>@mensaje</label>
                 </div>
 
                 <div class="form-group">
@@ -45,39 +49,43 @@
         <div class="col-4">  </div>
     </div>
 </div>
-        <script>
-            function pulsar() {
-                var cedula = $("#pasaporte").val();
+<script>
+    function pulsar() {
 
-                jQuery.ajax({
-                    type: 'POST',
-                    url: "/Basic/getClientes",
-                    data: { pasaporte: cedula },
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        jQuery.each(data, function (index, item) {
+        if (!validarEmail($("#email").val(item.correo))) {
+            return;
+        }
+        var cedula = $("#pasaporte").val();
 
-                            $("#pasaporte").val(item.pasaporte);
-                            $("#nombre").val(item.nombre);
-                            $("#apellido").val(item.apellido1);
-                            $("#email").val(item.correo);
+        jQuery.ajax({
+            type: 'POST',
+            url: "/Basic/getClientes",
+            data: { pasaporte: cedula },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                jQuery.each(data, function (index, item) {
 
-                            //var numeroCuenta = str.substr(0, str.length - 4);
-                            var numeroCuenta = 12345;
-                            $("#tarjeta").val(numeroCuenta + "****");
-                            document.getElementById("mensaje").innerHTML = "<div class='alert alert-primary' role='alert'> Bienvenido de nuevo, que gusto  "
-                                + item.nombre + ", por ser cliente frecuente te haremos un descuento </div >";
+                    $("#pasaporte").val(item.pasaporte);
+                    $("#nombre").val(item.nombre);
+                    $("#apellido").val(item.apellido1);
+                    $("#email").val(item.correo);
 
-                        });
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert("some error");
-                    }
+                    //var numeroCuenta = str.substr(0, str.length - 4);
+                    var numeroCuenta = 12345;
+                    $("#tarjeta").val(numeroCuenta + "****");
+                    document.getElementById("mensaje").innerHTML = "<div class='alert alert-primary' role='alert'> Bienvenido de nuevo, que gusto  "
+                        + item.nombre + ", por ser cliente frecuente te haremos un descuento </div >";
+
                 });
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("some error");
+            }
+        });
 
-            }//fin metodo
+    }//fin metodo
 
 
 
-        </script>
+</script>

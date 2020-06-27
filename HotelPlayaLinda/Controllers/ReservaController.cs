@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
 
 namespace HotelPlayaLinda.Controllers
 {
@@ -105,6 +106,14 @@ namespace HotelPlayaLinda.Controllers
             return new ViewAsPdf("View_pdf"); }
         public ActionResult GenerarReservacion(int codigoHabitacion, string fechaInicio, string fechaFin, string pasaporte, string nombre, string apellido, string email, string tarjeta)
         {
+            if (!email_bien_escrito(email))
+            {
+                ViewData["codigoHabitacion"] = codigoHabitacion;
+                ViewData["fechaInicio"] = fechaInicio;
+                ViewData["fechaFin"] = fechaFin;
+                ViewBag.Texto = "El formato del correo no es valido";
+                return View("DatosUsuario");
+            }
             Cliente cliente = new Cliente();
             cliente.apellido1 = apellido;
             cliente.nombre = nombre;
@@ -177,6 +186,27 @@ namespace HotelPlayaLinda.Controllers
             }
             return View("ListaReservaciones", reservacionCapaNegocios.listarReservaciones());
 
+        }
+
+        private Boolean email_bien_escrito(String email)
+        {
+            String expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(email, expresion))
+            {
+                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
