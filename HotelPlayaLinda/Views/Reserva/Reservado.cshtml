@@ -2,6 +2,8 @@
 @{
     var cliente = (ENTIDAD.Cliente )ViewData["cliente"];
     var Reserva = (ENTIDAD.Reservacion)ViewData["reservacion"];
+    var Precio = (string)ViewData["precio"];
+
     ViewBag.Title = "Reservado";
 }
     <div class="container" >
@@ -24,6 +26,8 @@
                     <h5>Codigo Habitacion:</h5><p>@Reserva.codigoHabitacion</p><br />
                     <h5>Fecha llegada:</h5><p>@Reserva.fechaLlegada</p><br />
                     <h5>Fecha salida:</h5><p>@Reserva.fechaSalida</p><br />
+                    <h5>Precio por día:</h5><p>@Precio</p><br />
+
 
 
 
@@ -35,12 +39,15 @@
                             <input type="text" id="codigoHabitacion" name="codigoHabitacion" value="@Reserva.codigoHabitacion" hidden>
                             <input type="text" id="fechaLlegada" name="fechaLlegada" value="@Reserva.fechaLlegada" hidden>
                             <input type="text" id="fechaSalida" name="fechaSalida" value="@Reserva.fechaLlegada" hidden>
-                            
+                            <input type="text" id="fechaSalida" name="fechaSalida" value="@Reserva.fechaLlegada" hidden>
+                            <input type="text" id="fechaSalida" name="fechaSalida" value="@Reserva.fechaLlegada" hidden>
+                            <input type="text" id="precio" name="precio" value="@Precio" hidden>
+
                             <center>   <button type="submit" class="btn btn-outline-primary" name="action">Ver pdf</button></center>
                         }
                     </div>
                     <!--<a class="btn btn-outline-info" onclick="viewAsPdf(@cliente.nombre,@cliente.correo)"> Ver pdf</a>
-                    -->
+    -->
 
                 </div>
 

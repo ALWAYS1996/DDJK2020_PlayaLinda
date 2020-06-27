@@ -1,6 +1,8 @@
 ﻿
 @{  var cliente = (ENTIDAD.Cliente)ViewData["cliente"];
     var Reserva = (ENTIDAD.Reservacion)ViewData["reservacion"];
+    var precio = (string)ViewData["precio"];
+
     Layout = null;
 }
 
@@ -22,8 +24,8 @@
                 <h5>Codigo Habitacion:</h5><p>@Reserva.codigoHabitacion</p><br />
                 <h5>Fecha llegada:</h5><p>@Reserva.fechaLlegada</p><br />
                 <h5>Fecha salida:</h5><p>@Reserva.fechaSalida</p><br />
+                <h5>precio por día:</h5><p>@precio</p><br />
 
-               
 
 
             </div>
