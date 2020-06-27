@@ -24,7 +24,7 @@ namespace DATOS
             SqlCommand comando = new SqlCommand();
             try
             {
-                conexion.Open();
+               // conexion.Open();
                 comando.Connection = conexion;
                 comando.CommandText = "exec PA_ModificarCoordenadasOrigen @latitudOrigen,@longitudOrigen";
                 comando.Parameters.AddWithValue("@latitudOrigen", mapa.latitudOrigen);
@@ -43,6 +43,7 @@ namespace DATOS
             finally { conexion.Close(); }
             return 0;
         }//fin
+
         private List<ENTIDAD.Mapa> listarCoordenadasOrigen = new List<ENTIDAD.Mapa>();
         public IEnumerable<ENTIDAD.Mapa> listadoCoordenadasOrigen()
         {
