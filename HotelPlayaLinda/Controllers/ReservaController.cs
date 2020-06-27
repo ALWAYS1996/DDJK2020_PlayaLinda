@@ -90,21 +90,29 @@ namespace HotelPlayaLinda.Controllers
             else
             {
                 var resultado = (reservacionCapaNegocios.verificarReservacion(new Reservacion(codigoTipoHabitacion, fechaLlegada, fechaSalida)));
+
+            //   int var= ;
+                var precio = reservacionCapaNegocios.Precio(Int32.Parse(codigoTipoHabitacion));
                 Reservacion reservacion = new Reservacion();
                 ViewData["codigoTipoHabitacion"] = codigoTipoHabitacion;
                 ViewData["codigoHabitacion"] = codigoHabitacion;
                 ViewData["fechaInicio"] =fechaLlegada;
                 ViewData["fechaFin"] = fechaSalida;
+                fechaSalida.Subtract(fechaLlegada);
+                ViewData["precio"] = precio;
+
                 ViewData["NumeroHabitacion"] = resultado;
                 ViewBag.mensaje = "Habitación disponible para ser reservada";
                 return View();
             }
         }
-        public ActionResult view_pdf(Cliente cliente, Reservacion reservacion) {
+        public ActionResult view_pdf(Cliente cliente, Reservacion reservacion,string precio) {
             ViewData["Cliente"] = cliente;
             ViewData["reservacion"] = reservacion;
+            ViewData["precio"] = precio;
+
             return new ViewAsPdf("View_pdf"); }
-        public ActionResult GenerarReservacion(int codigoHabitacion, string fechaInicio, string fechaFin, string pasaporte, string nombre, string apellido, string email, string tarjeta)
+        public ActionResult GenerarReservacion(int codigoHabitacion, string fechaInicio, string fechaFin, string pasaporte, string nombre, string apellido, string email, string tarjeta,string precio)
         {
             if (!email_bien_escrito(email))
             {
@@ -127,13 +135,17 @@ namespace HotelPlayaLinda.Controllers
             reservacion.fechaLlegada = Convert.ToDateTime(fechaInicio);
             reservacion.fechaSalida = Convert.ToDateTime(fechaFin);
 
+
+  
+            
             ViewData["cliente"] = cliente;
             ViewData["reservacion"] = reservacion;
+            ViewData["Precio"] = precio;
             //ViewData["fechaFin"] = reservacion.fechaSalida;
 
             if (reservacionCapaNegocios.registrarReservacion(reservacion) == 1)
             {
-                SendMail(cliente,reservacion);
+                SendMail(cliente,reservacion,precio);
                 return View("Reservado");
             }
             return View("Reservado");
@@ -141,7 +153,7 @@ namespace HotelPlayaLinda.Controllers
 
 
 
-        public void SendMail(Cliente cliente,Reservacion reservacion) {
+        public void SendMail(Cliente cliente,Reservacion reservacion,string precio) {
             try
             {
                 MailMessage mailMessage = new MailMessage();
@@ -149,7 +161,7 @@ namespace HotelPlayaLinda.Controllers
                 mailMessage.To.Add(cliente.correo);
                 mailMessage.Subject = "Hotel playa linda:";
                 mailMessage.Body = "Usted:" + cliente.nombre + " " + cliente.apellido1 + ". Ha realizado una reservación de la habitación: " + reservacion.codigoHabitacion + 
-                    " Fecha de llegada: " + reservacion.fechaLlegada + "Fecha salida: " + reservacion.fechaSalida;
+                    " Fecha de llegada: " + reservacion.fechaLlegada + "Fecha salida: " + reservacion.fechaSalida+ " Con un precio por día de ₡" + precio;
 
                 System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient("smtp.gmail.com");
                 smtpClient.Port = 587;

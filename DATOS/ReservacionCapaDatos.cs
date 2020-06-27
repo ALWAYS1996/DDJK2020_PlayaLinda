@@ -55,6 +55,7 @@ namespace DATOS
         /*Obtener*/
         public int verificarReservacion(ENTIDAD.Reservacion reservacion) {
             int habitacion = 0;// ""; 
+            float precio = 0;
             try
             {
                 conexion.Open();
@@ -64,13 +65,18 @@ namespace DATOS
                 cmd.Parameters.AddWithValue("@fechaSalida", reservacion.fechaSalida);
                 cmd.Parameters.AddWithValue("@tipoHabitacion", reservacion.idHabitacionTemp);
                 cmd.Parameters.AddWithValue("@retorno", SqlDbType.Int);
+                //cmd.Parameters.AddWithValue("@precio", SqlDbType.Float);
                 var returnParameter = cmd.Parameters.Add("@retorno", SqlDbType.Int);
+                //var returnParameter2 = cmd.Parameters.Add("@precio", SqlDbType.Int);
+
                 returnParameter.Direction = ParameterDirection.ReturnValue;
                 cmd.ExecuteNonQuery();
                 
 
                 habitacion = (int)returnParameter.Value;
-                
+                //precio = (float)returnParameter.Value;
+
+
                 //}
             }
             catch (Exception ex)
@@ -82,6 +88,44 @@ namespace DATOS
                 conexion.Close();
             }
             return habitacion;
+
+
+        }//fin
+
+        public int Precio(int id)
+        {
+            //int habitacion = 0;// ""; 
+            int precio = 0;
+            try
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("PA_Precio_ById", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@codigo_Hab", id);
+                cmd.Parameters.AddWithValue("@precio", SqlDbType.Int);
+                //cmd.Parameters.AddWithValue("@precio", SqlDbType.Float);
+                var returnParameter = cmd.Parameters.Add("@precio", SqlDbType.Int);
+                //var returnParameter2 = cmd.Parameters.Add("@precio", SqlDbType.Int);
+
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+                cmd.ExecuteNonQuery();
+
+
+              
+                precio = (int)returnParameter.Value;
+
+
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return precio;
 
 
         }//fin
